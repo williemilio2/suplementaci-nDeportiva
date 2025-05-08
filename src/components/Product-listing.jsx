@@ -26,8 +26,8 @@ const [sortBy, setSortBy] = useState("relevance")
 // Obtener valores únicos para los filtros
 const marcas = [...new Set(allProducts.map((product) => product.marca))]
 const tipos = [...new Set(allProducts.map((product) => product.tipo))]
-const formatos = [...new Set(allProducts.map((product) => product.formato))]
-const sabores = [...new Set(allProducts.map((product) => product.sabor))]
+//const formatos = [...new Set(allProducts.map((product) => product.formato))]
+//const sabores = [...new Set(allProducts.map((product) => product.sabor))]
 
 // Precio mínimo y máximo para el rango
 const minPrice = Math.floor(Math.min(...allProducts.map((p) => p.offerPrice || p.originalPrice)))
@@ -384,47 +384,6 @@ return (
               ))}
             </div>
           </div>
-
-          {/* Filtro de formatos */}
-          <div className={styles.filterSection}>
-            <h3 className={styles.filterSectionTitle}>Formato</h3>
-            <div className={styles.filterOptions}>
-              {formatos.map((formato) => (
-                <div key={formato} className={styles.filterOption}>
-                  <input
-                    type="checkbox"
-                    id={`formato-${formato}`}
-                    checked={selectedFormatos.includes(formato)}
-                    onChange={() => handleCheckboxChange(formato, selectedFormatos, setSelectedFormatos)}
-                  />
-                  <label htmlFor={`formato-${formato}`} className={styles.filterLabel}>
-                    {formato}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Filtro de sabores */}
-          <div className={styles.filterSection}>
-            <h3 className={styles.filterSectionTitle}>Sabor</h3>
-            <div className={styles.filterOptions}>
-              {sabores.map((sabor) => (
-                <div key={sabor} className={styles.filterOption}>
-                  <input
-                    type="checkbox"
-                    id={`sabor-${sabor}`}
-                    checked={selectedSabores.includes(sabor)}
-                    onChange={() => handleCheckboxChange(sabor, selectedSabores, setSelectedSabores)}
-                  />
-                  <label htmlFor={`sabor-${sabor}`} className={styles.filterLabel}>
-                    {sabor}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Filtro de valoraciones */}
           <div className={styles.filterSection}>
             <h3 className={styles.filterSectionTitle}>Valoración</h3>

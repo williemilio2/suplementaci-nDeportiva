@@ -1,5 +1,4 @@
-export const allProducts = [
-  {
+/*
     id: 1,
     name: 'High-Quality MASS PROTEIN',
     description: 'Fórmula de alta pureza con 28g de proteína de máxima pureza con fórmula mejorada',
@@ -77,7 +76,30 @@ export const allProducts = [
         glutamina: '4.8g'
       }
     }
-    
+*/
+
+
+export const allProducts = [
+  {
+    id: 1,
+    name: 'High-Quality MASS PROTEIN',
+    description: 'Fórmula de alta pureza con 28g de proteína de máxima pureza con fórmula mejorada',
+    originalPrice: 63.45,
+    offerPrice: 34.9,
+    discount: 45,
+    image: [ '/ofertaDelDia1.webp' ],
+    rating: 4.7,
+    reviews: 348,
+    badge: 'EXCLUSIVO',
+    marca: 'Ronnie Coleman',
+    tipo: 'Hydrolyzed Protein',
+    colesterol: 'Mínimo',
+    superOfertas: true,
+    slug: 'high-quality-mass-protein',
+    cantidad: 145,
+    informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
+    infoIngredientes: 'Concentrado de proteína de suero de leche (contiene emulsionante: lecitina de soja), aislado de proteína de suero de leche (90%), cacao en polvo (10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 2,
@@ -95,66 +117,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'premium-protein-formula',
     cantidad: 170,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Concentrado de proteína de suero de leche (contiene emulsionante: lecitina de soja), aislado de proteína de suero de leche (85%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '27g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.9g',
-      fibra: '0.5g',
-      sal: '0.2g',
-      sodio: '95mg',
-      calcio: '130mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 3,
@@ -172,66 +137,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'maximum-strength-nutrition',
     cantidad: 47,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 8 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 7 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 2 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (92%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '26g',
-      carbohidratos: '2g',
-      azucares: '1g',
-      grasas: '1.2g',
-      grasasSaturadas: '0.7g',
-      fibra: '0.4g',
-      sal: '0.18g',
-      sodio: '90mg',
-      calcio: '120mg',
-      hierro: '0.9mg',
-      vitaminaD: '0.65µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '18mg',
-      aminoacidos: {
-        leucina: '2.2g',
-        isoleucina: '1.3g',
-        valina: '1.4g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 4,
@@ -249,66 +157,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'extreme-protein-complex',
     cantidad: 135,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Caseína micelar (85%), concentrado de proteína de suero de leche (10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal antes de dormir para una liberación prolongada', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '125 kcal',
-      proteinas: '29g',
-      carbohidratos: '2.8g',
-      azucares: '1.3g',
-      grasas: '1.9g',
-      grasasSaturadas: '1.2g',
-      fibra: '0.5g',
-      sal: '0.22g',
-      sodio: '105mg',
-      calcio: '150mg',
-      hierro: '1.1mg',
-      vitaminaD: '0.8µg',
-      vitaminaB12: '1.2µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.6g',
-        isoleucina: '1.6g',
-        valina: '1.7g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 5,
@@ -326,66 +177,9 @@ export const allProducts = [
     colesterol: 'Reducido',
     slug: 'advanced-whey-power',
     cantidad: 81,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, caseína micelar), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '105 kcal',
-      proteinas: '20g',
-      carbohidratos: '2.2g',
-      azucares: '1.1g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.8g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '95mg',
-      calcio: '125mg',
-      hierro: '0.9mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.0g',
-        isoleucina: '1.2g',
-        valina: '1.3g',
-        glutamina: '4.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 6,
@@ -403,66 +197,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'premium-whey-recovery',
     cantidad: 147,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de guisante (60%), proteína de arroz (25%), proteína de cáñamo (10%), aromas naturales, espesantes (goma xantana, goma guar), edulcorantes naturales (stevia), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '2.5g',
-      azucares: '0.5g',
-      grasas: '1.7g',
-      grasasSaturadas: '0.3g',
-      fibra: '1.2g',
-      sal: '0.15g',
-      sodio: '80mg',
-      calcio: '100mg',
-      hierro: '2.5mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.1g',
-        isoleucina: '1.2g',
-        valina: '1.3g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 7,
@@ -476,75 +213,13 @@ export const allProducts = [
     reviews: 356,
     badge: 'TOP VENTAS',
     marca: 'Optimum Nutrition',
-    tipo: 'Vegan Protein',
-    rating: 4.8,
-    reviews: 356,
-    badge: 'TOP VENTAS',
-    marca: 'Optimum Nutrition',
     tipo: 'Isolate Protein',
     colesterol: 'Mínimo',
     slug: 'ultra-protein-isolate',
     cantidad: 120,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 35 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 15 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 20 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 5 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '30g',
-      carbohidratos: '1g',
-      azucares: '0.5g',
-      grasas: '0.5g',
-      grasasSaturadas: '0.2g',
-      fibra: '0.3g',
-      sal: '0.1g',
-      sodio: '50mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '25mg',
-      aminoacidos: {
-        leucina: '3.0g',
-        isoleucina: '1.8g',
-        valina: '1.9g',
-        glutamina: '5.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 8,
@@ -563,66 +238,9 @@ export const allProducts = [
     superOfertas: true,
     slug: 'pro-muscle-builder',
     cantidad: 95,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, caseína micelar), L-Glutamina (5g), BCAA (5g), creatina monohidrato (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '120 kcal',
-      proteinas: '28g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.8g',
-      fibra: '0.5g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '130mg',
-      hierro: '1.1mg',
-      vitaminaD: '0.8µg',
-      vitaminaB12: '1.1µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.8g',
-        isoleucina: '1.7g',
-        valina: '1.8g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 9,
@@ -640,66 +258,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'elite-performance-protein',
     cantidad: 110,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de suero hidrolizada (90%), aislado de proteína de suero de leche (5%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '2g',
-      azucares: '1g',
-      grasas: '1.2g',
-      grasasSaturadas: '0.6g',
-      fibra: '0.4g',
-      sal: '0.15g',
-      sodio: '80mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '30mg',
-      aminoacidos: {
-        leucina: '2.6g',
-        isoleucina: '1.5g',
-        valina: '1.6g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 10,
@@ -717,68 +278,10 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'natural-plant-protein',
     cantidad: 85,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de guisante (50%), proteína de arroz (30%), proteína de cáñamo (15%), proteína de semilla de calabaza (5%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '22g',
-      carbohidratos: '3g',
-      azucares: '0.5g',
-      grasas: '2g',
-      grasasSaturadas: '0.3g',
-      fibra: '2g',
-      sal: '0.2g',
-      sodio: '70mg',
-      calcio: '80mg',
-      hierro: '3mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '1.8g',
-        isoleucina: '1.0g',
-        valina: '1.1g',
-        glutamina: '3.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
-  // Continúo con más productos siguiendo el mismo patrón...
   {
     id: 11,
     name: 'Power MASS GAINER',
@@ -795,61 +298,9 @@ export const allProducts = [
     colesterol: 'Moderado',
     slug: 'power-mass-gainer',
     cantidad: 75,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 15 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 8 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 3 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 5 }
-      ],
-    ],
-    carracteristicas: ['100g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche, soja y gluten. Fabricado en instalaciones que también procesan huevo, frutos secos y cacahuetes.',
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (5g), glutamina (5g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
-    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-2 veces al día, según necesidades calóricas', 'Ideal después del entrenamiento y/o entre comidas', 'Para mejores resultados, combinar con un programa de entrenamiento de fuerza', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '100g',
-      calorias: '1200 kcal',
-      proteinas: '50g',
-      carbohidratos: '220g',
-      azucares: '15g',
-      grasas: '12g',
-      grasasSaturadas: '5g',
-      fibra: '3g',
-      sal: '0.5g',
-      sodio: '200mg',
-      calcio: '300mg',
-      hierro: '5mg',
-      vitaminaD: '5µg',
-      vitaminaB12: '2.5µg',
-      enzimasDigestivas: '50mg',
-      aminoacidos: {
-        leucina: '5g',
-        isoleucina: '3g',
-        valina: '3.2g',
-        glutamina: '10g'
-      }
-    }
+    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 12,
@@ -867,66 +318,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'lean-protein-matrix',
     cantidad: 90,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche), L-carnitina (1g), té verde (extracto), CLA (ácido linoleico conjugado), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '24g',
-      carbohidratos: '2g',
-      azucares: '1g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.7g',
-      fibra: '0.5g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.4g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 13,
@@ -944,66 +338,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'iso-whey-zero',
     cantidad: 105,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene soja. Sin lactosa. Fabricado en instalaciones que también procesan leche, huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (95%, sin lactosa), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche sin lactosa. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '112 kcal',
-      proteinas: '27g',
-      carbohidratos: '1.5g',
-      azucares: '0g',
-      grasas: '0.8g',
-      grasasSaturadas: '0.3g',
-      fibra: '0.3g',
-      sal: '0.15g',
-      sodio: '75mg',
-      calcio: '110mg',
-      hierro: '0.9mg',
-      vitaminaD: '0.6µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '25mg',
-      aminoacidos: {
-        leucina: '2.7g',
-        isoleucina: '1.6g',
-        valina: '1.7g',
-        glutamina: '4.6g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche sin lactosa. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 14,
@@ -1021,66 +358,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'night-time-protein',
     cantidad: 95,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Caseína micelar (90%), concentrado de proteína de suero de leche (5%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
-    recomendacionesDeUso: ['Tomar 1 vez al día, preferentemente antes de dormir', 'Proporciona liberación lenta de aminoácidos durante la noche', 'Ayuda a prevenir el catabolismo muscular nocturno', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.8g',
-      grasasSaturadas: '1.0g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '300mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '4.8g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.'
   },
   {
     id: 15,
@@ -1099,66 +379,9 @@ export const allProducts = [
     superOfertas: true,
     slug: 'complete-protein-blend',
     cantidad: 110,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 40%, aislado de proteína de suero de leche 30%, caseína micelar 20%, proteína de huevo 10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento y/o entre comidas', 'Proporciona liberación de aminoácidos a corto, medio y largo plazo', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '24g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.7g',
-      grasasSaturadas: '0.9g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '200mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.4g',
-        isoleucina: '1.5g',
-        valina: '1.6g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 16,
@@ -1176,66 +399,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'hydro-whey-protein',
     cantidad: 85,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de suero hidrolizada (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal inmediatamente después del entrenamiento para maximizar la recuperación', 'Absorción ultra rápida para una entrega inmediata de aminoácidos', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '28g',
-      carbohidratos: '1g',
-      azucares: '0.5g',
-      grasas: '0.8g',
-      grasasSaturadas: '0.3g',
-      fibra: '0.2g',
-      sal: '0.15g',
-      sodio: '70mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '25mg',
-      aminoacidos: {
-        leucina: '3.0g',
-        isoleucina: '1.8g',
-        valina: '1.9g',
-        glutamina: '4.8g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 17,
@@ -1253,66 +419,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'organic-plant-protein',
     cantidad: 75,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones certificadas para productos orgánicos.',
     infoIngredientes: 'Proteína de guisante orgánica (40%), proteína de arroz integral orgánico (30%), proteína de semillas de chía orgánica (10%), proteína de semillas de calabaza orgánica (10%), mezcla de superalimentos orgánicos (espirulina, maca, cúrcuma, jengibre), aromas naturales, stevia orgánica, sal marina.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '21g',
-      carbohidratos: '4g',
-      azucares: '0.5g',
-      grasas: '2.5g',
-      grasasSaturadas: '0.3g',
-      fibra: '3g',
-      sal: '0.2g',
-      sodio: '70mg',
-      calcio: '60mg',
-      hierro: '4mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '0mg',
-      aminoacidos: {
-        leucina: '1.7g',
-        isoleucina: '0.9g',
-        valina: '1.0g',
-        glutamina: '3.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 18,
@@ -1330,66 +439,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'whey-protein-isolate',
     cantidad: 120,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (97%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '29g',
-      carbohidratos: '0.5g',
-      azucares: '0g',
-      grasas: '0.5g',
-      grasasSaturadas: '0.2g',
-      fibra: '0g',
-      sal: '0.1g',
-      sodio: '50mg',
-      calcio: '120mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.6µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '3.1g',
-        isoleucina: '1.9g',
-        valina: '2.0g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 19,
@@ -1407,67 +459,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'pro-casein-protein',
     cantidad: 90,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Caseína micelar (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
-    recomendacionesDeUso: ['Tomar 1 vez al día, preferentemente antes de dormir', 'Proporciona liberación lenta de aminoácidos durante la noche', 'Ayuda a prevenir el catabolismo muscular nocturno', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.8g',
-      grasasSaturadas: '1.0g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '350mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.'
   },
   {
     id: 20,
@@ -1485,66 +479,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'lean-whey-protein',
     cantidad: 85,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Concentrado de proteína de suero de leche (85%), L-carnitina (1g), extracto de té verde, CLA (ácido linoleico conjugado), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '23g',
-      carbohidratos: '2g',
-      azucares: '1g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.7g',
-      fibra: '0.5g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 21,
@@ -1562,61 +499,9 @@ export const allProducts = [
     colesterol: 'Moderado',
     slug: 'ultra-mass-gainer',
     cantidad: 70,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 8 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 3 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 3 }
-      ],
-    ],
-    carracteristicas: ['100g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche, soja y gluten. Fabricado en instalaciones que también procesan huevo, frutos secos y cacahuetes.',
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (3g), glutamina (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
-    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-2 veces al día, según necesidades calóricas', 'Ideal después del entrenamiento y/o entre comidas', 'Para mejores resultados, combinar con un programa de entrenamiento de fuerza', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '100g',
-      calorias: '1000 kcal',
-      proteinas: '45g',
-      carbohidratos: '180g',
-      azucares: '12g',
-      grasas: '10g',
-      grasasSaturadas: '4g',
-      fibra: '2.5g',
-      sal: '0.4g',
-      sodio: '180mg',
-      calcio: '250mg',
-      hierro: '4mg',
-      vitaminaD: '4µg',
-      vitaminaB12: '2.0µg',
-      enzimasDigestivas: '40mg',
-      aminoacidos: {
-        leucina: '4.5g',
-        isoleucina: '2.7g',
-        valina: '2.8g',
-        glutamina: '8.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 22,
@@ -1634,66 +519,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'premium-whey-concentrate',
     cantidad: 150,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 40 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 15 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 35 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 28 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 3 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Concentrado de proteína de suero de leche (80%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '112 kcal',
-      proteinas: '22g',
-      carbohidratos: '3g',
-      azucares: '1.5g',
-      grasas: '2g',
-      grasasSaturadas: '1.2g',
-      fibra: '0.5g',
-      sal: '0.25g',
-      sodio: '100mg',
-      calcio: '120mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.6µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '15mg',
-      aminoacidos: {
-        leucina: '2.2g',
-        isoleucina: '1.3g',
-        valina: '1.4g',
-        glutamina: '4.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 23,
@@ -1712,66 +540,9 @@ export const allProducts = [
     superOfertas: true,
     slug: 'vegan-protein-complete',
     cantidad: 80,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 3 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de guisante (40%), proteína de arroz integral (30%), proteína de semillas de calabaza (15%), proteína de cáñamo (10%), mezcla de aminoácidos esenciales (5%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '20g',
-      carbohidratos: '3.5g',
-      azucares: '0.5g',
-      grasas: '2.2g',
-      grasasSaturadas: '0.3g',
-      fibra: '2.5g',
-      sal: '0.2g',
-      sodio: '70mg',
-      calcio: '60mg',
-      hierro: '3.5mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '15mg',
-      aminoacidos: {
-        leucina: '1.6g',
-        isoleucina: '0.9g',
-        valina: '1.0g',
-        glutamina: '3.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 24,
@@ -1789,66 +560,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'gold-standard-whey',
     cantidad: 200,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 40 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 50 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 35 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 20 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 35 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 45 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 30 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 15 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 30 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 40 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 25 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 25 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 35 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 28 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 38 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 22 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 8 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 70%, aislado de proteína de suero de leche 20%, proteína de suero hidrolizada 10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '24g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.8g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '130mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.5g',
-        isoleucina: '1.5g',
-        valina: '1.6g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 25,
@@ -1866,66 +580,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'combat-protein-powder',
     cantidad: 120,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas de 5 fases (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, proteína de suero hidrolizada, caseína micelar, proteína de clara de huevo), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento y/o entre comidas', 'Proporciona liberación de aminoácidos a corto, medio y largo plazo', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.6g',
-      grasasSaturadas: '0.8g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '150mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.5g',
-        isoleucina: '1.5g',
-        valina: '1.6g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 26,
@@ -1943,66 +600,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'nitro-tech-protein',
     cantidad: 110,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (70%), concentrado de proteína de suero de leche (20%), creatina monohidrato (3g), L-glutamina (2g), BCAA (2g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '120 kcal',
-      proteinas: '30g',
-      carbohidratos: '2g',
-      azucares: '1g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.7g',
-      fibra: '0.3g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '130mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '3.0g',
-        isoleucina: '1.8g',
-        valina: '1.9g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 27,
@@ -2020,66 +620,9 @@ export const allProducts = [
     colesterol: 'Moderado',
     slug: 'syntha-6-protein-matrix',
     cantidad: 100,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 3 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 12 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, caseína micelar, proteína de leche, proteína de clara de huevo, proteína de suero hidrolizada), MCT (triglicéridos de cadena media), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento y/o entre comidas', 'Proporciona liberación de aminoácidos a corto, medio y largo plazo', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '130 kcal',
-      proteinas: '22g',
-      carbohidratos: '3.5g',
-      azucares: '1.5g',
-      grasas: '3g',
-      grasasSaturadas: '1.5g',
-      fibra: '0.5g',
-      sal: '0.25g',
-      sodio: '100mg',
-      calcio: '200mg',
-      hierro: '0.9mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.2g',
-        isoleucina: '1.3g',
-        valina: '1.4g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 28,
@@ -2097,61 +640,9 @@ export const allProducts = [
     colesterol: 'Moderado',
     slug: 'serious-mass-gainer',
     cantidad: 80,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 12 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 8 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 8 }
-      ],
-    ],
-    carracteristicas: ['100g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche, soja y gluten. Fabricado en instalaciones que también procesan huevo, frutos secos y cacahuetes.',
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (5g), glutamina (5g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
-    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-2 veces al día, según necesidades calóricas', 'Ideal después del entrenamiento y/o entre comidas', 'Para mejores resultados, combinar con un programa de entrenamiento de fuerza', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '100g',
-      calorias: '1250 kcal',
-      proteinas: '50g',
-      carbohidratos: '250g',
-      azucares: '20g',
-      grasas: '15g',
-      grasasSaturadas: '6g',
-      fibra: '3g',
-      sal: '0.5g',
-      sodio: '200mg',
-      calcio: '300mg',
-      hierro: '5mg',
-      vitaminaD: '5µg',
-      vitaminaB12: '2.5µg',
-      enzimasDigestivas: '50mg',
-      aminoacidos: {
-        leucina: '5g',
-        isoleucina: '3g',
-        valina: '3.2g',
-        glutamina: '10g'
-      }
-    }
+    modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 29,
@@ -2169,66 +660,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'iso-100-hydrolyzed',
     cantidad: 90,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de suero hidrolizada (100%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal inmediatamente después del entrenamiento para maximizar la recuperación', 'Absorción ultra rápida para una entrega inmediata de aminoácidos', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '25g',
-      carbohidratos: '0g',
-      azucares: '0g',
-      grasas: '0.5g',
-      grasasSaturadas: '0.2g',
-      fibra: '0g',
-      sal: '0.1g',
-      sodio: '50mg',
-      calcio: '120mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.6µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '25mg',
-      aminoacidos: {
-        leucina: '2.7g',
-        isoleucina: '1.6g',
-        valina: '1.7g',
-        glutamina: '4.5g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 30,
@@ -2247,66 +681,9 @@ export const allProducts = [
     superOfertas: true,
     slug: 'pure-whey-isolate',
     cantidad: 95,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '112 kcal',
-      proteinas: '27g',
-      carbohidratos: '0.8g',
-      azucares: '0.5g',
-      grasas: '0.6g',
-      grasasSaturadas: '0.3g',
-      fibra: '0.2g',
-      sal: '0.15g',
-      sodio: '70mg',
-      calcio: '120mg',
-      hierro: '0.9mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.8g',
-        isoleucina: '1.7g',
-        valina: '1.8g',
-        glutamina: '4.7g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 31,
@@ -2324,66 +701,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'micellar-casein-protein',
     cantidad: 85,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 8 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Caseína micelar (98%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
-    recomendacionesDeUso: ['Tomar 1 vez al día, preferentemente antes de dormir', 'Proporciona liberación lenta de aminoácidos durante la noche', 'Ayuda a prevenir el catabolismo muscular nocturno', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '24g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.8g',
-      grasasSaturadas: '1.0g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '350mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '5.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.'
   },
   {
     id: 32,
@@ -2401,66 +721,9 @@ export const allProducts = [
     colesterol: 'Mínimo',
     slug: 'egg-white-protein',
     cantidad: 75,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene huevo. Fabricado en instalaciones que también procesan leche, soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de clara de huevo en polvo (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '24g',
-      carbohidratos: '2g',
-      azucares: '0.5g',
-      grasas: '0.5g',
-      grasasSaturadas: '0.1g',
-      fibra: '0.3g',
-      sal: '0.2g',
-      sodio: '80mg',
-      calcio: '50mg',
-      hierro: '1.2mg',
-      vitaminaD: '0.5µg',
-      vitaminaB12: '0.8µg',
-      enzimasDigestivas: '18mg',
-      aminoacidos: {
-        leucina: '2.2g',
-        isoleucina: '1.3g',
-        valina: '1.4g',
-        glutamina: '3.8g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 33,
@@ -2478,66 +741,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'beef-protein-isolate',
     cantidad: 70,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene lactosa ni gluten. Fabricado en instalaciones que también procesan soja, huevo, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de carne de vacuno (90%), creatina monohidrato (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '25g',
-      carbohidratos: '1g',
-      azucares: '0g',
-      grasas: '1g',
-      grasasSaturadas: '0.5g',
-      fibra: '0.2g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '30mg',
-      hierro: '5mg',
-      vitaminaD: '0.2µg',
-      vitaminaB12: '2.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.4g',
-        isoleucina: '1.5g',
-        valina: '1.6g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 34,
@@ -2555,66 +761,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'slim-diet-protein',
     cantidad: 80,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 8 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, caseína micelar), L-carnitina (1g), extracto de té verde, extracto de garcinia cambogia, extracto de café verde, fibra de avena, aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-2 veces al día, como sustituto de comida o entre horas', 'Ideal como parte de un programa de control de peso', 'Combinar con ejercicio regular para mejores resultados', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '105 kcal',
-      proteinas: '20g',
-      carbohidratos: '3g',
-      azucares: '1g',
-      grasas: '1.5g',
-      grasasSaturadas: '0.7g',
-      fibra: '2g',
-      sal: '0.2g',
-      sodio: '85mg',
-      calcio: '120mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '20mg',
-      aminoacidos: {
-        leucina: '2.0g',
-        isoleucina: '1.2g',
-        valina: '1.3g',
-        glutamina: '3.8g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 35,
@@ -2632,66 +781,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'tri-blend-protein',
     cantidad: 105,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 28 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 12 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 40%, aislado de proteína de suero de leche 30%, caseína micelar 30%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento y/o entre comidas', 'Proporciona liberación de aminoácidos a corto, medio y largo plazo', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '115 kcal',
-      proteinas: '23g',
-      carbohidratos: '2.5g',
-      azucares: '1.2g',
-      grasas: '1.7g',
-      grasasSaturadas: '0.9g',
-      fibra: '0.4g',
-      sal: '0.2g',
-      sodio: '90mg',
-      calcio: '180mg',
-      hierro: '1.0mg',
-      vitaminaD: '0.7µg',
-      vitaminaB12: '1.0µg',
-      enzimasDigestivas: '22mg',
-      aminoacidos: {
-        leucina: '2.3g',
-        isoleucina: '1.4g',
-        valina: '1.5g',
-        glutamina: '4.3g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 36,
@@ -2709,66 +801,9 @@ export const allProducts = [
     colesterol: 'Bajo',
     slug: 'whey-protein-concentrate',
     cantidad: 140,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 35 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 15 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 25 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 15 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 3 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Concentrado de proteína de suero de leche (80%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '112 kcal',
-      proteinas: '22g',
-      carbohidratos: '3g',
-      azucares: '1.5g',
-      grasas: '2g',
-      grasasSaturadas: '1.2g',
-      fibra: '0.5g',
-      sal: '0.25g',
-      sodio: '100mg',
-      calcio: '120mg',
-      hierro: '0.8mg',
-      vitaminaD: '0.6µg',
-      vitaminaB12: '0.9µg',
-      enzimasDigestivas: '15mg',
-      aminoacidos: {
-        leucina: '2.2g',
-        isoleucina: '1.3g',
-        valina: '1.4g',
-        glutamina: '4.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 37,
@@ -2786,66 +821,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'pea-protein-isolate',
     cantidad: 85,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de guisante (90%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '108 kcal',
-      proteinas: '24g',
-      carbohidratos: '1.5g',
-      azucares: '0g',
-      grasas: '1.2g',
-      grasasSaturadas: '0.2g',
-      fibra: '1.5g',
-      sal: '0.2g',
-      sodio: '70mg',
-      calcio: '40mg',
-      hierro: '5mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '0mg',
-      aminoacidos: {
-        leucina: '2.0g',
-        isoleucina: '1.1g',
-        valina: '1.2g',
-        glutamina: '4.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 38,
@@ -2863,66 +841,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'rice-protein-isolate',
     cantidad: 75,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de arroz integral (95%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '105 kcal',
-      proteinas: '22g',
-      carbohidratos: '2g',
-      azucares: '0g',
-      grasas: '1g',
-      grasasSaturadas: '0.2g',
-      fibra: '1.8g',
-      sal: '0.2g',
-      sodio: '65mg',
-      calcio: '30mg',
-      hierro: '4mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '0mg',
-      aminoacidos: {
-        leucina: '1.8g',
-        isoleucina: '1.0g',
-        valina: '1.1g',
-        glutamina: '3.8g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 39,
@@ -2932,7 +853,7 @@ export const allProducts = [
     offerPrice: 34.99,
     discount: 20,
     image: [ '/ofertaDelDia1.webp' ],
-    rating: 4.0,
+    rating: 4,
     reviews: 165,
     badge: 'NATURAL',
     marca: 'Manitoba Harvest',
@@ -2941,66 +862,9 @@ export const allProducts = [
     superOfertas: true,
     slug: 'hemp-protein-powder',
     cantidad: 65,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 5 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 8 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 5 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'No contiene alérgenos comunes. Apto para veganos. Fabricado en instalaciones que también procesan soja, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Proteína de semillas de cáñamo (100%), sin aditivos ni conservantes.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '120 kcal',
-      proteinas: '18g',
-      carbohidratos: '3g',
-      azucares: '0g',
-      grasas: '4g',
-      grasasSaturadas: '0.5g',
-      fibra: '4g',
-      sal: '0g',
-      sodio: '10mg',
-      calcio: '20mg',
-      hierro: '6mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '0mg',
-      aminoacidos: {
-        leucina: '1.5g',
-        isoleucina: '0.8g',
-        valina: '0.9g',
-        glutamina: '3.0g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   },
   {
     id: 40,
@@ -3018,66 +882,9 @@ export const allProducts = [
     colesterol: 'Sin colesterol',
     slug: 'soy-protein-isolate',
     cantidad: 90,
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 15 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 18 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 22 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 12 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 15 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 12 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 0 }
-      ],
-    ],
-    carracteristicas: ['30g', 'tal', 'tal2', 'tal3', 'tal4', 'tal5', 'tal6'],
     informacionAlergenos: 'Contiene soja. Apto para veganos. Fabricado en instalaciones que también procesan leche, huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de soja (95%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
-    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
-    recomendacionesDeUso: ['Tomar 1-3 veces al día, según necesidades proteicas', 'Ideal después del entrenamiento para maximizar la recuperación', 'Puede tomarse entre comidas como snack proteico', 'Conservar en lugar fresco y seco'],
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '110 kcal',
-      proteinas: '25g',
-      carbohidratos: '1g',
-      azucares: '0g',
-      grasas: '1g',
-      grasasSaturadas: '0.2g',
-      fibra: '1g',
-      sal: '0.2g',
-      sodio: '80mg',
-      calcio: '60mg',
-      hierro: '4mg',
-      vitaminaD: '0µg',
-      vitaminaB12: '0µg',
-      enzimasDigestivas: '0mg',
-      aminoacidos: {
-        leucina: '2.1g',
-        isoleucina: '1.2g',
-        valina: '1.3g',
-        glutamina: '4.2g'
-      }
-    }
+    modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.'
   }
 ]
 export const productosSuperOfertas = allProducts.filter(producto => producto.superOfertas);

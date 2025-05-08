@@ -15,23 +15,25 @@ import styles from "../../../styles/ProductDetail.module.css"
 {/*Ordenar un poco tood */}
 {/*Lo de las reseñas ya es para mucho mucho alante*/}
 interface Producto {
-  id: "number"
-  name: "strnig"
-  description: "strnig"
-  originalPrice: "float"
-  offerPrice: "float"
-  discount: "float"
-  image: "strnig"
-  rating: "float"
-  reviews: "number"
-  badge: "strnig"
-  marca: "strnig"
-  tipo: "strnig"
-  colesterol: "strnig"
-  superOfertas: "bool"
-  slug: "strnig"
-  cantidad: "number"
-  
+  id: number;            // 'number' en lugar de 'string'
+  name: string;          // 'string' en lugar de 'strnig'
+  description: string;   // 'string' en lugar de 'strnig'
+  originalPrice: number; // 'number' en lugar de 'float' (en JavaScript, 'float' es 'number')
+  offerPrice: number;    // 'number' en lugar de 'float'
+  discount: number;      // 'number' en lugar de 'float'
+  image: string[];       // 'string[]' para un array de cadenas de texto
+  rating: number;        // 'number' en lugar de 'float'
+  reviews: number;       // 'number' está bien
+  badge: string;         // 'string' en lugar de 'strnig'
+  marca: string;         // 'string' en lugar de 'strnig'
+  tipo: string;          // 'string' en lugar de 'strnig'
+  colesterol: string;    // 'string' en lugar de 'strnig'
+  superOfertas: boolean; // 'boolean' en lugar de 'bool'
+  slug: string;          // 'string' en lugar de 'strnig'
+  cantidad: number;      // 'number' está bien
+  informacionAlergenos: string;
+  infoIngredientes: string;
+  modoDeUso: string;
 }
 
 export default function ProductDetailClient({ producto }: { producto: Producto }) {

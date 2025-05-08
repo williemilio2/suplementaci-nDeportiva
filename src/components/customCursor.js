@@ -17,14 +17,14 @@ export default function CustomCursor() {
 
     // Detectar cuando el cursor entra en elementos "hoverable"
     const handleMouseEnter = (e) => {
-      if (e.target.classList.contains("hoverable")) {
+      if (e.target && e.target.classList?.contains("hoverable")) {
         setHovered(true)
       }
     }
 
     // Detectar cuando el cursor sale de elementos "hoverable"
     const handleMouseLeave = (e) => {
-      if (e.target.classList.contains("hoverable")) {
+      if (e.target && e.target.classList?.contains("hoverable")) {
         setHovered(false)
       }
     }
