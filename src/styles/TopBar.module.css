@@ -1,0 +1,41 @@
+.topBar {
+  background-color: #f8f8f8;
+  color: #555555;
+  font-size: 0.875rem;
+  padding: 0.25rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.languageSelector {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.authLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topBar a {
+  color: #555555;
+  transition: color 0.2s;
+}
+
+.topBar a:hover {
+  color: var(--color-accent);
+}
+.linksDiv{
+  display: flex;
+  align-items: center;
+}

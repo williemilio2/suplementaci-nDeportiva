@@ -1,0 +1,418 @@
+.productListingContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Encabezado del listado */
+.listingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.resultsInfo {
+  flex: 1;
+}
+
+.listingTitle {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.5rem;
+}
+
+.resultsCount {
+  font-size: 1.3rem;
+  color: #666;
+  margin: 0;
+}
+
+.listingControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sortControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sortLabel {
+  font-size: 1.1rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.sortSelect {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background-color: white;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.mobileFilterButton {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: #333;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.filterBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: #ff5500;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+/* Contenido principal */
+.productListingContent {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Panel de filtros */
+.filtersPanel {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.clearFiltersButton {
+  font-size: 0.9rem;
+  color: #ff5500;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.closeFiltersButton {
+  display: none;
+  background: none;
+  border: none;
+  color: #666;
+  padding: 0;
+}
+
+.filtersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filterSection {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+}
+
+.filterSectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem;
+}
+
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterLabel {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Filtro de precio */
+.priceRangeContainer {
+  padding: 0 0.5rem;
+}
+
+.priceSlider {
+  margin-bottom: 1rem;
+}
+
+.priceInputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priceInput {
+  position: relative;
+  flex: 1;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.priceInput input {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.priceSeparator {
+  color: #666;
+}
+
+/* Filtro de valoraciones */
+.ratingStars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star,
+.starFilled {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.star {
+  color: #ddd;
+}
+
+.starFilled {
+  color: #ffc107;
+}
+
+.ratingText {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: 0.25rem;
+}
+
+.clearRatingButton {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #ff5500;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Botones de acción para filtros móviles */
+.mobileFilterActions {
+  display: none;
+  margin-top: 1rem;
+}
+
+.applyFiltersButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ff5500;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.applyFiltersButton:hover {
+  background-color: #e64d00;
+}
+
+/* Contenedor de productos */
+.productsContainer {
+  flex: 1;
+}
+
+.offerProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Mensaje de no resultados */
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.noResults p {
+  color: #666;
+  margin: 0;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: #333;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.pageButton:hover {
+  border-color: #ff5500;
+  color: #ff5500;
+}
+
+.activePageButton {
+  background-color: #ff5500;
+  border-color: #ff5500;
+  color: white;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disabledButton {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dotsButton {
+  cursor: default;
+}
+
+.dotsButton:hover {
+  border-color: #ddd;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .offerProducts {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .listingHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .listingControls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sortLabel {
+    display: none;
+  }
+
+  .mobileFilterButton {
+    display: flex;
+  }
+
+  .filtersPanel {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 350px;
+    height: 100vh;
+    background-color: white;
+    z-index: 1000;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: left 0.3s ease;
+  }
+
+  .showMobileFilters {
+    left: 0;
+  }
+
+  .closeFiltersButton {
+    display: block;
+  }
+
+  .mobileFilterActions {
+    display: block;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 1rem 0;
+  }
+
+  .productListingContent {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .offerProducts {
+    grid-template-columns: 1fr;
+  }
+}
