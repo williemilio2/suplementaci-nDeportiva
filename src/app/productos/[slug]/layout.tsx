@@ -4,7 +4,10 @@ export const metadata = {
   description: 'Tienda online de suplementos deportivos y nutrición',
 };
 
-export default function RootLayout({ children }) {
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>{children}</>
   );
