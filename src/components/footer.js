@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/footer.module.css';
-import { Facebook, Instagram, Twitter, Youtube, CreditCard, Truck, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Youtube, CreditCard, Truck, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
