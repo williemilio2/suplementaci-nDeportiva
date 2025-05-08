@@ -5,7 +5,8 @@ import { ChevronDown } from "lucide-react";
 import styles from "../styles/Navigation.module.css";
 
 export default function Navigation() {
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
+
 
   const navItems = [
     {
@@ -226,7 +227,7 @@ export default function Navigation() {
 
             {item.hasDropdown && activeDropdown === index && (
               <div className={styles.dropdown}>
-                {item.dropdownContent.map((category, catIndex) => (
+                {item.dropdownContent?.map((category, catIndex) => (
                   <div key={catIndex} className={styles.dropdownCategory}>
                     <h4 className={styles.dropdownTitle}>{category.title}</h4>
                     <ul className={styles.dropdownList}>
