@@ -28,7 +28,7 @@ interface Producto {
   marca: string;         // 'string' en lugar de 'strnig'
   tipo: string;          // 'string' en lugar de 'strnig'
   colesterol: string;    // 'string' en lugar de 'strnig'
-  superOfertas: boolean; // 'boolean' en lugar de 'bool'
+  superOfertas?: boolean; // 'boolean' en lugar de 'bool'
   slug: string;          // 'string' en lugar de 'strnig'
   cantidad: number;      // 'number' está bien
   informacionAlergenos: string;
