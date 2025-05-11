@@ -22,8 +22,8 @@ interface Producto {
   name: string;          // 'string' en lugar de 'strnig'
   description: string;   // 'string' en lugar de 'strnig'
   originalPrice: number; // 'number' en lugar de 'float' (en JavaScript, 'float' es 'number')
-  offerPrice: number;    // 'number' en lugar de 'float'
-  discount: number;      // 'number' en lugar de 'float'
+  offerPrice?: number;    // 'number' en lugar de 'float'
+  discount?: number;      // 'number' en lugar de 'float'
   image: string;       // 'string
   rating: number;        // 'number' en lugar de 'float'
   reviews: number;       // 'number' está bien
