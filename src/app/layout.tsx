@@ -2,7 +2,7 @@ import './globals.css';
 import TopBar from '../components/TopBar';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import Footer from '../components/footer';
 
 export const metadata = {
   title: 'Suplementos deportivos',
