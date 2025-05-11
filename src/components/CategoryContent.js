@@ -13,7 +13,7 @@ export default function CategoryContent() {
             {tabs.map((tab, index) => (
               <button
                 key={index}
-                className={`${styles.tab} ${index === 0 ? styles.tabActive : ""}`}
+                className={`${styles.tab} ${index === 0 ? styles.tabActive : ""} hoverable`}
               >
                 {tab}
               </button>
@@ -36,7 +36,7 @@ export default function CategoryContent() {
               </Link>
               <div className={styles.overlay}>
                 <Link href={'google.com'}>
-                  <button className={styles.ctaButton}>Ir ahora</button>
+                  <button className={`${styles.ctaButton} hoverable`}>Ir ahora</button>
                 </Link>
               </div>
               </div>

@@ -1,5 +1,5 @@
 import ProductDetailClient from "./product-detail-client"
-import { allProducts }  from '../../../others/listaArchivos'
+import { allProducts }  from '../../../products/listaArchivos'
 //import { PageProps } from 'next';
 import { notFound } from 'next/navigation';  // Asumiendo que usas 'notFound'
 

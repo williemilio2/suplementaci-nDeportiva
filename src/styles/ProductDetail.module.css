@@ -234,7 +234,9 @@
   .starEmpty {
     color: #ddd;
   }
-  
+  .starMirror{
+    transform: scaleX(-1);
+  }
   .reviewCount {
     font-size: 14px;
     color: #666;
@@ -250,7 +252,7 @@
   
   /* Variantes y selección */
   .variantsSection {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   .sectionTitle {
@@ -342,13 +344,8 @@
     border-top: 1px solid #eee;
   }
   
-  .metaItem {
-    display: flex;
-    align-items: center;
-  }
-  
   .metaLabel {
-    font-weight: 600;
+    font-weight: 700;
     width: 100px;
     font-size: 14px;
     color: #666;
@@ -358,7 +355,11 @@
     font-size: 14px;
     color: #333;
   }
-  
+  .descripCionLabelsGrid{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
   /* Columna de compra */
   .buyCard {
     background-color: white;
@@ -613,6 +614,17 @@
   .nutritionRow {
     display: flex;
     justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .aminoacidos{
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+    font-weight: bold;
+  }
+  .nutritionRowAminoacidos{
+    display: flex;
+    flex-direction: column;
     padding: 8px 0;
     border-bottom: 1px solid #eee;
   }

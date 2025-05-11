@@ -1,6 +1,7 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import styles from "../styles/Navigation.module.css";
 
@@ -208,10 +209,27 @@ export default function Navigation() {
     }
   ];
   
-  
+  useEffect(() => {
+    const handleScroll = () => {
+      setActiveDropdown(null);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <nav className={styles.nav}>
+      <Image
+        src={'/logoLetras.png'}
+        width={110}
+        height={35}
+        alt={'logoLetras'}
+        className={styles.navBarImage}
+      />
       <div className={styles.navContainer}>
         {navItems.map((item, index) => (
           <div
@@ -220,7 +238,7 @@ export default function Navigation() {
             onMouseEnter={() => item.hasDropdown && setActiveDropdown(index)}
             onMouseLeave={() => item.hasDropdown && setActiveDropdown(null)}
           >
-            <div className={`${styles.navLink} ${!item.hasDropdown ? styles.remarcado : ''}`}>
+            <div className={`${styles.navLink} ${!item.hasDropdown ? `${styles.remarcado} hoverable` : ''}`}>
               {item.name}
               {item.hasDropdown && <ChevronDown size={16} className={styles.icon} style={activeDropdown === index ? { transition: 'transform 0.3s' } : {  transform: 'rotate(-90deg)', transition: 'transform 0.3s' }}/>}
             </div>
@@ -233,7 +251,7 @@ export default function Navigation() {
                     <ul className={styles.dropdownList}>
                       {category.links.map((link, linkIndex) => (
                         <li key={linkIndex}>
-                          <Link href={link.linkUrl} className={styles.dropdownLink}>
+                          <Link href={link.linkUrl} className={`${styles.dropdownLink} hoverable`}>
                             {link.nameLink}
                           </Link>
                         </li>

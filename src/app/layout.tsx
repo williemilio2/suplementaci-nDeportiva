@@ -1,4 +1,8 @@
 import './globals.css';
+import TopBar from '../components/TopBar';
+import Header from '../components/Header';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Suplementos deportivos',
@@ -11,8 +15,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es">
       <body>
-        {children}
-        </body>
+        <header>
+          <TopBar />
+          <Header />
+          <Navigation />
+        </header>
+        <main>{children}</main>
+        <footer><Footer /></footer>
+      </body>
     </html>
   );
 }

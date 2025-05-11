@@ -41,14 +41,15 @@ export default function HeroBanner() {
                 alt={`Slide ${i}`}
                 fill
                 style={{ objectFit: "cover" }}
+                className="hoverable"
               />
             </div>
           ))}
         </div>
-        <div className={styles.flechaRight}>
+        <div className={`${styles.flechaRight} hoverable`} >
           <ArrowRight size={30} style={{ transform: "rotate(180deg)", marginLeft: '5px'}} className={styles.heroImage} onClick={() => mover(0)}/>
         </div>
-        <div className={styles.flechaLeft}>
+        <div className={`${styles.flechaLeft} hoverable`}>
           <ArrowRight size={30} style={{ marginRight: '5px'}} className={styles.heroImage} onClick={() => mover(1)}/>
         </div>
       </div>

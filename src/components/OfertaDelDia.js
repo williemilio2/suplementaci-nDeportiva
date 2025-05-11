@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Clock, ArrowRight } from 'lucide-react';
 import styles from '../styles/ofertaDelDia.module.css';
 import OfferProductCard from "./ContenedorPorducto";
-import { productosSuperOfertas }  from '../others/listaArchivos'
+import { productosSuperOfertas }  from '../products/listaArchivos'
 
 export default function DailyOffer() {
   const [time, setTime] = useState({ h: '--', m: '--', s: '--' });
@@ -90,7 +90,7 @@ export default function DailyOffer() {
         
         {/* Botón para ver todas las ofertas */}
         <div className={styles.viewAllContainer}>
-          <Link href="/ofertas" className={styles.viewAllButton}>
+          <Link href="/ofertas" className={`${styles.viewAllButton} hoverable`}>
             <span>Ver las demás ofertas</span>
             <ArrowRight size={18} />
           </Link>

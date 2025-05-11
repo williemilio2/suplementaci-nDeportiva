@@ -42,7 +42,7 @@ export default function Footer() {
             {/* Columna 1: Sobre nosotros */}
             <div className={styles.footerColumn}>
               <h3 className={styles.footerTitle}>SOBRE POWERFITT</h3>
-              <ul className={styles.footerLinks}>
+              <ul className={`${styles.footerLinks} hoverable`}>
                 <li><Link href="/nosotros">Quiénes Somos</Link></li>
                 <li><Link href="/blog">Blog</Link></li>
                 <li><Link href="/contacto">Contacto</Link></li>
@@ -54,7 +54,7 @@ export default function Footer() {
             {/* Columna 2: Ayuda */}
             <div className={styles.footerColumn}>
               <h3 className={styles.footerTitle}>AYUDA</h3>
-              <ul className={styles.footerLinks}>
+              <ul className={`${styles.footerLinks} hoverable`}>
                 <li><Link href="/envios">Envíos y Entregas</Link></li>
                 <li><Link href="/devoluciones">Devoluciones</Link></li>
                 <li><Link href="/preguntas-frecuentes">Preguntas Frecuentes</Link></li>
@@ -67,7 +67,7 @@ export default function Footer() {
             {/* Columna 3: Categorías */}
             <div className={styles.footerColumn}>
               <h3 className={styles.footerTitle}>CATEGORÍAS</h3>
-              <ul className={styles.footerLinks}>
+              <ul className={`${styles.footerLinks} hoverable`}>
                 <li><Link href="/proteinas">Proteínas</Link></li>
                 <li><Link href="/aminoacidos">Aminoácidos</Link></li>
                 <li><Link href="/pre-entreno">Pre-entreno</Link></li>
@@ -83,19 +83,19 @@ export default function Footer() {
               <p className={styles.newsletterText}>Suscríbete y recibe ofertas exclusivas y contenido sobre nutrición deportiva.</p>
               <form className={styles.newsletterForm}>
                 <input type="email" placeholder="Tu email" className={styles.newsletterInput} />
-                <button type="submit" className={styles.newsletterButton}>SUSCRIBIRSE</button>
+                <button type="submit" className={`${styles.newsletterButton} hoverable`}>SUSCRIBIRSE</button>
               </form>
               <div className={styles.socialLinks}>
-                <a href="https://facebook.com" aria-label="Facebook">
+                <a href="https://facebook.com" aria-label="Facebook" className='hoverable'>
                   <Facebook size={20} />
                 </a>
-                <a href="https://instagram.com" aria-label="Instagram">
+                <a href="https://instagram.com" aria-label="Instagram" className='hoverable'>
                   <Instagram size={20} />
                 </a>
-                <a href="https://twitter.com" aria-label="Twitter">
+                <a href="https://twitter.com" aria-label="Twitter" className='hoverable'>
                   <Twitter size={20} />
                 </a>
-                <a href="https://youtube.com" aria-label="Youtube">
+                <a href="https://youtube.com" aria-label="Youtube" className='hoverable'>
                   <Youtube size={20} />
                 </a>
               </div>

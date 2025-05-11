@@ -2,10 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, ShoppingCart } from "lucide-react"
+import { Heart, ShoppingCart, Star, StarHalf } from "lucide-react"
 import styles from "../styles/contenedorProducto.module.css"
 
 export default function OfferProductCard({ product }) {
+  const imagenSplit = product.image.split('<<<')
+  const imagen = imagenSplit[0]
   return (
     <div className={`${styles.productCard} ${product.superOfertas ? styles.productCardGlow : ""}`}>
       {product.badge && (
@@ -17,7 +19,7 @@ export default function OfferProductCard({ product }) {
       <div className={styles.productImageContainer}>
         <Link href={`/productos/${product.slug}`}>
           <Image
-            src={product.image[0] || "https://via.placeholder.com/300"}
+            src={imagen || "https://via.placeholder.com/300"}
             alt={product.name}
             width={300}
             height={300}
@@ -25,10 +27,10 @@ export default function OfferProductCard({ product }) {
           />
         </Link>
         <div className={styles.productActions}>
-          <button className={styles.actionButton} aria-label="Añadir a favoritos">
-            <Heart size={20} onClick={() => alert(product.name)} />
+          <button className={`${styles.actionButton} hoverable`} aria-label="Añadir a favoritos">
+            <Heart size={20} onClick={() => alert(product.rating)} />
           </button>
-          <button className={styles.actionButtonPrimary}>
+          <button className={`${styles.actionButtonPrimary} hoverable`}>
             <ShoppingCart size={20} />
             <span>Añadir</span>
           </button>
@@ -36,18 +38,57 @@ export default function OfferProductCard({ product }) {
       </div>
 
       <div className={styles.productInfo}>
-        <Link href={`/producto/${product.id}`} className={styles.productName}>
+        <Link href={`/producto/${product.id}`} className={`${styles.productName} hoverable`}>
           {product.name}
         </Link>
         <p className={styles.productDescription}>{product.description}</p>
 
         <div className={styles.productRating}>
           <div className={styles.stars}>
-            {[...Array(5)].map((_, i) => (
-              <span key={i} className={i < Math.floor(product.rating) ? styles.starFilled : styles.star}>
-                ★
-              </span>
-            ))}
+            {[1, 2, 3, 4, 5].map((star) => {
+              const rating = Number(product.rating);
+              const diff = rating - (star - 1);
+
+              let fillLevel = 0;
+              if (diff >= 0.75) {
+                fillLevel = 1;
+              } else if (diff >= 0.25) {
+                fillLevel = 0.5;
+              }
+
+              if (fillLevel === 0.5) {
+                return (
+                  <div key={star} style={{position: 'relative'}}>
+                    <StarHalf
+                      size={16}
+                      className={`${styles.star} ${styles.starFilled}`}
+                      fill="#FFA500"
+                      stroke="#ccc"
+                    />
+                    
+                    <StarHalf
+                      size={16}
+                      className={`${styles.starMirror}`}
+                      fill="none"
+                      stroke="#ccc"
+                      style={{ position: 'absolute', left: 0 }}
+                    />
+                  </div>
+                );
+              }
+
+              return (
+                <Star
+                  key={star}
+                  size={16}
+                  className={`${styles.star} ${
+                    fillLevel === 1 ? styles.starFilled : styles.starEmpty
+                  }`}
+                  fill={fillLevel > 0 ? "#FFA500" : "none"}
+                  stroke={fillLevel > 0 ? "#FFA500" : "#ccc"}
+                />
+              );
+            })}
           </div>
           <span className={styles.reviewCount}>{product.reviews} opiniones</span>
         </div>

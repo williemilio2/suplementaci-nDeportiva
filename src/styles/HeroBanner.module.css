@@ -47,12 +47,17 @@
 .flechaLeft,
 .flechaRight{
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 45px;
   height: 45px;
   top: 50%;
   transform: translateY(-50%);
+  transition: 1s;
 }
 .flechaLeft{
   right: 0%;
+}
+.flechaLeft:hover,
+.flechaRight:hover{
+  transform: scale(1.5);
 }

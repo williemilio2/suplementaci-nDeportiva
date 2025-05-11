@@ -1,7 +1,7 @@
 "use client"
+import { isMobile, isTablet } from 'react-device-detect';
 import { useEffect, useState } from "react"
 import Image from "next/image"
-
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [clicked, setClicked] = useState(false)
@@ -54,7 +54,7 @@ export default function CustomCursor() {
     transform: "translate(-50%, -50%)",
     zIndex: 9999,
   }
-
+  if(isMobile || isTablet){return}
   return (
     <div style={cursorStyle}>
       {clicked ? (
