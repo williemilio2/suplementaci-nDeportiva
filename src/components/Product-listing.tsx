@@ -7,11 +7,27 @@ import styles from "../styles/Product-listing.module.css"
 import { allProducts } from "../products/listaArchivos"
 import ProductFilters from "./filtroProductos"
 import ProductSort from "./ordenadorProductso"
+import Link from 'next/link';
 
-export default function ProductListing() {
+// Importar la función especiales
+import { especiales } from "../products/listaArchivos"
+
+interface ProductListingProps {
+  searchTerm?: string
+  displayMode?: "grid" | "column"
+  title?: string
+  coleccionEspecial?: string
+}
+
+export default function ProductListing({
+  searchTerm,
+  displayMode = "grid",
+  title = "Suplementos Deportivos",
+  coleccionEspecial,
+}: ProductListingProps) {
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(0)
-  const productosPorPagina = 16
+  const productosPorPagina = displayMode === "column" ? 6 : 16
 
   // Estados para los filtros
   const [showFilters, setShowFilters] = useState(false)
@@ -37,8 +53,25 @@ export default function ProductListing() {
     setPriceRange([minPrice, maxPrice])
   }, [minPrice, maxPrice])
 
+  // Filtrar por colección especial si existe
+  let baseProducts = allProducts
+  if (coleccionEspecial) {
+    baseProducts = especiales(coleccionEspecial)
+  }
+
+  // Filtrar por término de búsqueda si existe
+  const searchFilteredProducts = searchTerm
+    ? baseProducts.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (product.marca && product.marca.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (product.tipo && product.tipo.toLowerCase().includes(searchTerm.toLowerCase())),
+      )
+    : baseProducts
+
   // Aplicar filtros
-  const filteredProducts = allProducts.filter((product) => {
+  const filteredProducts = searchFilteredProducts.filter((product) => {
     // Filtro de precio
     const productPrice = product.offerPrice || product.originalPrice
     if (productPrice < priceRange[0] || productPrice > priceRange[1]) return false
@@ -217,7 +250,9 @@ export default function ProductListing() {
     pageButtons.push(
       <button
         key="next"
-        className={`${styles.pageButton} ${styles.navButton} ${currentPage === totalPages - 1 ? styles.disabledButton : ""} hoverable`}
+        className={`${styles.pageButton} ${styles.navButton} ${
+          currentPage === totalPages - 1 ? styles.disabledButton : ""
+        } hoverable`}
         onClick={() => currentPage < totalPages - 1 && setCurrentPage(currentPage + 1)}
         disabled={currentPage === totalPages - 1}
         aria-label="Página siguiente"
@@ -234,12 +269,23 @@ export default function ProductListing() {
     setCurrentPage(0)
   }, [priceRange, selectedMarcas, selectedTipos, selectedFormatos, selectedSabores, selectedRating, showOffers, sortBy])
 
+  // Resetear a la primera página cuando cambia la colección especial
+  useEffect(() => {
+    setCurrentPage(0)
+  }, [coleccionEspecial])
+
   return (
     <div className={styles.productListingContainer}>
       {/* Barra superior con controles */}
       <div className={styles.listingHeader}>
         <div className={styles.resultsInfo}>
-          <h1 className={styles.listingTitle}>Suplementos Deportivos</h1>
+          <h1 className={styles.listingTitle}>
+            {searchTerm
+              ? `Resultados para "${searchTerm}"`
+              : coleccionEspecial
+                ? `Colección: ${coleccionEspecial.replace(/(?!^)([A-Z])/g, ' $1').toLowerCase().replace(/^./, c => c.toUpperCase())}`
+                : title}
+          </h1>
           <p className={styles.resultsCount}>
             Mostrando {cantidadProductos > 0 ? inicio + 1 : 0}-{fin} de {cantidadProductos} productos
           </p>
@@ -288,17 +334,23 @@ export default function ProductListing() {
         <div className={styles.productsContainer}>
           {/* Contenedor de productos con clase condicional basada en el modo de vista */}
           {productosPagina.length > 0 ? (
-            <div className={styles.offerProducts}>
+            <div className={`${styles.offerProducts} ${displayMode === "column" ? styles.columnLayout : ""}`}>
               {productosPagina.map((product, index) => (
-                <OfferProductCard key={index} product={product} />
+                <OfferProductCard key={index} product={product} displayMode={displayMode} />
               ))}
             </div>
           ) : (
             <div className={styles.noResults}>
               <p>No se encontraron productos que coincidan con los filtros seleccionados.</p>
-              <button className={styles.clearFiltersButton} onClick={clearAllFilters}>
-                Limpiar filtros
-              </button>
+              {displayMode === "column" ? (
+                <Link href="/" className={styles.clearFiltersButton}>
+                  Volver al inicio
+                </Link>
+              ) : (
+                <button className={styles.clearFiltersButton} onClick={clearAllFilters}>
+                  Limpiar filtros
+                </button>
+              )}
             </div>
           )}
 

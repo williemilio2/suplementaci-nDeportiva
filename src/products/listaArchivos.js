@@ -58,7 +58,9 @@ export const allProducts = [
     name: 'High-Quality MASS PROTEIN',
     description: 'Fórmula de alta pureza con 28g de proteína de máxima pureza con fórmula mejorada',
     originalPrice: 63.45,
-    image: '/ofertaDelDia1.webp<<</ofertaDelDia2.webp',
+    offerPrice: 21.66,
+    discount: 32,
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp<<</ofertaDelDia2.webp',
     rating: 3.3,
     reviews: 348,
     badge: 'EXCLUSIVO',
@@ -71,15 +73,14 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de proteína de suero de leche (contiene emulsionante: lecitina de soja), aislado de proteína de suero de leche (90%), cacao en polvo (10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Chocolate<<<Vainilla<<<Fresa'
+    sabores: 'Chocolate<<<Vainilla<<<Fresa',  
+    categoriaEspecial: 'veganas<<<OfertaDelDia'
   },
   {
     id: 2,
     name: 'Premium PROTEIN FORMULA',
     description: 'Fórmula de alta pureza con 27g de proteína pura por dosis y absorción rápida',
     originalPrice: 31.86,
-    offerPrice: 21.66,
-    discount: 32,
     image: '/ofertaDelDia2.webp',
     rating: 4.3,
     reviews: 212,
@@ -101,40 +102,42 @@ export const allProducts = [
     originalPrice: 52.8,
     offerPrice: 44.35,
     discount: 16,
-    image: '/ofertaDelDia1.webp',
+    image: '/ofertaDelDia3.webp',
     rating: 4.7,
     reviews: 112,
     badge: 'POPULAR',
     marca: 'ProSupps',
     tipo: 'Whey Protein',
     colesterol: 'Mínimo',
+    superOfertas: true,
     slug: 'maximum-strength-nutrition',
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Aislado de proteína de suero de leche (92%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Menta'
+    sabores: 'Menta',
+    categoriaEspecial: 'veganas<<<OfertaDelDia'
   },
   {
     id: 4,
     name: 'Extreme PROTEIN COMPLEX',
     description: 'Nutrición deportiva de élite con 29g de proteína por medida para una recuperación óptima',
     originalPrice: 40.61,
-    offerPrice: 40.61,
-    discount: 0,
-    image: '/ofertaDelDia1.webp',
+    image: '/ofertaDelDia2.webp',
     rating: 3.9,
     reviews: 125,
     badge: 'RECOMENDADO',
     marca: 'BSN',
     tipo: 'Casein Protein',
     colesterol: 'Mínimo',
+    superOfertas: true,
     slug: 'extreme-protein-complex',
     informacionAlergenos: 'Contiene leche y soja. Fabricado en instalaciones que también procesan huevo, gluten, frutos secos y cacahuetes.',
     infoIngredientes: 'Caseína micelar (85%), concentrado de proteína de suero de leche (10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Caramelo'
+    sabores: 'Caramelo',
+    categoriaEspecial: 'veganas<<<OfertaDelDia'
   },
   {
     id: 5,
@@ -143,7 +146,7 @@ export const allProducts = [
     originalPrice: 72.7,
     offerPrice: 33.44,
     discount: 54,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 5,
     reviews: 421,
     badge: 'RECOMENDADO',
@@ -164,7 +167,7 @@ export const allProducts = [
     originalPrice: 63.96,
     offerPrice: 32.62,
     discount: 49,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.5,
     reviews: 495,
     badge: 'EXCLUSIVO',
@@ -219,7 +222,8 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, caseína micelar), L-Glutamina (5g), BCAA (5g), creatina monohidrato (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Pistacho'
+    sabores: 'Pistacho',
+    categoriaEspecial: 'veganas<<<OfertaDelDia'
   },
   {
     id: 9,
@@ -228,7 +232,7 @@ export const allProducts = [
     originalPrice: 54.99,
     offerPrice: 44.99,
     discount: 18,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.9,
     reviews: 412,
     badge: 'PREMIUM',
@@ -261,7 +265,8 @@ export const allProducts = [
     infoIngredientes: 'Proteína de guisante (50%), proteína de arroz (30%), proteína de cáñamo (15%), proteína de semilla de calabaza (5%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Dulce de Leche'
+    sabores: 'Dulce de Leche',
+    categoriaEspecial: 'veganas<<<OfertaDelDia'
   },
   {
     id: 11,
@@ -291,7 +296,7 @@ export const allProducts = [
     originalPrice: 45.99,
     offerPrice: 36.99,
     discount: 20,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.6,
     reviews: 245,
     badge: 'DEFINICIÓN',
@@ -354,7 +359,7 @@ export const allProducts = [
     originalPrice: 52.99,
     offerPrice: 42.99,
     discount: 19,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.6,
     reviews: 298,
     badge: 'COMPLETO',
@@ -418,7 +423,7 @@ export const allProducts = [
     originalPrice: 59.99,
     offerPrice: 47.99,
     discount: 20,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.7,
     reviews: 325,
     badge: 'BESTSELLER',
@@ -481,7 +486,7 @@ export const allProducts = [
     originalPrice: 69.99,
     offerPrice: 54.99,
     discount: 21,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.3,
     reviews: 230,
     badge: 'VOLUMEN',
@@ -545,7 +550,7 @@ export const allProducts = [
     originalPrice: 54.99,
     offerPrice: 44.99,
     discount: 18,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.8,
     reviews: 520,
     badge: 'TOP VENTAS',
@@ -608,7 +613,7 @@ export const allProducts = [
     originalPrice: 52.99,
     offerPrice: 42.99,
     discount: 19,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.5,
     reviews: 290,
     badge: 'SABOR PREMIUM',
@@ -671,7 +676,7 @@ export const allProducts = [
     originalPrice: 57.99,
     offerPrice: 45.99,
     discount: 21,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.7,
     reviews: 315,
     badge: 'CALIDAD',
@@ -735,7 +740,7 @@ export const allProducts = [
     originalPrice: 59.99,
     offerPrice: 47.99,
     discount: 20,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.2,
     reviews: 185,
     badge: 'SIN LACTOSA',
@@ -798,7 +803,7 @@ export const allProducts = [
     originalPrice: 42.99,
     offerPrice: 32.99,
     discount: 23,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.2,
     reviews: 310,
     badge: 'ECONÓMICO',
@@ -861,7 +866,7 @@ export const allProducts = [
     originalPrice: 43.99,
     offerPrice: 34.99,
     discount: 20,
-    image: '/ofertaDelDia1.webp',
+    image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4,
     reviews: 165,
     badge: 'NATURAL',
@@ -1769,3 +1774,11 @@ export function sacarInformacionNutricional(id){
   return informacionNutricionalProductoElegido
 }
 export const productosSuperOfertas = allProducts.filter(producto => producto.superOfertas);
+
+export function especiales(tituloEspecial) {
+  return allProducts.filter((producto) => {
+    if (!producto.categoriaEspecial) return false;
+    const categorias = producto.categoriaEspecial.split("<<<");
+    return categorias.includes(tituloEspecial);
+  });
+}

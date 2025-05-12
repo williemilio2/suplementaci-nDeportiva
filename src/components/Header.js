@@ -47,18 +47,6 @@ export default function Header() {
   const handleSearchFocus = () => {
     setShowResults(true)
   }
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowResults(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const handleSearch = () => {
     // Aquí podrías redirigir a la página de resultados
@@ -179,7 +167,7 @@ export default function Header() {
                     </Link>
                   ))}
                   {filteredProducts.length > 5 && (
-                    <Link href={`/buscar?q=${encodeURIComponent(searchTerm)}`} className={`${styles.viewAllResults} hoverable`}>
+                    <Link href={`/buscar?q=${encodeURIComponent(searchTerm)}`} className={`${styles.viewAllResults} hoverable`} onClick={handleSearch}>
                       Ver todos los resultados ({filteredProducts.length})
                     </Link>
                   )}

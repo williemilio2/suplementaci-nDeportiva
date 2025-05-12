@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function CategoryContent() {
   const tabs = ["GANE HSN", "NUTRICIÓN DEPORTIVA", "ALIMENTACIÓN SALUDABLE", "SALUD Y BIENESTAR"];
-  const images = [{'name': "apartadoSlider1", "link": "https://google.com"},{'name': "apartadoSlider2", "link": "https://facebook.com"},{'name': "apartadoSlider3", "link": "https://efitec.com.es"}]
+  const images = [{'name': "apartadoSlider1", "link": "/especiales?t=veganas"},{'name': "apartadoSlider2", "link": "enCreacion..."},{'name': "apartadoSlider3", "link": "enCreacion..."}]
   return (
     <div className={styles.categoryContent}>
       <div className={styles.categoryTabs}>
@@ -35,7 +35,7 @@ export default function CategoryContent() {
                 />
               </Link>
               <div className={styles.overlay}>
-                <Link href={'google.com'}>
+                <Link href={item.link}>
                   <button className={`${styles.ctaButton} hoverable`}>Ir ahora</button>
                 </Link>
               </div>

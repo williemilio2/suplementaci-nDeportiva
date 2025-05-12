@@ -276,6 +276,13 @@
   margin-bottom: 2rem;
 }
 
+/* Estilo para visualización en columna */
+.columnLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* Mensaje de no resultados */
 .noResults {
   text-align: center;
@@ -336,11 +343,6 @@
 
 .disabledButton {
   opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.dotsButton {
-  cursor: default;
 }
 
 .dotsButton:hover {
@@ -412,7 +414,7 @@
 }
 
 @media (max-width: 480px) {
-  .offerProducts {
+  .offerProducts:not(.columnLayout) {
     grid-template-columns: 1fr;
   }
 }

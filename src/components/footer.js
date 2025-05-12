@@ -41,7 +41,7 @@ export default function Footer() {
           <div className={styles.footerColumns}>
             {/* Columna 1: Sobre nosotros */}
             <div className={styles.footerColumn}>
-              <h3 className={styles.footerTitle}>SOBRE POWERFITT</h3>
+              <h3 className={styles.footerTitle}>SOBRE suplementacionDeportiva</h3>
               <ul className={`${styles.footerLinks} hoverable`}>
                 <li><Link href="/nosotros">Quiénes Somos</Link></li>
                 <li><Link href="/blog">Blog</Link></li>
@@ -108,13 +108,13 @@ export default function Footer() {
         <div className={`container ${styles.contenedorCopyright}`}>
             <Image
             alt='LogoFooter'
-            src={'/logo.png'}
+            src={'/logoLetras.png'}
             width={224}
             height={55}
             >
 
             </Image>
-          <p>© {new Date().getFullYear()} POWERFITT. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} SuplementacionDeportiva. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

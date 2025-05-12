@@ -27,7 +27,7 @@ interface Producto {
   image: string;       // 'string
   rating: number;        // 'number' en lugar de 'float'
   reviews: number;       // 'number' está bien
-  badge: string;         // 'string' en lugar de 'strnig'
+  badge?: string;         // 'string' en lugar de 'strnig'
   marca: string;         // 'string' en lugar de 'strnig'
   tipo: string;          // 'string' en lugar de 'strnig'
   colesterol: string;    // 'string' en lugar de 'strnig'
