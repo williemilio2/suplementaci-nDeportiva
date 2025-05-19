@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { ChevronRight, Truck, Check, MapPin, Calendar, CreditCardIcon as CardIcon } from "lucide-react"
-import styles from "../Checkout.module.css"
+import styles from "../checkout.module.css"
 import CustomCursor from "@/src/components/customCursor"
 
 export default function ReviewPage() {

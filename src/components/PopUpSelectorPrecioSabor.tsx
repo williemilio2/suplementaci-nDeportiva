@@ -5,7 +5,7 @@ import type React from "react"
 import Image from "next/image"
 import { useState } from "react"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
-import styles from "../styles/popUpSelectorPrecioSabor.module.css"
+import styles from "../styles/PopUpSelectorPrecioSabor.module.css"
 import ProductOptions from "./product-options"
 import { sacarStock } from "../products/listaArchivos"
 
