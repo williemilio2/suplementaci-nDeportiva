@@ -138,7 +138,7 @@ export default function Carrito() {
     })
 
     setCarrito(carritoActualizado)
-  }, [preciosStock,carrito])
+  }, [preciosStock])
 
   useEffect(() => {
     let totalCalculado = 0

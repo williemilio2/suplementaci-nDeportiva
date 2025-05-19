@@ -53,7 +53,7 @@ export default function StockSelectorSaborTamano({
         hayStockEnOtrasVariantes
       })
     }
-  }, [productId, onFound, sabor, tamano])
+  }, [productId, onFound])
 
   return null
 }

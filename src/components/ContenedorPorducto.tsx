@@ -63,7 +63,7 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
     return () => {
       window.removeEventListener("favoritesUpdated", checkFavoriteStatus)
     }
-  }, [product.id, product.name])
+  }, [product.id])
     const toggleFavorite = (e: React.MouseEvent) => {
       e.preventDefault()
       e.stopPropagation()
