@@ -14,7 +14,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 import styles from "./admin.module.css"
-import { LineChart, BarChart } from "./UI/estadisticas/page"
+import { LineChart, BarChart } from "./UI/estadisticas"
 
 export default function AdminDashboard() {
   const [timeRange, setTimeRange] = useState("7d")
