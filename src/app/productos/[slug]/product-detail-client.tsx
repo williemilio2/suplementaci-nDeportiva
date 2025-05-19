@@ -185,7 +185,7 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
     return () => {
       window.removeEventListener("favoritesUpdated", checkFavoriteStatus)
     }
-  }, [producto.id])
+  }, [producto.id, producto.name])
   return (
     <>
       <CustomCursor />

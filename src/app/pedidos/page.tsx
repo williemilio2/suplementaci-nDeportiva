@@ -4,7 +4,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronDown, ChevronRight, Search, Package, Truck, CheckCircle, AlertCircle, Download } from "lucide-react"
+import { ChevronDown, Search, Package, Truck, CheckCircle, AlertCircle, Download } from "lucide-react"
 import styles from "../../styles/pedidos.module.css"
 import CustomCursor from "@/src/components/customCursor"
 

@@ -102,7 +102,7 @@ export default function Header() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [])
+  }, [handleSearch])
 
   const updateCartCount = () => {
     const carritoString = localStorage.getItem("carrito")
