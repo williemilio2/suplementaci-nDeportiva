@@ -1,13 +1,15 @@
 "use client"
 
 import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import OfferProductCard from "./ContenedorPorducto"
 import styles from "../styles/Product-listing.module.css"
 import { allProducts } from "../products/listaArchivos"
 import ProductFilters from "./filtroProductos"
+// Importar el componente ProductSort
 import ProductSort from "./ordenadorProductso"
-import Link from 'next/link';
+import Link from "next/link"
+import StockAutoSelector from "./dineroDefault"
 
 // Importar la función especiales
 import { especiales } from "../products/listaArchivos"
@@ -19,6 +21,14 @@ interface ProductListingProps {
   coleccionEspecial?: string
 }
 
+// Interfaz para almacenar los precios y ofertas de los productos
+interface ProductPricing {
+  [productId: number]: {
+    price: number
+    offer: number
+  }
+}
+
 export default function ProductListing({
   searchTerm,
   displayMode = "grid",
@@ -27,7 +37,7 @@ export default function ProductListing({
 }: ProductListingProps) {
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(0)
-  const productosPorPagina = displayMode === "column" ? 6 : 16
+  const productosPorPagina = displayMode === "column" ? 6 : 12
 
   // Estados para los filtros
   const [showFilters, setShowFilters] = useState(false)
@@ -40,18 +50,13 @@ export default function ProductListing({
   const [showOffers, setShowOffers] = useState(false)
   const [sortBy, setSortBy] = useState("relevance")
 
-  // Obtener valores únicos para los filtros
-  const marcas = [...new Set(allProducts.map((product) => product.marca))]
-  const tipos = [...new Set(allProducts.map((product) => product.tipo))]
+  // Estado para almacenar los precios y ofertas de los productos
+  const [productPricing, setProductPricing] = useState<ProductPricing>({})
+  const [isLoadingPrices, setIsLoadingPrices] = useState(true)
 
-  // Precio mínimo y máximo para el rango
-  const minPrice = Math.floor(Math.min(...allProducts.map((p) => p.offerPrice || p.originalPrice)))
-  const maxPrice = Math.ceil(Math.max(...allProducts.map((p) => p.offerPrice || p.originalPrice)))
-
-  // Inicializar el rango de precios
-  useEffect(() => {
-    setPriceRange([minPrice, maxPrice])
-  }, [minPrice, maxPrice])
+  // Usar useRef para evitar actualizaciones infinitas
+  const pricesInitialized = useRef(false)
+  const productsToLoad = useRef<number[]>([])
 
   // Filtrar por colección especial si existe
   let baseProducts = allProducts
@@ -70,10 +75,89 @@ export default function ProductListing({
       )
     : baseProducts
 
+  // Función para calcular el precio final con descuento
+  const calculateFinalPrice = useCallback(
+    (productId: number) => {
+      const pricing = productPricing[productId]
+      if (!pricing) return 0
+
+      return pricing.offer > 0 ? pricing.price - (pricing.price * pricing.offer) / 100 : pricing.price
+    },
+    [productPricing],
+  )
+
+  // Obtener valores únicos para los filtros
+  const marcas = [...new Set(searchFilteredProducts.map((product) => product.marca))].filter(Boolean).sort()
+  const tipos = [...new Set(searchFilteredProducts.map((product) => product.tipo))].filter(Boolean).sort()
+
+  // Extraer todos los sabores únicos de los productos
+  const extractSabores = (saboresString?: string): string[] => {
+    if (!saboresString) return []
+    return saboresString.split("<<<").filter(Boolean)
+  }
+
+  const sabores = [...new Set(searchFilteredProducts.flatMap((product) => extractSabores(product.sabores)))]
+    .filter(Boolean)
+    .sort()
+
+  // Inicializar la lista de productos a cargar
+  useEffect(() => {
+    productsToLoad.current = searchFilteredProducts.map((product) => product.id)
+  }, [searchFilteredProducts])
+
+  // Calcular precio mínimo y máximo después de cargar los precios
+  useEffect(() => {
+    // Solo actualizar el rango de precios una vez que tengamos suficientes precios
+    // y solo si no se ha inicializado antes
+    if (Object.keys(productPricing).length > 0 && isLoadingPrices && !pricesInitialized.current) {
+      const prices = searchFilteredProducts
+        .map((product) => calculateFinalPrice(product.id))
+        .filter((price) => price > 0)
+
+      if (prices.length > 0) {
+        const minPrice = Math.floor(Math.min(...prices))
+        const maxPrice = Math.ceil(Math.max(...prices))
+
+        // Solo actualizar si los valores son diferentes
+        if (priceRange[0] !== minPrice || priceRange[1] !== maxPrice) {
+          setPriceRange([minPrice, maxPrice])
+          pricesInitialized.current = true
+        }
+
+        // Marcar como cargado si tenemos precios para la mayoría de los productos
+        if (Object.keys(productPricing).length >= searchFilteredProducts.length * 0.8) {
+          setIsLoadingPrices(false)
+        }
+      }
+    }
+  }, [productPricing, searchFilteredProducts, calculateFinalPrice, priceRange, isLoadingPrices])
+
+  // Función para manejar los precios encontrados
+  const handlePriceFound = useCallback((productId: number, price: number, offer: number) => {
+    setProductPricing((prev) => {
+      // Si ya tenemos este precio, no actualizar
+      if (prev[productId] && prev[productId].price === price && prev[productId].offer === offer) {
+        return prev
+      }
+      return {
+        ...prev,
+        [productId]: { price, offer },
+      }
+    })
+
+    // Eliminar el producto de la lista de productos a cargar
+    productsToLoad.current = productsToLoad.current.filter((id) => id !== productId)
+  }, [])
+
   // Aplicar filtros
   const filteredProducts = searchFilteredProducts.filter((product) => {
     // Filtro de precio
-    const productPrice = product.offerPrice || product.originalPrice
+    const productPrice = calculateFinalPrice(product.id)
+
+    // Si no hay precio (fuera de stock) y no estamos filtrando por precio, mostrar el producto
+    if (productPrice === 0 && priceRange[0] === 0) return true
+
+    // Si estamos filtrando por precio y el producto no tiene precio o está fuera del rango, no mostrarlo
     if (productPrice < priceRange[0] || productPrice > priceRange[1]) return false
 
     // Filtro de marca
@@ -82,22 +166,39 @@ export default function ProductListing({
     // Filtro de tipo
     if (selectedTipos.length > 0 && !selectedTipos.includes(product.tipo)) return false
 
+    // Filtro de sabor
+    if (selectedSabores.length > 0) {
+      const productSabores = extractSabores(product.sabores)
+      if (!selectedSabores.some((sabor) => productSabores.includes(sabor))) return false
+    }
+
     // Filtro de valoración
     if (selectedRating > 0 && product.rating < selectedRating) return false
 
     // Filtro de ofertas
-    if (showOffers && !product.offerPrice) return false
+    if (showOffers && (!productPricing[product.id] || productPricing[product.id].offer <= 0)) return false
 
     return true
   })
 
   // Ordenar productos
   const sortedProducts = [...filteredProducts].sort((a, b) => {
+    const priceA = calculateFinalPrice(a.id)
+    const priceB = calculateFinalPrice(b.id)
+
     switch (sortBy) {
       case "price_asc":
-        return (a.offerPrice || a.originalPrice) - (b.offerPrice || b.originalPrice)
+        // Productos sin precio (fuera de stock) van al final
+        if (priceA === 0 && priceB === 0) return 0
+        if (priceA === 0) return 1
+        if (priceB === 0) return -1
+        return priceA - priceB
       case "price_desc":
-        return (b.offerPrice || b.originalPrice) - (a.offerPrice || a.originalPrice)
+        // Productos sin precio (fuera de stock) van al final
+        if (priceA === 0 && priceB === 0) return 0
+        if (priceA === 0) return 1
+        if (priceB === 0) return -1
+        return priceB - priceA
       case "rating":
         return b.rating - a.rating
       case "newest":
@@ -132,10 +233,16 @@ export default function ProductListing({
     (selectedSabores.length > 0 ? 1 : 0) +
     (selectedRating > 0 ? 1 : 0) +
     (showOffers ? 1 : 0) +
-    (priceRange[0] > minPrice || priceRange[1] < maxPrice ? 1 : 0)
+    (priceRange[0] > 0 || priceRange[1] < 1000 ? 1 : 0)
 
   // Función para limpiar todos los filtros
-  const clearAllFilters = () => {
+  const clearAllFilters = useCallback(() => {
+    // Calcular min y max precio de los productos disponibles
+    const prices = searchFilteredProducts.map((product) => calculateFinalPrice(product.id)).filter((price) => price > 0)
+
+    const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0
+    const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 100
+
     setPriceRange([minPrice, maxPrice])
     setSelectedMarcas([])
     setSelectedTipos([])
@@ -144,7 +251,7 @@ export default function ProductListing({
     setSelectedRating(0)
     setShowOffers(false)
     setSortBy("relevance")
-  }
+  }, [searchFilteredProducts, calculateFinalPrice])
 
   // Función para generar la paginación
   const renderPagination = () => {
@@ -272,10 +379,23 @@ export default function ProductListing({
   // Resetear a la primera página cuando cambia la colección especial
   useEffect(() => {
     setCurrentPage(0)
-  }, [coleccionEspecial])
+    // Reiniciar el estado de precios cuando cambia la colección
+    setProductPricing({})
+    setIsLoadingPrices(true)
+    pricesInitialized.current = false
+  }, [coleccionEspecial, searchTerm])
 
   return (
     <div className={styles.productListingContainer}>
+      {/* Componentes StockAutoSelector solo para productos que aún no tienen precio */}
+      {productsToLoad.current.map((productId) => (
+        <StockAutoSelector
+          key={`stock-${productId}`}
+          productId={productId}
+          onFound={({ price, offer }) => handlePriceFound(productId, price, offer)}
+        />
+      ))}
+
       {/* Barra superior con controles */}
       <div className={styles.listingHeader}>
         <div className={styles.resultsInfo}>
@@ -283,7 +403,10 @@ export default function ProductListing({
             {searchTerm
               ? `Resultados para "${searchTerm}"`
               : coleccionEspecial
-                ? `Colección: ${coleccionEspecial.replace(/(?!^)([A-Z])/g, ' $1').toLowerCase().replace(/^./, c => c.toUpperCase())}`
+                ? `Colección: ${coleccionEspecial
+                    .replace(/(?!^)([A-Z])/g, " $1")
+                    .toLowerCase()
+                    .replace(/^./, (c) => c.toUpperCase())}`
                 : title}
           </h1>
           <p className={styles.resultsCount}>
@@ -291,12 +414,13 @@ export default function ProductListing({
           </p>
         </div>
 
+        {/* Reemplazar la parte donde se usa el componente ProductSort */}
         <div className={styles.listingControls}>
           {/* Componente de ordenación */}
           <ProductSort sortBy={sortBy} setSortBy={setSortBy} />
 
           <button
-            className={styles.mobileFilterButton}
+            className={`${styles.mobileFilterButton} mobileFilterButton`}
             onClick={() => setShowFilters(!showFilters)}
             aria-label="Mostrar filtros"
           >
@@ -310,8 +434,13 @@ export default function ProductListing({
       <div className={styles.productListingContent}>
         {/* Componente de filtros */}
         <ProductFilters
-          minPrice={minPrice}
-          maxPrice={maxPrice}
+          minPrice={Math.min(
+            ...Object.values(productPricing)
+              .map((p) => p.price)
+              .filter((p) => p > 0),
+            0,
+          )}
+          maxPrice={Math.max(...Object.values(productPricing).map((p) => p.price), 100)}
           priceRange={priceRange}
           setPriceRange={setPriceRange}
           marcas={marcas}
@@ -320,6 +449,9 @@ export default function ProductListing({
           tipos={tipos}
           selectedTipos={selectedTipos}
           setSelectedTipos={setSelectedTipos}
+          sabores={sabores}
+          selectedSabores={selectedSabores}
+          setSelectedSabores={setSelectedSabores}
           selectedRating={selectedRating}
           setSelectedRating={setSelectedRating}
           showOffers={showOffers}
@@ -332,11 +464,15 @@ export default function ProductListing({
 
         {/* Contenedor de productos */}
         <div className={styles.productsContainer}>
-          {/* Contenedor de productos con clase condicional basada en el modo de vista */}
-          {productosPagina.length > 0 ? (
+          {isLoadingPrices && Object.keys(productPricing).length < searchFilteredProducts.length / 2 ? (
+            <div className={styles.loadingContainer}>
+              <p>Cargando precios...</p>
+              <div className={styles.spinner}></div>
+            </div>
+          ) : productosPagina.length > 0 ? (
             <div className={`${styles.offerProducts} ${displayMode === "column" ? styles.columnLayout : ""}`}>
               {productosPagina.map((product, index) => (
-                <OfferProductCard key={index} product={product} displayMode={displayMode} />
+                <OfferProductCard key={`product-${product.id}-${index}`} product={product} displayMode={displayMode} />
               ))}
             </div>
           ) : (

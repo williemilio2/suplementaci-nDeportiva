@@ -349,6 +349,11 @@
   }
   
   /* Responsive */
+    @media (max-width: 950px) {
+    .offerProducts {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+  }
   @media (max-width: 768px) {
     .offerHeader {
       flex-direction: column;
@@ -361,13 +366,14 @@
     }
     
     .offerProducts {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
   }
   
   @media (max-width: 480px) {
     .offerProducts {
       grid-template-columns: 1fr;
+      gap: 20px;
     }
     
     .offerTitle {

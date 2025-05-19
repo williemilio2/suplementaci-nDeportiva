@@ -3,6 +3,7 @@
     background-color: #f5f5f5;
     color: #333;
     font-size: 14px;
+    margin-top: 20px;
   }
   
   /* Sección superior con servicios */
@@ -223,5 +224,11 @@
     .newsletterButton {
       border-radius: 4px;
       width: 100%;
+    }
+    .contenedorCopyright{
+      flex-direction: column;
+    }
+    .contenedorCopyright p{
+      margin-top: 20px;
     }
   }

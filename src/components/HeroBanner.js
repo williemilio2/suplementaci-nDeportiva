@@ -41,7 +41,6 @@ export default function HeroBanner() {
                 alt={`Slide ${i}`}
                 fill
                 style={{ objectFit: "cover" }}
-                className="hoverable"
               />
             </div>
           ))}

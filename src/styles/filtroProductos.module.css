@@ -1,0 +1,314 @@
+.filtersContainer {
+  position: sticky;
+  top: 20px;
+  width: 250px;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 1.5rem;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.filtersHeader {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filtersTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.clearFiltersButton {
+    margin-right: 20px;
+  background: none;
+  border: none;
+  color: #ff4500;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.clearFiltersButton:hover {
+  background-color: rgba(255, 69, 0, 0.05);
+}
+
+.filterSection {
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.selectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.selectHeader:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownIcon {
+  transition: transform 0.2s ease;
+}
+
+.dropdownIconOpen {
+  transform: rotate(180deg);
+}
+
+.selectDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 250px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+.searchContainer {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #ff4500;
+}
+
+.optionsContainer {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.optionItem:hover {
+  background-color: #f5f5f5;
+}
+
+.optionSelected {
+  background-color: rgba(255, 69, 0, 0.05);
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkboxChecked {
+  background-color: #ff4500;
+  border-color: #ff4500;
+  color: white;
+}
+
+.noResults {
+  padding: 0.8rem;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.resetButton {
+  background: none;
+  border: none;
+  color: #ff4500;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+  text-align: left;
+}
+
+.priceRangeContainer {
+  margin-bottom: 1.5rem;
+}
+.rangeSliders{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.priceLabels {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.rangeInput {
+  flex: 1;
+}
+
+/* Animación para los dropdowns */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para móvil */
+.mobileFilterButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.filterBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: white;
+  color: #ff4500;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Modificar el botón de cerrar para que solo aparezca en modo móvil */
+.closeFiltersButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  display: none; /* Oculto por defecto */
+}
+
+/* Media queries para responsive */
+@media (max-width: 992px) {
+  .filtersContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .filtersVisible {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobileFilterButton {
+    display: flex;
+  }
+
+  .filtersOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .overlayVisible {
+    display: block;
+  }
+
+  .closeFiltersButton {
+    display: block; /* Mostrar solo en móvil */
+  }
+}

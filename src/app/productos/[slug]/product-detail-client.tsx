@@ -2,94 +2,190 @@
 
 import Link from "next/link"
 import CustomCursor from "../../../components/customCursor"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { ShoppingCart, Heart, Share2, Truck, Shield, Star, Minus, Plus, StarHalf  } from "lucide-react"
-import { sacarStock, sacarInformacionNutricional } from '../../../products/listaArchivos'
+import { ShoppingCart, Heart, Share2, Truck, Shield, Star, StarHalf, Minus, Plus } from "lucide-react"
+import { sacarStock, sacarInformacionNutricional } from "../../../products/listaArchivos"
 import ProductSlider from "../../../components/product-slider"
-
+import ProductOptions from "../../../components/product-options"
 
 // Estilos
 import styles from "../../../styles/ProductDetail.module.css"
-{/*PARA AÑADIR A UN FUTURO, QUE LAS COSAS ESTAS Q NO LE IMPORTAN A NADIE VAYAN MAS ABAJO, Y ABAJO DE ESTO LOS RELACIONADOS*/}
-{/*TAMBIEN AÑADIR UNA Q PONGA PACKS, Y SI TIENE UN PACK EN PLAN PILLA ESTA Y ESTA JUNTAS Y AHORRASM PUES LO METO arribo  DE LOS RELACIONADOS*/}
-{/*Hacer que si le das click a la imagen se haga grande position abosulte*/}
-{/*Ordenar un poco tood */}
-{/*Lo de las reseñas ya es para mucho mucho alante*/}
+{
+  /*PARA AÑADIR A UN FUTURO, QUE LAS COSAS ESTAS Q NO LE IMPORTAN A NADIE VAYAN MAS ABAJO, Y ABAJO DE ESTO LOS RELACIONADOS*/
+}
+{
+  /*TAMBIEN AÑADIR UNA Q PONGA PACKS, Y SI TIENE UN PACK EN PLAN PILLA ESTA Y ESTA JUNTAS Y AHORRASM PUES LO METO arribo  DE LOS RELACIONADOS*/
+}
+{
+  /*Hacer que si le das click a la imagen se haga grande position abosulte*/
+}
+{
+  /*Ordenar un poco tood */
+}
+{
+  /*Lo de las reseñas ya es para mucho mucho alante*/
+}
 
 interface Producto {
-  id: number;            // 'number' en lugar de 'string'
-  name: string;          // 'string' en lugar de 'strnig'
-  description: string;   // 'string' en lugar de 'strnig'
-  originalPrice: number; // 'number' en lugar de 'float' (en JavaScript, 'float' es 'number')
-  offerPrice?: number;    // 'number' en lugar de 'float'
-  discount?: number;      // 'number' en lugar de 'float'
-  image: string;       // 'string
-  rating: number;        // 'number' en lugar de 'float'
-  reviews: number;       // 'number' está bien
-  badge?: string;         // 'string' en lugar de 'strnig'
-  marca: string;         // 'string' en lugar de 'strnig'
-  tipo: string;          // 'string' en lugar de 'strnig'
-  colesterol: string;    // 'string' en lugar de 'strnig'
-  superOfertas?: boolean; // 'boolean' en lugar de 'bool'
-  slug: string;          // 'string' en lugar de 'strnig'
-  informacionAlergenos: string;
-  infoIngredientes: string;
-  modoDeUso: string;
-  recomendacionesDeUso: string;
+  id: number // 'number' en lugar de 'string'
+  name: string // 'string' en lugar de 'strnig'
+  description: string // 'string' en lugar de 'strnig'
+  image: string // 'string
+  rating: number // 'number' en lugar de 'float'
+  reviews: number // 'number' está bien
+  badge?: string // 'string' en lugar de 'strnig'
+  marca: string // 'string' en lugar de 'strnig'
+  tipo: string // 'string' en lugar de 'strnig'
+  colesterol: string // 'string' en lugar de 'strnig'
+  superOfertas?: boolean // 'boolean' en lugar de 'bool'
+  slug: string // 'string' en lugar de 'strnig'
+  informacionAlergenos: string
+  infoIngredientes: string
+  modoDeUso: string
+  recomendacionesDeUso: string
 }
 
 export default function ProductDetailClient({ producto }: { producto: Producto }) {
   //Sacamos la inforamcion nutricional y le quitamos el primer valor q es id: numero
   const stockInformacionNutricionalActualEntero = sacarInformacionNutricional(producto.id)?.[0]
   const stockInformacionNutricionalActual = stockInformacionNutricionalActualEntero
-  ? Object.fromEntries(Object.entries(stockInformacionNutricionalActualEntero).slice(1))
-  : undefined;
+    ? Object.fromEntries(Object.entries(stockInformacionNutricionalActualEntero).slice(1))
+    : undefined
 
   interface stockInformacionNutricionalActual {
-    product_id: number;
-    porcion: string;
-    calorias: string;
-    proteinas: string;
-    carbohidratos: string;
-    azucares: string;
-    grasas: string;
-    grasasSaturadas: string;
-    fibra: string;
-    sal: string;
-    sodio: string;
-    calcio: string;
-    hierro: string;
-    vitaminaD: string;
-    vitaminaB12: string;
-    enzimasDigestivas: string;
-    aminoacidos: string;
+    product_id: number
+    porcion: string
+    calorias: string
+    proteinas: string
+    carbohidratos: string
+    azucares: string
+    grasas: string
+    grasasSaturadas: string
+    fibra: string
+    sal: string
+    sodio: string
+    calcio: string
+    hierro: string
+    vitaminaD: string
+    vitaminaB12: string
+    enzimasDigestivas: string
+    aminoacidos: string
   }
   //Dividir imagenes
-  const imagenes = producto.image.split('<<<')
+  const imagenes = producto.image.split("<<<")
   //Dividir recomendaciones de uso
-  const recomendacionesDeUsoLista = producto.recomendacionesDeUso.split('<<<')
+  const recomendacionesDeUsoLista = producto.recomendacionesDeUso.split("<<<")
   //Ordenar sabores y tamanos desde el objeto stock
   const stockProductoActual = sacarStock(producto.id)
-  const itemsDelProducto = stockProductoActual?.filter(item => item.product_id === producto.id);
-  console.log(itemsDelProducto)
-  const saboresDisponibles = Array.from(new Set(itemsDelProducto?.map(item => item.sabor)));
-  const tamanosDisponibles = Array.from(new Set(itemsDelProducto?.map(item => item.tamano)));
+  const itemsDelProducto = stockProductoActual?.filter((item) => item.product_id === producto.id)
 
   //UseStates
   const [activeTab, setActiveTab] = useState("descripcion")
+  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null)
+  const [selectedSize, setSelectedSize] = useState<string | null>(null)
   const [quantity, setQuantity] = useState(1)
-  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [precio, setPrecio] = useState(producto.offerPrice ?? producto.originalPrice);
-  const [precioUnitario, setPrecioUnitario] = useState(producto.offerPrice ?? producto.originalPrice);
-  const obtenerCantidad = (sabor: string, tamano: string) => {
-    const producto = itemsDelProducto?.find(item => item.sabor === sabor && item.tamano === tamano);
-    setPrecioUnitario(producto?.precio ?? precioUnitario)
-    setPrecio(producto?.precio ?? precio)
-    setQuantity(1)
-    return producto ? producto.cantidad : 0;
-  };
+  const [precioUnitario, setPrecioUnitario] = useState<number | 0>(0)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [cantidadProductoActual, setCantidadProductoActual] = useState<number | null>(null)
+  const [ofertaProductoActual, setOfertaProductoActual] = useState<number | null>(null)
+
+  // Manejar cambios de sabor y tamaño
+  const handleFlavorSizeChange = (flavor: string | null, size: string | null, price: number, quantity: number | null, offer: number) => {
+    setSelectedFlavor(flavor)
+    setSelectedSize(size)
+    setPrecioUnitario(price)
+    if (flavor !== selectedFlavor || size !== selectedSize) {
+      setQuantity(1)
+    }
+    setCantidadProductoActual(quantity)
+    setOfertaProductoActual(offer)
+  }
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation()
+
+    if (!selectedFlavor || !selectedSize) {
+      alert("Por favor, selecciona sabor y tamaño antes de añadir al carrito")
+      return
+    }
+
+    const carritoItem = {
+      producto: producto.name,
+      sabor: selectedFlavor,
+      tamaño: selectedSize,
+      cantidad: quantity,
+    }
+
+    type CarritoItem = {
+      producto: string;
+      sabor: string;
+      tamaño: string;
+      cantidad: number;
+    };
+
+    const carritoString = localStorage.getItem('carrito');
+    const carritoActual: CarritoItem[] = carritoString ? JSON.parse(carritoString) : [];
+
+    const existente = carritoActual.find(item =>
+      item.producto === carritoItem.producto &&
+      item.sabor === carritoItem.sabor &&
+      item.tamaño === carritoItem.tamaño
+    );
+
+    if (existente) {
+      alert('Este producto ya está en el carrito')
+      return
+    } else {
+      alert('Producto añadido!')
+      carritoActual.push(carritoItem);
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carritoActual));
+    window.dispatchEvent(new Event("cartUpdated"))
+  }
+
+  const toggleFavorite = (e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const favoritosString = localStorage.getItem("favoritos")
+      const favoritos: string[] = favoritosString ? JSON.parse(favoritosString) : []
+      
+      let nuevosFavoritos: string[]
+      
+      if (isFavorite) {
+        // Quitar de favoritos
+        nuevosFavoritos = favoritos.filter(nombre => nombre !== producto.name)
+      } else {
+        // Añadir a favoritos
+        nuevosFavoritos = [...favoritos, producto.name]
+      }
+      
+      // Guardar en localStorage
+      localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos))
+      
+      // Actualizar estado
+      setIsFavorite(!isFavorite)
+      
+      // Disparar evento para que otros componentes puedan reaccionar
+      window.dispatchEvent(new Event("favoritesUpdated"))
+  }
+  useEffect(() => {
+    const checkFavoriteStatus = () => {
+      const favoritosString = localStorage.getItem("favoritos")
+      const favoritos: string[] = favoritosString ? JSON.parse(favoritosString) : []
+      setIsFavorite(favoritos.includes(producto.name))
+    }
+
+    checkFavoriteStatus()
+    
+    // Añadir un event listener para actualizar el estado si cambian los favoritos
+    window.addEventListener("favoritesUpdated", checkFavoriteStatus)
+    
+    return () => {
+      window.removeEventListener("favoritesUpdated", checkFavoriteStatus)
+    }
+  }, [producto.id])
   return (
     <>
       <CustomCursor />
@@ -112,16 +208,16 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
             <div className={styles.productoPasarela}>
               <div className={styles.badgeContainer}>
                 {producto.badge && <span className={styles.badgeOverlay}>{producto.badge}</span>}
-                {Number(producto.discount) > 0 && (
-                  <span className={styles.discountOverlay}>-{Number(producto.discount)}%</span>
+                {Number(ofertaProductoActual) > 0 && (
+                  <span className={styles.discountOverlay}>-{Number(ofertaProductoActual)}%</span>
                 )}
               </div>
-                <ProductSlider images={imagenes} productName={producto.name} className="mb-8" />
+              <ProductSlider images={imagenes} productName={producto.name} className="mb-8" />
             </div>
             <div className={styles.shareWishlist}>
-              <button className={`${styles.iconButton} hoverable`}>
-                <Heart size={18} />
-                <span>Favorito</span>
+              <button className={`${styles.iconButton} ${isFavorite ? styles.actionButtonFavorite : ''} hoverable`} onClick={toggleFavorite} aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}>
+                <Heart size={18} fill={isFavorite ? "red" : "none"} />
+                <span style={{color: isFavorite ? "red": ""}}>Favorito</span>
               </button>
               <button className={`${styles.iconButton} hoverable`}>
                 <Share2 size={18} />
@@ -145,48 +241,46 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
                 <div className={styles.ratingContainer}>
                   <div className={styles.stars}>
                     {[1, 2, 3, 4, 5].map((star) => {
-                      const rating = Number(producto.rating);
-                      const diff = rating - (star - 1);
+                      const rating = Number(producto.rating)
+                      const diff = rating - (star - 1)
 
-                      let fillLevel = 0;
+                      let fillLevel = 0
                       if (diff >= 0.75) {
-                        fillLevel = 1;
+                        fillLevel = 1
                       } else if (diff >= 0.25) {
-                        fillLevel = 0.5;
+                        fillLevel = 0.5
                       }
 
                       if (fillLevel === 0.5) {
                         return (
-                          <div key={star} style={{position: 'relative', transform: 'translateY(2px)'}}>
+                          <div key={star} style={{ position: "relative", transform: "translateY(2px)" }}>
                             <StarHalf
                               size={16}
                               className={`${styles.star} ${styles.starFilled}`}
                               fill="#FFA500"
                               stroke="#ccc"
                             />
-                            
+
                             <StarHalf
                               size={16}
                               className={`${styles.starMirror}`}
                               fill="none"
                               stroke="#ccc"
-                              style={{ position: 'absolute', left: 0 }}
+                              style={{ position: "absolute", left: 0 }}
                             />
                           </div>
-                        );
+                        )
                       }
 
                       return (
                         <Star
                           key={star}
                           size={16}
-                          className={`${styles.star} ${
-                            fillLevel === 1 ? styles.starFilled : styles.starEmpty
-                          }`}
+                          className={`${styles.star} ${fillLevel === 1 ? styles.starFilled : styles.starEmpty}`}
                           fill={fillLevel > 0 ? "#FFA500" : "none"}
                           stroke={fillLevel > 0 ? "#FFA500" : "#ccc"}
                         />
-                      );
+                      )
                     })}
                     <span className={styles.reviewCount}>({producto.reviews} reseñas)</span>
                   </div>
@@ -196,81 +290,11 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
               {/* Descripción corta */}
               <p className={styles.productDescription}>{producto.description}</p>
 
-              {/* Variantes/Sabores */}
-              <div className={styles.variantsSection}>
-                <h3 className={styles.sectionTitle}>Sabor:</h3>
-                <div className={styles.flavorOptions}>
-                  {saboresDisponibles.map((sabor) => {
-                    const tieneStock =
-                      selectedSize === null ||
-                      itemsDelProducto?.some(
-                        (item) =>
-                          item.sabor === sabor &&
-                          item.tamano === selectedSize &&
-                          item.cantidad > 0
-                      );
-
-                    return (
-                      <button
-                        key={sabor}
-                        className={`
-                          ${styles.flavorButton} 
-                          ${selectedFlavor === sabor ? styles.flavorButtonActive : ""} 
-                          ${!tieneStock ? styles.flavorButtonDisabled : ""} 
-                          hoverable
-                        `}
-                        onClick={() => {
-                          setSelectedFlavor(sabor);
-                          if(selectedFlavor){
-                            obtenerCantidad(sabor, selectedFlavor);
-                          }
-                        }}
-                        disabled={!tieneStock}
-                      >
-                        {sabor}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Tamaños */}
-              <div className={styles.variantsSection}>
-                <h3 className={styles.sectionTitle}>Tamaño:</h3>
-                <div className={styles.sizeOptions}>
-                  {tamanosDisponibles.map((tamaño) => {
-                    const tieneStock =
-                      selectedFlavor === null ||
-                      itemsDelProducto?.some(
-                        (item) =>
-                          item.tamano === tamaño &&
-                          item.sabor === selectedFlavor &&
-                          item.cantidad > 0
-                      );
-
-                    return (
-                      <button
-                        key={tamaño}
-                        className={`
-                          ${styles.sizeButton} 
-                          ${selectedSize === tamaño ? styles.sizeButtonActive : ""} 
-                          ${!tieneStock ? styles.sizeButtonDisabled : ""} 
-                          hoverable
-                        `}
-                        onClick={() => {
-                          setSelectedSize(tamaño);
-                          if (selectedFlavor !== null) {
-                            obtenerCantidad(selectedFlavor, tamaño);
-                          }
-                        }}
-                        disabled={!tieneStock}
-                      >
-                        {tamaño}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+              {/* Opciones de producto */}
+              <ProductOptions
+                stockItems={itemsDelProducto}
+                onFlavorSizeChange={handleFlavorSizeChange}
+              />
             </div>
           </motion.div>
 
@@ -284,50 +308,55 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
             <div className={styles.buyCard}>
               {/* Precio */}
               <div className={styles.priceContainer}>
-                {producto.offerPrice != null ? (
+                {ofertaProductoActual!= 0 ? (
                   <>
-                    <span className={styles.currentPrice}>{Number(precio).toFixed(2)}€</span>
-                    <span className={styles.originalPrice}>{Number(producto.originalPrice).toFixed(2)}€</span>
+                    <span className={styles.currentPrice}>{precioUnitario == 0 ? 'Sold out' : `${(Number(precioUnitario) * (1 - (ofertaProductoActual ?? 0) / 100) * quantity).toFixed(2)}€`}</span>
+                    <span className={styles.originalPrice}>{precioUnitario == 0 ? '' : `${Number(precioUnitario).toFixed(2)}€`}</span>
                   </>
                 ) : (
-                  <span className={styles.currentPrice}>{Number(precio).toFixed(2)}€</span>
+                  <span className={styles.currentPrice}>{precioUnitario == 0 ? 'Sold out' : `${Number(Number(precioUnitario) * quantity).toFixed(2)}€`}</span>
                 )}
               </div>
               <p className={styles.taxInfo}>IVA incluido</p>
-
+              <div className={styles.quantitySection}>
+                <h3 className={styles.sectionTitle}>Cantidad:</h3>
+                <div className={styles.quantityControl}>
+                  <button
+                    className={`${styles.quantityButton} hoverable`}
+                    onClick={() => {
+                      if (quantity > 1) {
+                        setQuantity((prev) => prev - 1)
+                      }
+                    }}
+                    disabled={quantity <= 1 || selectedFlavor == null || selectedSize == null}
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <span className={styles.quantityValue}>{quantity}</span>
+                  <button
+                    className={`${styles.quantityButton} hoverable`}
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                    disabled={selectedFlavor == null || selectedSize == null || cantidadProductoActual === quantity}
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+              </div>
               {/* Disponibilidad */}
               <div className={styles.availability}>
                 <div className={styles.availabilityDot}></div>
                 En stock - Disponible para envío inmediato
               </div>
 
-              {/* Cantidad */}
-              <div className={styles.quantitySection}>
-                <h3 className={styles.sectionTitle}>Cantidad:</h3>
-                <div className={styles.quantityControl}>
-                  <button className={`${styles.quantityButton} hoverable`} 
-                  onClick={() => {
-                    if (quantity > 1) {
-                      setQuantity((prev) => prev - 1);
-                      setPrecio((prev) => prev - precioUnitario);
-                    }
-                  }} disabled={quantity <= 1}>
-                    <Minus size={16} />
-                  </button>
-                  <span className={styles.quantityValue}>{quantity}</span>
-                  <button className={`${styles.quantityButton} hoverable`} onClick={() => {setQuantity((prev) => prev + 1); setPrecio(precioUnitario * (quantity + 1))}}>
-                    <Plus size={16} />
-                  </button>
-                </div>
-              </div>
-
               {/* Botones de acción */}
               <div className={styles.actionButtons}>
-                <button className={`${styles.button} ${styles.primaryButton} hoverable`}>
+                <button className={`${styles.button} ${styles.primaryButton} hoverable`} disabled={selectedFlavor == null || selectedSize == null} onClick={handleAddToCart}>
                   <ShoppingCart size={18} />
-                  Añadir al carrito
+                 {(selectedFlavor == null || selectedSize == null) ? "Selecciona un sabor y un tamaño" : "Añadir al carrito" }
                 </button>
-                <button className={`${styles.button} ${styles.secondaryButton} hoverable`}>Comprar ahora</button>
+                <Link href={(selectedFlavor == null || selectedSize == null) ? '' : '/checkout'} className={`${styles.button} ${styles.secondaryButton} hoverable`}>
+                    {(selectedFlavor == null || selectedSize == null) ? "Selecciona un sabor y un tamaño" : "Comprar" }
+                </Link>
               </div>
 
               {/* Envío y garantías */}
@@ -423,27 +452,27 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
                     <h4>Información nutricional (por servicio de {stockInformacionNutricionalActual?.porcion})</h4>
                     {stockInformacionNutricionalActual && (
                       <div className={styles.nutritionTable}>
-                        {Object.entries(stockInformacionNutricionalActual).map(([key, value]) => (
+                        {Object.entries(stockInformacionNutricionalActual).map(([key, value]) =>
                           key === "aminoacidos" ? (
                             <div className={styles.nutritionRowAminoacidos} key={key}>
                               <span className={styles.aminoacidos}>Aminoácidos:</span>
-                                {(value as string).split(";").map((item: string, index: number) => {
-                                  const [nombre, cantidad] = item.split(":");
-                                  return (
-                                    <div key={index} className={styles.nutritionRow}>
-                                      <span style={{paddingLeft: '20px'}}>{nombre.trim()}</span>
-                                      <span>{cantidad.trim()}</span>
-                                    </div>
-                                  );
-                                })}
+                              {(value as string).split(";").map((item: string, index: number) => {
+                                const [nombre, cantidad] = item.split(":")
+                                return (
+                                  <div key={index} className={styles.nutritionRow}>
+                                    <span style={{ paddingLeft: "20px" }}>{nombre.trim()}</span>
+                                    <span>{cantidad.trim()}</span>
+                                  </div>
+                                )
+                              })}
                             </div>
                           ) : (
                             <div className={styles.nutritionRow} key={key}>
                               <span>{key}</span>
                               <span>{value}</span>
                             </div>
-                          )
-                        ))}
+                          ),
+                        )}
                       </div>
                     )}
                   </div>
@@ -452,31 +481,24 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
               {activeTab === "ingredientes" && (
                 <div>
                   <h3>Ingredientes</h3>
-                  <p>
-                    {producto.infoIngredientes}
-                  </p>
+                  <p>{producto.infoIngredientes}</p>
                   <div className={styles.allergenInfo}>
                     <h4>Información sobre alérgenos</h4>
-                    <p>
-                      {producto.informacionAlergenos}
-                    </p>
+                    <p>{producto.informacionAlergenos}</p>
                   </div>
                 </div>
               )}
               {activeTab === "modo-uso" && (
                 <div>
                   <h3>Modo de uso</h3>
-                  <p>
-                    {producto.modoDeUso}
-                  </p>
+                  <p>{producto.modoDeUso}</p>
                   <div className={styles.usageTips}>
                     <h4>Recomendaciones</h4>
                     <ul>
                       {recomendacionesDeUsoLista.map((recomendacion, index) => {
-                        return(
-                          <li key={index}>{recomendacion}</li>
-                        )
-                      })};
+                        return <li key={index}>{recomendacion}</li>
+                      })}
+                      ;
                     </ul>
                   </div>
                 </div>
@@ -489,48 +511,46 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
                       <span className={styles.bigRating}>{Number(producto.rating).toFixed(1)}</span>
                       <div className={styles.starsLarge}>
                         {[1, 2, 3, 4, 5].map((star) => {
-                          const rating = Number(producto.rating);
-                          const diff = rating - (star - 1);
+                          const rating = Number(producto.rating)
+                          const diff = rating - (star - 1)
 
-                          let fillLevel = 0;
+                          let fillLevel = 0
                           if (diff >= 0.75) {
-                            fillLevel = 1;
+                            fillLevel = 1
                           } else if (diff >= 0.25) {
-                            fillLevel = 0.5;
+                            fillLevel = 0.5
                           }
 
                           if (fillLevel === 0.5) {
                             return (
-                              <div key={star} style={{position: 'relative'}}>
+                              <div key={star} style={{ position: "relative" }}>
                                 <StarHalf
                                   size={16}
                                   className={`${styles.star} ${styles.starFilled}`}
                                   fill="#FFA500"
                                   stroke="#ccc"
                                 />
-                                
+
                                 <StarHalf
                                   size={16}
                                   className={`${styles.starMirror}`}
                                   fill="none"
                                   stroke="#ccc"
-                                  style={{ position: 'absolute', left: 0 }}
+                                  style={{ position: "absolute", left: 0 }}
                                 />
                               </div>
-                            );
+                            )
                           }
 
                           return (
                             <Star
                               key={star}
                               size={16}
-                              className={`${styles.star} ${
-                                fillLevel === 1 ? styles.starFilled : styles.starEmpty
-                              }`}
+                              className={`${styles.star} ${fillLevel === 1 ? styles.starFilled : styles.starEmpty}`}
                               fill={fillLevel > 0 ? "#FFA500" : "none"}
                               stroke={fillLevel > 0 ? "#FFA500" : "#ccc"}
                             />
-                          );
+                          )
                         })}
                       </div>
                       <span>Basado en {producto.reviews} opiniones</span>
@@ -575,47 +595,6 @@ export default function ProductDetailClient({ producto }: { producto: Producto }
                   </div>
                 </div>
               )}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Productos relacionados */}
-        <motion.div
-          className={styles.relatedSection}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h2 className={styles.sectionHeading}>Productos relacionados</h2>
-          <div className={styles.relatedProducts}>
-            {/* Aquí irían los productos relacionados */}
-            <div className={styles.relatedProductPlaceholder}>
-              <div className={styles.placeholderImage}></div>
-              <div className={styles.placeholderText}>
-                <div className={styles.placeholderTitle}></div>
-                <div className={styles.placeholderPrice}></div>
-              </div>
-            </div>
-            <div className={styles.relatedProductPlaceholder}>
-              <div className={styles.placeholderImage}></div>
-              <div className={styles.placeholderText}>
-                <div className={styles.placeholderTitle}></div>
-                <div className={styles.placeholderPrice}></div>
-              </div>
-            </div>
-            <div className={styles.relatedProductPlaceholder}>
-              <div className={styles.placeholderImage}></div>
-              <div className={styles.placeholderText}>
-                <div className={styles.placeholderTitle}></div>
-                <div className={styles.placeholderPrice}></div>
-              </div>
-            </div>
-            <div className={styles.relatedProductPlaceholder}>
-              <div className={styles.placeholderImage}></div>
-              <div className={styles.placeholderText}>
-                <div className={styles.placeholderTitle}></div>
-                <div className={styles.placeholderPrice}></div>
-              </div>
             </div>
           </div>
         </motion.div>

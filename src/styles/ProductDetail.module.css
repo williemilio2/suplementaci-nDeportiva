@@ -292,7 +292,6 @@
   .flavorButtonDisabled,
   .sizeButtonDisabled {
     opacity: 0.5;
-    cursor: not-allowed;
   }
   
   .unavailableText {
@@ -442,7 +441,6 @@
   
   .quantityButton:disabled {
     opacity: 0.5;
-    cursor: not-allowed;
   }
   
   .quantityValue {
@@ -754,7 +752,14 @@
     border-radius: 4px;
     width: 60%;
   }
-  
+  .actionButtonFavorite {
+    color: red;
+  }
+
+  .actionButtonFavorite:hover {
+    color: rgba(255, 69, 0, 0.2);
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .productTitle {

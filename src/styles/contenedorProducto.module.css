@@ -76,7 +76,6 @@
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   transition: all 0.2s;
 }
 
@@ -324,6 +323,45 @@
   border-radius: 12px;
   z-index: -1;
   box-shadow: 0 0 30px rgba(255, 85, 0, 0.2); /* suave y envolvente */
+}
+
+/* POP UP ESTILOS*/
+.highestOverlay {
+  position: fixed;
+  z-index: 10001;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998; /* Capa inferior, debajo del pop-up */
+}
+
+.closeButton {
+  transform: translate(-195px, -255px);
+  position: absolute;
+  background: none;
+  border: none;
+  z-index: 10001; /* Asegura que la X esté encima del contenido */
+}
+.actionButtonFavorite {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+
+.actionButtonFavorite:hover {
+  background-color: rgba(255, 69, 0, 0.2);
 }
 
 @keyframes rotateBorder {

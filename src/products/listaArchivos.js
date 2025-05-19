@@ -1,65 +1,10 @@
-/*
-    stock: [
-      [
-        { sabor: 'Chocolate', tamano: '500g', cantidad: 25 },
-        { sabor: 'Chocolate', tamano: '1kg', cantidad: 30 },
-        { sabor: 'Chocolate', tamano: '2kg', cantidad: 20 },
-        { sabor: 'Chocolate', tamano: '5kg', cantidad: 10 },
-      ],
-      [
-        { sabor: 'Vainilla', tamano: '500g', cantidad: 15 },
-        { sabor: 'Vainilla', tamano: '1kg', cantidad: 20 },
-        { sabor: 'Vainilla', tamano: '2kg', cantidad: 10 },
-        { sabor: 'Vainilla', tamano: '5kg', cantidad: 5 },
-      ],
-      [
-        { sabor: 'Fresa', tamano: '500g', cantidad: 12 },
-        { sabor: 'Fresa', tamano: '1kg', cantidad: 18 },
-        { sabor: 'Fresa', tamano: '2kg', cantidad: 7 },
-        { sabor: 'Fresa', tamano: '5kg', cantidad: 3 },
-      ],
-      [
-        { sabor: 'Cookies & Cream', tamano: '500g', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 2 },
-        { sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 0 },
-        { sabor: 'Cookies & Cream', tamano: '5kg', cantidad: 0 },
-      ],
-      [
-        { sabor: 'Plátano', tamano: '500g', cantidad: 10 },
-        { sabor: 'Plátano', tamano: '1kg', cantidad: 15 },
-        { sabor: 'Plátano', tamano: '2kg', cantidad: 8 },
-        { sabor: 'Plátano', tamano: '5kg', cantidad: 2 }
-      ],
-    ],
-    
-    informacionNutricional: {
-      porcion: '30g',
-      calorias: '120 kcal',
-      proteinas: '24g',
-      carbohidratos: '3g',
-      azucares: '1.5g',
-      grasas: '1.8g',
-      grasasSaturadas: '1.1g',
-      fibra: '0.6g',
-      sal: '0.25g',
-      sodio: '100mg',
-      calcio: '140mg',
-      hierro: '1.2mg',
-      vitaminaD: '0.75µg',
-      vitaminaB12: '1.1µg',
-      enzimasDigestivas: '25mg',
-      aminoacidos: 'leucina: 2.5g;isoleucina: 1.5g;valina: 1.6g;glutamina: 4.8g'
-    }
-*/
+
 
 export const allProducts = [
-  {
+{
     id: 1,
     name: 'High-Quality MASS PROTEIN',
     description: 'Fórmula de alta pureza con 28g de proteína de máxima pureza con fórmula mejorada',
-    originalPrice: 63.45,
-    offerPrice: 21.66,
-    discount: 32,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp<<</ofertaDelDia2.webp',
     rating: 3.3,
     reviews: 348,
@@ -73,14 +18,13 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de proteína de suero de leche (contiene emulsionante: lecitina de soja), aislado de proteína de suero de leche (90%), cacao en polvo (10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Chocolate<<<Vainilla<<<Fresa',  
-    categoriaEspecial: 'veganas<<<OfertaDelDia'
+    sabores: 'Chocolate<<<Vainilla<<<Fresa',
+    categoriaEspecial: 'veganas<<<OfertaDelDia<<<proteinas'
   },
   {
     id: 2,
     name: 'Premium PROTEIN FORMULA',
     description: 'Fórmula de alta pureza con 27g de proteína pura por dosis y absorción rápida',
-    originalPrice: 31.86,
     image: '/ofertaDelDia2.webp',
     rating: 4.3,
     reviews: 212,
@@ -93,15 +37,13 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de protedasasdasdadsadsasdadsasdasdína de suero de leche (contiene emulsionante: lecitina de soja), aislado de proteína de suero de leche (85%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Cookies & Cream<<<Plátano'
+    sabores: 'Cookies & Cream<<<Plátano',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 3,
     name: 'Maximum STRENGTH NUTRITION',
     description: 'Proteína de absorción rápida con 26g de proteína de suero aislada para deportistas exigentes',
-    originalPrice: 52.8,
-    offerPrice: 44.35,
-    discount: 16,
     image: '/ofertaDelDia3.webp',
     rating: 4.7,
     reviews: 112,
@@ -116,13 +58,12 @@ export const allProducts = [
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
     sabores: 'Menta',
-    categoriaEspecial: 'veganas<<<OfertaDelDia'
+    categoriaEspecial: 'veganas<<<OfertaDelDia<<<proteinas'
   },
   {
     id: 4,
     name: 'Extreme PROTEIN COMPLEX',
     description: 'Nutrición deportiva de élite con 29g de proteína por medida para una recuperación óptima',
-    originalPrice: 40.61,
     image: '/ofertaDelDia2.webp',
     rating: 3.9,
     reviews: 125,
@@ -137,15 +78,12 @@ export const allProducts = [
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
     sabores: 'Caramelo',
-    categoriaEspecial: 'veganas<<<OfertaDelDia'
+    categoriaEspecial: 'veganas<<<OfertaDelDia<<<proteinas'
   },
   {
     id: 5,
     name: 'Advanced WHEY POWER',
     description: 'Fórmula de alta pureza con 20g de proteína de absorción rápida con fórmula mejorada',
-    originalPrice: 72.7,
-    offerPrice: 33.44,
-    discount: 54,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 5,
     reviews: 421,
@@ -158,15 +96,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, caseína micelar), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Café'
+    sabores: 'Café',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 6,
     name: 'Premium WHEY RECOVERY',
     description: 'Mezcla de proteínas que ofrece 25g de proteína por porción con fórmula mejorada',
-    originalPrice: 63.96,
-    offerPrice: 32.62,
-    discount: 49,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.5,
     reviews: 495,
@@ -179,15 +115,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de guisante (60%), proteína de arroz (25%), proteína de cáñamo (10%), aromas naturales, espesantes (goma xantana, goma guar), edulcorantes naturales (stevia), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Limón'
+    sabores: 'Limón',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 7,
     name: 'Ultra PROTEIN ISOLATE',
     description: 'Aislado de proteína de suero con 30g de proteína por servicio y mínimo contenido de grasa',
-    originalPrice: 69.99,
-    offerPrice: 49.99,
-    discount: 29,
     image: '/ofertaDelDia3.webp',
     rating: 4.8,
     reviews: 356,
@@ -200,15 +134,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de suero de leche (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Coco'
+    sabores: 'Coco',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 8,
     name: 'Pro MUSCLE BUILDER',
     description: 'Fórmula avanzada con 28g de proteína y aminoácidos adicionales para maximizar el crecimiento muscular',
-    originalPrice: 59.99,
-    offerPrice: 39.99,
-    discount: 33,
     image: '/ofertaDelDia2.webp',
     rating: 4.6,
     reviews: 289,
@@ -223,15 +155,12 @@ export const allProducts = [
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
     sabores: 'Pistacho',
-    categoriaEspecial: 'veganas<<<OfertaDelDia'
+    categoriaEspecial: 'veganas<<<OfertaDelDia<<<proteinas'
   },
   {
     id: 9,
     name: 'Elite PERFORMANCE PROTEIN',
     description: 'Proteína premium con 25g por servicio y digestión optimizada para atletas de alto rendimiento',
-    originalPrice: 54.99,
-    offerPrice: 44.99,
-    discount: 18,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.9,
     reviews: 412,
@@ -244,15 +173,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de suero hidrolizada (90%), aislado de proteína de suero de leche (5%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Nuez'
+    sabores: 'Nuez',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 10,
     name: 'Natural PLANT PROTEIN',
     description: 'Proteína vegetal con 22g por servicio, sin aditivos artificiales y fácil digestión',
-    originalPrice: 49.99,
-    offerPrice: 39.99,
-    discount: 20,
     image: '/ofertaDelDia3.webp',
     rating: 4.4,
     reviews: 278,
@@ -266,15 +193,12 @@ export const allProducts = [
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
     sabores: 'Dulce de Leche',
-    categoriaEspecial: 'veganas<<<OfertaDelDia'
+    categoriaEspecial: 'veganas<<<OfertaDelDia<<<proteinas'
   },
   {
     id: 11,
     name: 'Power MASS GAINER',
     description: 'Ganador de peso con 1200 calorías y 50g de proteína por servicio para aumento de masa muscular',
-    originalPrice: 79.99,
-    offerPrice: 59.99,
-    discount: 25,
     image: '/ofertaDelDia2.webp',
     rating: 4.5,
     reviews: 320,
@@ -287,15 +211,13 @@ export const allProducts = [
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (5g), glutamina (5g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
     modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Mango'
+    sabores: 'Mango',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 12,
     name: 'Lean PROTEIN MATRIX',
     description: 'Fórmula de proteína con 24g por servicio y L-carnitina para definición muscular',
-    originalPrice: 45.99,
-    offerPrice: 36.99,
-    discount: 20,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.6,
     reviews: 245,
@@ -308,15 +230,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, aislado de proteína de suero de leche), L-carnitina (1g), té verde (extracto), CLA (ácido linoleico conjugado), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Maracuyá'
+    sabores: 'Maracuyá',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 13,
     name: 'Iso WHEY ZERO',
     description: 'Aislado de proteína sin lactosa con 27g de proteína por servicio y cero azúcares añadidos',
-    originalPrice: 57.99,
-    offerPrice: 42.99,
-    discount: 26,
     image: '/ofertaDelDia3.webp',
     rating: 4.7,
     reviews: 310,
@@ -329,15 +249,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de suero de leche (95%, sin lactosa), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche sin lactosa. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Cereza'
+    sabores: 'Cereza',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 14,
     name: 'Night TIME PROTEIN',
     description: 'Proteína de liberación lenta con 25g por servicio, ideal para tomar antes de dormir',
-    originalPrice: 49.99,
-    offerPrice: 39.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.5,
     reviews: 265,
@@ -350,15 +268,13 @@ export const allProducts = [
     infoIngredientes: 'Caseína micelar (90%), concentrado de proteína de suero de leche (5%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Avellana'
+    sabores: 'Avellana',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 15,
     name: 'Complete PROTEIN BLEND',
     description: 'Mezcla completa de proteínas con 24g por servicio y digestión escalonada para máxima eficacia',
-    originalPrice: 52.99,
-    offerPrice: 42.99,
-    discount: 19,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.6,
     reviews: 298,
@@ -372,15 +288,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 40%, aislado de proteína de suero de leche 30%, caseína micelar 20%, proteína de huevo 10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Tiramisú'
+    sabores: 'Tiramisú',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 16,
     name: 'Hydro WHEY PROTEIN',
     description: 'Proteína de suero hidrolizada con 28g por servicio y absorción ultra rápida',
-    originalPrice: 64.99,
-    offerPrice: 49.99,
-    discount: 23,
     image: '/ofertaDelDia3.webp',
     rating: 4.8,
     reviews: 342,
@@ -393,15 +307,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de suero hidrolizada (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Chicle'
+    sabores: 'Chicle',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 17,
     name: 'Organic PLANT PROTEIN',
     description: 'Proteína vegetal orgánica con 21g por servicio y mezcla de superalimentos',
-    originalPrice: 54.99,
-    offerPrice: 44.99,
-    discount: 18,
     image: '/ofertaDelDia2.webp',
     rating: 4.4,
     reviews: 256,
@@ -414,15 +326,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de guisante orgánica (40%), proteína de arroz integral orgánico (30%), proteína de semillas de chía orgánica (10%), proteína de semillas de calabaza orgánica (10%), mezcla de superalimentos orgánicos (espirulina, maca, cúrcuma, jengibre), aromas naturales, stevia orgánica, sal marina.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Sandía'
+    sabores: 'Sandía',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 18,
     name: 'Whey PROTEIN ISOLATE',
     description: 'Aislado de proteína de suero con 29g por servicio y mínimo contenido de carbohidratos y grasas',
-    originalPrice: 59.99,
-    offerPrice: 47.99,
-    discount: 20,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.7,
     reviews: 325,
@@ -435,15 +345,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de suero de leche (97%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Kiwi'
+    sabores: 'Kiwi',
+    categoriaEspecial: 'proteinas'
   },
   {
     id: 19,
     name: 'Pro CASEIN PROTEIN',
     description: 'Caseína micelar con 25g de proteína por servicio y liberación prolongada durante 8 horas',
-    originalPrice: 52.99,
-    offerPrice: 42.99,
-    discount: 19,
     image: '/ofertaDelDia3.webp',
     rating: 4.5,
     reviews: 275,
@@ -456,15 +364,13 @@ export const allProducts = [
     infoIngredientes: 'Caseína micelar (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Frambuesa'
+    sabores: 'Frambuesa',
+    categoriaEspecial: 'proteinas'
   },
-  {
+{
     id: 20,
     name: 'Lean WHEY PROTEIN',
     description: 'Proteína de suero con 23g por servicio y L-carnitina para apoyo en la definición muscular',
-    originalPrice: 47.99,
-    offerPrice: 37.99,
-    discount: 21,
     image: '/ofertaDelDia2.webp',
     rating: 4.4,
     reviews: 245,
@@ -477,15 +383,13 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de proteína de suero de leche (85%), L-carnitina (1g), extracto de té verde, CLA (ácido linoleico conjugado), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Arándano'
+    sabores: 'Arándano',
+    categoriaEspecial: 'aminoacidos'
   },
   {
     id: 21,
     name: 'Ultra MASS GAINER',
     description: 'Ganador de peso con 1000 calorías y 45g de proteína por servicio para aumento de masa muscular',
-    originalPrice: 69.99,
-    offerPrice: 54.99,
-    discount: 21,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.3,
     reviews: 230,
@@ -498,15 +402,13 @@ export const allProducts = [
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (3g), glutamina (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
     modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Piña'
+    sabores: 'Piña',
+    categoriaEspecial: 'aminoacidos'
   },
   {
     id: 22,
     name: 'Premium WHEY CONCENTRATE',
     description: 'Concentrado de proteína de suero con 22g por servicio y excelente relación calidad-precio',
-    originalPrice: 39.99,
-    offerPrice: 29.99,
-    discount: 25,
     image: '/ofertaDelDia3.webp',
     rating: 4.2,
     reviews: 320,
@@ -519,15 +421,13 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de proteína de suero de leche (80%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Melón'
+    sabores: 'Melón',
+    categoriaEspecial: 'aminoacidos'
   },
   {
     id: 23,
     name: 'Vegan PROTEIN COMPLETE',
     description: 'Proteína vegetal completa con 20g por servicio y perfil completo de aminoácidos',
-    originalPrice: 49.99,
-    offerPrice: 39.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.3,
     reviews: 210,
@@ -541,15 +441,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de guisante (40%), proteína de arroz integral (30%), proteína de semillas de calabaza (15%), proteína de cáñamo (10%), mezcla de aminoácidos esenciales (5%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Toffee'
+    sabores: 'Toffee',
+    categoriaEspecial: 'aminoacidos'
   },
   {
     id: 24,
     name: 'Gold STANDARD WHEY',
     description: 'Proteína de suero premium con 24g por servicio y mezcla de concentrado, aislado e hidrolizado',
-    originalPrice: 54.99,
-    offerPrice: 44.99,
-    discount: 18,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.8,
     reviews: 520,
@@ -562,15 +460,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 70%, aislado de proteína de suero de leche 20%, proteína de suero hidrolizada 10%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Brownie'
+    sabores: 'Brownie',
+    categoriaEspecial: 'aminoacidos<<<pre-entreno'
   },
   {
     id: 25,
     name: 'Combat PROTEIN POWDER',
     description: 'Proteína de liberación en 5 fases con 25g por servicio para nutrición prolongada',
-    originalPrice: 56.99,
-    offerPrice: 45.99,
-    discount: 19,
     image: '/ofertaDelDia3.webp',
     rating: 4.6,
     reviews: 310,
@@ -583,15 +479,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas de 5 fases (concentrado de proteína de suero de leche, aislado de proteína de suero de leche, proteína de suero hidrolizada, caseína micelar, proteína de clara de huevo), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Cheesecake'
+    sabores: 'Cheesecake',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 26,
     name: 'Nitro TECH PROTEIN',
     description: 'Fórmula avanzada con 30g de proteína por servicio y creatina para máximo rendimiento',
-    originalPrice: 59.99,
-    offerPrice: 47.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.7,
     reviews: 340,
@@ -604,15 +498,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de suero de leche (70%), concentrado de proteína de suero de leche (20%), creatina monohidrato (3g), L-glutamina (2g), BCAA (2g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Manzana'
+    sabores: 'Manzana',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 27,
     name: 'Syntha-6 PROTEIN MATRIX',
     description: 'Mezcla de proteínas de liberación sostenida con 22g por servicio y delicioso sabor cremoso',
-    originalPrice: 52.99,
-    offerPrice: 42.99,
-    discount: 19,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.5,
     reviews: 290,
@@ -625,15 +517,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, caseína micelar, proteína de leche, proteína de clara de huevo, proteína de suero hidrolizada), MCT (triglicéridos de cadena media), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Canela'
+    sabores: 'Canela',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 28,
     name: 'Serious MASS GAINER',
     description: 'Ganador de peso con 1250 calorías y 50g de proteína por servicio para aumento de masa muscular',
-    originalPrice: 74.99,
-    offerPrice: 59.99,
-    discount: 20,
     image: '/ofertaDelDia3.webp',
     rating: 4.4,
     reviews: 280,
@@ -646,15 +536,13 @@ export const allProducts = [
     infoIngredientes: 'Maltodextrina, concentrado de proteína de suero de leche, caseína micelar, avena en polvo, aceite de MCT, creatina monohidrato (5g), glutamina (5g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), complejo vitamínico y mineral, enzimas digestivas (amilasa, proteasa, lipasa).',
     modoDeUso: 'Mezclar 3 cacitos (100g) con 400-500ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Yogurt'
+    sabores: 'Yogurt',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 29,
     name: 'Iso 100 HYDROLYZED',
     description: 'Proteína de suero hidrolizada con 25g por servicio y cero carbohidratos y grasas',
-    originalPrice: 64.99,
-    offerPrice: 51.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.8,
     reviews: 330,
@@ -667,15 +555,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de suero hidrolizada (100%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Mora'
+    sabores: 'Mora',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 30,
     name: 'Pure WHEY ISOLATE',
     description: 'Aislado de proteína de suero con 27g por servicio y mínimo contenido de lactosa',
-    originalPrice: 57.99,
-    offerPrice: 45.99,
-    discount: 21,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.7,
     reviews: 315,
@@ -689,15 +575,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de suero de leche (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína, lactasa).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Pistache'
+    sabores: 'Pistache',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 31,
     name: 'Micellar CASEIN PROTEIN',
     description: 'Caseína micelar pura con 24g de proteína por servicio y liberación lenta durante 8 horas',
-    originalPrice: 54.99,
-    offerPrice: 43.99,
-    discount: 20,
     image: '/ofertaDelDia3.webp',
     rating: 4.5,
     reviews: 260,
@@ -710,15 +594,13 @@ export const allProducts = [
     infoIngredientes: 'Caseína micelar (98%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 15 segundos o hasta que se disuelva por completo. Tomar preferentemente antes de dormir.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Almendra'
+    sabores: 'Almendra',
+    categoriaEspecial: 'pre-entreno'
   },
   {
     id: 32,
     name: 'Egg WHITE PROTEIN',
     description: 'Proteína de clara de huevo con 24g por servicio, baja en grasas y de alta calidad biológica',
-    originalPrice: 49.99,
-    offerPrice: 39.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.3,
     reviews: 220,
@@ -731,15 +613,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de clara de huevo en polvo (95%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Banana Split'
+    sabores: 'Banana Split',
+    categoriaEspecial: 'creatina'
   },
   {
     id: 33,
     name: 'Beef PROTEIN ISOLATE',
     description: 'Proteína aislada de carne de vacuno con 25g por servicio, sin lactosa ni gluten',
-    originalPrice: 59.99,
-    offerPrice: 47.99,
-    discount: 20,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.2,
     reviews: 185,
@@ -752,15 +632,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de carne de vacuno (90%), creatina monohidrato (3g), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Chicozapote'
+    sabores: 'Chicozapote',
+    categoriaEspecial: 'creatina'
   },
   {
     id: 34,
     name: 'Slim DIET PROTEIN',
     description: 'Proteína para control de peso con 20g por servicio y extractos de plantas para apoyo metabólico',
-    originalPrice: 47.99,
-    offerPrice: 37.99,
-    discount: 21,
     image: '/ofertaDelDia3.webp',
     rating: 4.1,
     reviews: 195,
@@ -773,15 +651,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche, caseína micelar), L-carnitina (1g), extracto de té verde, extracto de garcinia cambogia, extracto de café verde, fibra de avena, aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Mamey'
+    sabores: 'Mamey',
+    categoriaEspecial: 'creatina'
   },
   {
     id: 35,
     name: 'Tri-Blend PROTEIN',
     description: 'Mezcla de tres proteínas con 23g por servicio y liberación en tres fases para nutrición continua',
-    originalPrice: 51.99,
-    offerPrice: 41.99,
-    discount: 19,
     image: '/ofertaDelDia2.webp',
     rating: 4.5,
     reviews: 275,
@@ -794,15 +670,13 @@ export const allProducts = [
     infoIngredientes: 'Mezcla de proteínas (concentrado de proteína de suero de leche 40%, aislado de proteína de suero de leche 30%, caseína micelar 30%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Rompope'
+    sabores: 'Rompope',
+    categoriaEspecial: 'creatina<<<vitaminas'
   },
   {
     id: 36,
     name: 'Whey PROTEIN CONCENTRATE',
     description: 'Concentrado de proteína de suero con 22g por servicio y excelente relación calidad-precio',
-    originalPrice: 42.99,
-    offerPrice: 32.99,
-    discount: 23,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4.2,
     reviews: 310,
@@ -815,15 +689,13 @@ export const allProducts = [
     infoIngredientes: 'Concentrado de proteína de suero de leche (80%), aromas, espesantes (goma xantana, goma guar), edulcorantes (sucralosa, acesulfamo K), sal, enzimas digestivas (bromelina, papaína).',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Mazapán'
+    sabores: 'Mazapán',
+    categoriaEspecial: 'creatina'
   },
   {
     id: 37,
     name: 'Pea PROTEIN ISOLATE',
     description: 'Proteína aislada de guisante con 24g por servicio, vegana y de fácil digestión',
-    originalPrice: 47.99,
-    offerPrice: 37.99,
-    discount: 21,
     image: '/ofertaDelDia3.webp',
     rating: 4.3,
     reviews: 230,
@@ -836,15 +708,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de guisante (90%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Cajeta'
+    sabores: 'Cajeta',
+    categoriaEspecial: 'creatina<<<vitaminas'
   },
   {
     id: 38,
     name: 'Rice PROTEIN ISOLATE',
     description: 'Proteína aislada de arroz con 22g por servicio, vegana y sin alérgenos comunes',
-    originalPrice: 45.99,
-    offerPrice: 36.99,
-    discount: 20,
     image: '/ofertaDelDia2.webp',
     rating: 4.1,
     reviews: 190,
@@ -857,15 +727,13 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de arroz integral (95%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Guayaba'
+    sabores: 'Guayaba',
+    categoriaEspecial: 'creatina<<<vitaminas'
   },
   {
     id: 39,
     name: 'Hemp PROTEIN POWDER',
     description: 'Proteína de cáñamo con 18g por servicio, rica en ácidos grasos esenciales y fibra',
-    originalPrice: 43.99,
-    offerPrice: 34.99,
-    discount: 20,
     image: 'https://q2qwccah9hqmefmy.public.blob.vercel-storage.com/evoflex-gral-coat-tabs-front-hsn_1-9yP2K8aLQ71nESrj0BClWhMtfZ8ofx.webp',
     rating: 4,
     reviews: 165,
@@ -879,15 +747,13 @@ export const allProducts = [
     infoIngredientes: 'Proteína de semillas de cáñamo (100%), sin aditivos ni conservantes.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Tamarindo'
+    sabores: 'Tamarindo',
+    categoriaEspecial: 'creatina<<<vitaminas'
   },
   {
     id: 40,
     name: 'Soy PROTEIN ISOLATE',
     description: 'Proteína aislada de soja con 25g por servicio, vegana y con perfil completo de aminoácidos',
-    originalPrice: 44.99,
-    offerPrice: 35.99,
-    discount: 20,
     image: '/ofertaDelDia3.webp',
     rating: 4.2,
     reviews: 210,
@@ -900,33 +766,34 @@ export const allProducts = [
     infoIngredientes: 'Aislado de proteína de soja (95%), aromas naturales, espesantes naturales (goma xantana, goma guar), edulcorante natural (stevia), sal marina.',
     modoDeUso: 'Mezclar 1 cacito (30g) con 250-300ml de agua o leche vegetal. Agitar enérgicamente durante 10 segundos o hasta que se disuelva por completo.',
     recomendacionesDeUso: 'Tomar 1-3 veces al día según necesidades proteicas<<<Ideal después del entrenamiento para maximizar la recuperación<<<Puede tomarse entre comidas como snack proteico<<<Conservar en lugar fresco y seco',
-    sabores: 'Chamoy'
+    sabores: 'Chamoy',
+    categoriaEspecial: 'creatina<<<vitaminas'
   }
 ]
 const stock = [
-  { product_id: 1, sabor: 'Chocolate', tamano: '500g', cantidad: 0, precio: 19.99 },
-  { product_id: 1, sabor: 'Chocolate', tamano: '1kg', cantidad: 30, precio: 37.98 },
-  { product_id: 1, sabor: 'Chocolate', tamano: '2kg', cantidad: 0, precio: 69.97 },
-  { product_id: 1, sabor: 'Chocolate', tamano: '5kg', cantidad: 10, precio: 149.93 },
-  { product_id: 1, sabor: 'Vainilla', tamano: '500g', cantidad: 0, precio: 19.99 },
-  { product_id: 1, sabor: 'Vainilla', tamano: '1kg', cantidad: 0, precio: 37.98 },
-  { product_id: 1, sabor: 'Vainilla', tamano: '2kg', cantidad: 20, precio: 69.97 },
-  { product_id: 1, sabor: 'Vainilla', tamano: '5kg', cantidad: 0, precio: 149.93 },
-  { product_id: 1, sabor: 'Fresa', tamano: '500g', cantidad: 0, precio: 19.99 },
-  { product_id: 1, sabor: 'Fresa', tamano: '1kg', cantidad: 30, precio: 37.98 },
-  { product_id: 1, sabor: 'Fresa', tamano: '2kg', cantidad: 20, precio: 69.97 },
-  { product_id: 1, sabor: 'Fresa', tamano: '5kg', cantidad: 10, precio: 149.93 },
-  { product_id: 2, sabor: 'Cookies & Cream', tamano: '500g', cantidad: 15, precio: 22.99 },
-  { product_id: 2, sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 12, precio: 43.68 },
-  { product_id: 2, sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5, precio: 80.47 },
-  { product_id: 2, sabor: 'Plátano', tamano: '500g', cantidad: 10, precio: 22.99 },
-  { product_id: 2, sabor: 'Plátano', tamano: '1kg', cantidad: 18, precio: 43.68 },
-  { product_id: 2, sabor: 'Plátano', tamano: '2kg', cantidad: 7, precio: 80.47 },
-  { product_id: 2, sabor: 'Plátano', tamano: '5kg', cantidad: 3, precio: 172.43 },
-  { product_id: 3, sabor: 'Menta', tamano: '500g', cantidad: 22, precio: 24.99 },
-  { product_id: 3, sabor: 'Menta', tamano: '1kg', cantidad: 15, precio: 47.48 },
-  { product_id: 3, sabor: 'Menta', tamano: '2kg', cantidad: 8, precio: 87.47 },
-  { product_id: 4, sabor: 'Caramelo', tamano: '500g', cantidad: 17, precio: 18.99 },
+  { product_id: 1, sabor: 'Chocolate', tamano: '500g', cantidad: 0, precio: 19.99, oferta: 14 },
+  { product_id: 1, sabor: 'Chocolate', tamano: '1kg', cantidad: 1, precio: 37.98, oferta: 14  },
+  { product_id: 1, sabor: 'Chocolate', tamano: '2kg', cantidad: 0, precio: 79.97, oferta: 14  },
+  { product_id: 1, sabor: 'Chocolate', tamano: '5kg', cantidad: 0, precio: 149.93, oferta: 14  },
+  { product_id: 1, sabor: 'Vainilla', tamano: '500g', cantidad: 0, precio: 19.99, oferta: 14  },
+  { product_id: 1, sabor: 'Vainilla', tamano: '1kg', cantidad: 0, precio: 37.98, oferta: 14  },
+  { product_id: 1, sabor: 'Vainilla', tamano: '2kg', cantidad: 0, precio: 69.97, oferta: 14  },
+  { product_id: 1, sabor: 'Vainilla', tamano: '5kg', cantidad: 0, precio: 149.93, oferta: 14  },
+  { product_id: 1, sabor: 'Fresa', tamano: '500g', cantidad: 0, precio: 19.99, oferta: 13  },
+  { product_id: 1, sabor: 'Fresa', tamano: '1kg', cantidad: 0, precio: 37.98, oferta: 14  },
+  { product_id: 1, sabor: 'Fresa', tamano: '2kg', cantidad: 0, precio: 69.97, oferta: 0  },
+  { product_id: 1, sabor: 'Fresa', tamano: '5kg', cantidad: 0, precio: 149.93, oferta: 14  },
+  { product_id: 2, sabor: 'Cookies & Cream', tamano: '500g', cantidad: 2, precio: 212.99, oferta: 0  },
+  { product_id: 2, sabor: 'Cookies & Cream', tamano: '1kg', cantidad: 12, precio: 43.68, oferta: 14 },
+  { product_id: 2, sabor: 'Cookies & Cream', tamano: '2kg', cantidad: 5, precio: 80.47, oferta: 14 },
+  { product_id: 2, sabor: 'Plátano', tamano: '500g', cantidad: 10, precio: 22.99, oferta: 14 },
+  { product_id: 2, sabor: 'Plátano', tamano: '1kg', cantidad: 18, precio: 43.68, oferta: 14 },
+  { product_id: 2, sabor: 'Plátano', tamano: '2kg', cantidad: 7, precio: 80.47, oferta: 14 },
+  { product_id: 2, sabor: 'Plátano', tamano: '5kg', cantidad: 3, precio: 172.43, oferta: 14 },
+  { product_id: 3, sabor: 'Menta', tamano: '500g', cantidad: 0, precio: 24.99, oferta: 14 },
+  { product_id: 3, sabor: 'Menta', tamano: '1kg', cantidad: 3, precio: 47.48, oferta: 14 },
+  { product_id: 3, sabor: 'Menta', tamano: '2kg', cantidad: 0, precio: 87.47, oferta: 10 },
+  { product_id: 4, sabor: 'Caramelo', tamano: '500g', cantidad: 0, precio: 18.99 },
   { product_id: 4, sabor: 'Caramelo', tamano: '1kg', cantidad: 12, precio: 36.08 },
   { product_id: 5, sabor: 'Café', tamano: '500g', cantidad: 20, precio: 17.99 },
   { product_id: 5, sabor: 'Café', tamano: '1kg', cantidad: 15, precio: 34.18 },
@@ -938,14 +805,14 @@ const stock = [
   { product_id: 8, sabor: 'Pistacho', tamano: '2kg', cantidad: 6, precio: 59.47 },
   { product_id: 9, sabor: 'Nuez', tamano: '500g', cantidad: 16, precio: 20.99 },
   { product_id: 9, sabor: 'Nuez', tamano: '1kg', cantidad: 12, precio: 39.88 },
-  { product_id: 10, sabor: 'Dulce de Leche', tamano: '500g', cantidad: 19, precio: 2.49 },
-  { product_id: 10, sabor: 'Dulce de Leche', tamano: '1kg', cantidad: 14, precio: 4.73 },
+  { product_id: 10, sabor: 'Dulce de Leche', tamano: '500g', cantidad: 0, precio: 2.49 },
+  { product_id: 10, sabor: 'Dulce de Leche', tamano: '1kg', cantidad: 0, precio: 4.73 },
   { product_id: 11, sabor: 'Mango', tamano: '500g', cantidad: 21, precio: 25.99 },
   { product_id: 11, sabor: 'Mango', tamano: '1kg', cantidad: 16, precio: 49.38 },
   { product_id: 12, sabor: 'Maracuyá', tamano: '500g', cantidad: 13, precio: 29.99 },
   { product_id: 12, sabor: 'Maracuyá', tamano: '1kg', cantidad: 8, precio: 56.98 },
   { product_id: 13, sabor: 'Cereza', tamano: '500g', cantidad: 17, precio: 27.99 },
-  { product_id: 13, sabor: 'Cereza', tamano: '1kg', cantidad: 12, precio: 53.18 },
+  { product_id: 13, sabor: 'Cereza', tamano: '1kg', cantidad: 12, precio: 53.18,  oferta: 10  },
   { product_id: 13, sabor: 'Cereza', tamano: '2kg', cantidad: 7, precio: 97.97 },
   { product_id: 14, sabor: 'Avellana', tamano: '500g', cantidad: 15, precio: 19.99 },
   { product_id: 14, sabor: 'Avellana', tamano: '1kg', cantidad: 10, precio: 37.98 },
@@ -1781,4 +1648,28 @@ export function especiales(tituloEspecial) {
     const categorias = producto.categoriaEspecial.split("<<<");
     return categorias.includes(tituloEspecial);
   });
+}
+export function guardados(guardados) {
+  const coleccionGuardados = [];
+  // Iteramos sobre la lista de tituloEspecial
+  for (let e of guardados) {
+    // Buscamos en allProducts el producto que coincida con el name
+    const productoGuardado = allProducts.find(allProducts => allProducts.name === e.producto);
+    if (productoGuardado) {  // Si encontramos el producto, lo agregamos a la lista
+      coleccionGuardados.push(productoGuardado);
+    }
+  }
+  return coleccionGuardados
+}
+export function favoritosF(favoritos) {
+    const coleccionGuardados = [];
+  // Iteramos sobre la lista de tituloEspecial
+  for (let e of favoritos) {
+    // Buscamos en allProducts el producto que coincida con el name
+    const productoGuardado = allProducts.find(allProducts => allProducts.name === e);
+    if (productoGuardado) {  // Si encontramos el producto, lo agregamos a la lista
+      coleccionGuardados.push(productoGuardado);
+    }
+  }
+  return coleccionGuardados
 }

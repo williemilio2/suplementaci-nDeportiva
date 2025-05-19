@@ -53,6 +53,12 @@
   top: 50%;
   transform: translateY(-50%);
   transition: 1s;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 20px;
 }
 .flechaLeft{
   right: 0%;
@@ -60,4 +66,33 @@
 .flechaLeft:hover,
 .flechaRight:hover{
   transform: scale(1.5);
+}
+@media (max-width: 1400px) {
+  .heroImageContainer{
+    height: 400px;
+  }
+}
+@media (max-width: 1100px) {
+  .heroImageContainer{
+    height: 300px;
+  }
+}
+@media (max-width: 800px) {
+  .heroImageContainer{
+    height: 200px;
+  }
+  .flechaLeft,
+  .flechaRight{
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .heroImageContainer{
+    height: 150px;
+  }
+  .dot{
+    width: 1rem;
+    height: 0.175rem;
+  }
 }

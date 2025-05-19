@@ -1,0 +1,1322 @@
+/* Contenedor principal */
+.checkoutContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header del checkout */
+.checkoutHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Barra de progreso */
+.checkoutProgress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stepIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.progressStep.active .stepIcon {
+  background-color: #ff5722;
+  color: white;
+}
+
+.progressStep.completed .stepIcon {
+  background-color: #10b981;
+  color: white;
+}
+
+.stepText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.progressStep.active .stepText {
+  color: #111827;
+  font-weight: 600;
+}
+
+.progressLine {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #e5e7eb;
+  margin: 0 0.5rem;
+  position: relative;
+  top: -20px;
+  max-width: 100px;
+}
+
+/* Contenido principal */
+.checkoutContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.checkoutMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkoutSidebar {
+  width: 100%;
+  max-width: 380px;
+}
+
+@media (max-width: 1024px) {
+  .checkoutContent {
+    flex-direction: column;
+  }
+
+  .checkoutSidebar {
+    max-width: 100%;
+    order: -1;
+  }
+}
+
+/* TÃ­tulos de secciÃ³n */
+.sectionTitle {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.sectionTitle p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.sectionSubtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 1.5rem 0 1rem;
+}
+
+/* MÃ©todos de pago */
+.paymentMethods {
+  margin-bottom: 2rem;
+}
+
+.paymentMethod {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  
+  transition: all 0.2s ease;
+}
+
+.paymentMethod:hover {
+  border-color: #d1d5db;
+}
+
+.paymentMethod.active {
+  border-color: #ff5722;
+  background-color: #fff8f6;
+}
+
+.methodRadio {
+  margin-right: 1rem;
+  position: relative;
+}
+
+.methodRadio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.methodRadio label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  position: relative;
+  
+}
+
+.methodRadio input[type="radio"]:checked + label {
+  border-color: #ff5722;
+}
+
+.methodRadio input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff5722;
+}
+
+.methodContent {
+  flex: 1;
+}
+
+.methodTitle {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.methodDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.cardIcons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Formulario de tarjeta */
+.cardForm {
+  margin-bottom: 2rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  flex: 1;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #111827;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #ff5722;
+  box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.1);
+}
+
+.cardNumberInput {
+  position: relative;
+}
+
+.cardBrand {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.securePayment {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Acciones del formulario */
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.backButton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.backButton:hover {
+  background-color: #f9fafb;
+}
+
+.continueButton,
+.completeButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  background-color: #ff5722;
+  
+  transition: all 0.2s ease;
+}
+
+.continueButton:hover,
+.completeButton:hover {
+  background-color: #e64a19;
+}
+
+.continueButton:disabled,
+.completeButton:disabled {
+  opacity: 0.7;
+}
+
+.loading {
+  position: relative;
+  color: transparent;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Resumen del pedido */
+.orderSummary {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.cartItems {
+  margin-bottom: 1.5rem;
+}
+
+.cartItem {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cartItem:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.itemImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background-color: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.itemDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemVariant {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.itemPriceQty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemPrice {
+  font-weight: 600;
+  color: #111827;
+}
+
+.itemQuantity {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.summaryDetails {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.summaryTotal {
+  font-weight: 600;
+  color: #111827;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Caja de garantÃ­a */
+.guaranteeBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.guaranteeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fff1ed;
+  color: #ff5722;
+  flex-shrink: 0;
+}
+
+.guaranteeContent h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.guaranteeContent p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* SecciÃ³n de direcciones */
+.addressSection {
+  margin-bottom: 2rem;
+}
+
+.savedAddresses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.addressCard {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  
+  transition: all 0.2s ease;
+}
+
+.addressCard:hover {
+  border-color: #d1d5db;
+}
+
+.addressCard.selectedAddress {
+  border-color: #ff5722;
+  background-color: #fff8f6;
+}
+
+.addressRadio {
+  margin-right: 1rem;
+  position: relative;
+}
+
+.addressRadio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.addressRadio label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  position: relative;
+  
+}
+
+.addressRadio input[type="radio"]:checked + label {
+  border-color: #ff5722;
+}
+
+.addressRadio input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff5722;
+}
+
+.addressContent {
+  flex: 1;
+}
+
+.addressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.addressName {
+  font-weight: 600;
+  color: #111827;
+}
+
+.defaultBadge {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  background-color: #fff1ed;
+  color: #ff5722;
+  border-radius: 9999px;
+}
+
+.addressDetails {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.recipientName {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.addAddressCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border: 1px dashed #d1d5db;
+  border-radius: 0.5rem;
+  
+  transition: all 0.2s ease;
+  height: 100%;
+  min-height: 150px;
+}
+
+.addAddressCard:hover {
+  border-color: #ff5722;
+  background-color: #fff8f6;
+}
+
+.addAddressIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff1ed;
+  color: #ff5722;
+  margin-bottom: 0.75rem;
+}
+
+/* Formulario para aÃ±adir direcciÃ³n */
+.addAddressForm {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.formHeader h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.closeFormButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  
+  transition: all 0.2s ease;
+}
+
+.closeFormButton:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s ease;
+  
+}
+
+.cancelButton:hover {
+  background-color: #f9fafb;
+}
+
+.saveButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  background-color: #ff5722;
+  
+  transition: all 0.2s ease;
+}
+
+.saveButton:hover {
+  background-color: #e64a19;
+}
+
+/* Checkbox */
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 30px;
+  
+  font-size: 0.875rem;
+  color: #4b5563;
+  user-select: none;
+}
+
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.checkboxContainer:hover input ~ .checkmark {
+  border-color: #9ca3af;
+}
+
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: #ff5722;
+  border-color: #ff5722;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxContainer .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Opciones de envÃ­o */
+.shippingOptions {
+  margin-bottom: 2rem;
+}
+
+.shippingOption {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  
+  transition: all 0.2s ease;
+}
+
+.shippingOption:hover {
+  border-color: #d1d5db;
+}
+
+.shippingOption.selectedShipping {
+  border-color: #ff5722;
+  background-color: #fff8f6;
+}
+
+.shippingRadio {
+  margin-right: 1rem;
+  position: relative;
+}
+
+.shippingRadio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.shippingRadio label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  position: relative;
+  
+}
+
+.shippingRadio input[type="radio"]:checked + label {
+  border-color: #ff5722;
+}
+
+.shippingRadio input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff5722;
+}
+
+.shippingContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.shippingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff1ed;
+  color: #ff5722;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.shippingDetails {
+  flex: 1;
+}
+
+.shippingName {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.shippingDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.shippingPrice {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* InformaciÃ³n de entrega */
+.deliveryInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.deliveryIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fff1ed;
+  color: #ff5722;
+  flex-shrink: 0;
+}
+
+.deliveryContent h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.deliveryContent p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Secciones de revisiÃ³n */
+.reviewSections {
+  margin-bottom: 2rem;
+}
+
+.reviewSection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.reviewSection:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reviewHeader h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.editLink {
+  font-size: 0.875rem;
+  color: #ff5722;
+  text-decoration: none;
+}
+
+.editLink:hover {
+  text-decoration: underline;
+}
+
+.reviewContent {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.paymentReview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardBrandIcon {
+  flex-shrink: 0;
+}
+
+.paymentDetails {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.cardNumber {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.addressReview {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.shippingReview {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.shippingName {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.deliveryReview {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.deliveryDate {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+/* TÃ©rminos y condiciones */
+.termsContainer {
+  margin-bottom: 2rem;
+}
+
+.termsLink {
+  color: #ff5722;
+  text-decoration: none;
+}
+
+.termsLink:hover {
+  text-decoration: underline;
+}
+
+/* Nota de pedido */
+.orderNote {
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.noteLink {
+  color: #ff5722;
+  text-decoration: none;
+}
+
+.noteLink:hover {
+  text-decoration: underline;
+}
+
+/* PÃ¡gina de pedido completado */
+.completeContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.completeHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.completeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #dcfce7;
+  color: #10b981;
+  margin: 0 auto 1.5rem;
+}
+
+.completeTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.completeSubtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.orderNumber {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.orderNumber strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.completeContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.completeMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.completeSidebar {
+  width: 100%;
+  max-width: 380px;
+}
+
+@media (max-width: 1024px) {
+  .completeContent {
+    flex-direction: column;
+  }
+
+  .completeSidebar {
+    max-width: 100%;
+    order: -1;
+  }
+}
+
+/* Estado del pedido */
+.orderStatus {
+  margin-bottom: 2rem;
+}
+
+.statusTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.statusTimeline {
+  position: relative;
+}
+
+.statusStep {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.statusStep:last-child {
+  padding-bottom: 0;
+}
+
+.statusIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.statusStep.active .statusIcon {
+  background-color: #dcfce7;
+  color: #10b981;
+}
+
+.statusLine {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background-color: #e5e7eb;
+  transform: translateX(-50%);
+}
+
+.statusContent {
+  padding-top: 0.5rem;
+}
+
+.statusContent h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.statusContent p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* InformaciÃ³n de entrega en la pÃ¡gina de completado */
+.deliveryInfo {
+  margin-bottom: 2rem;
+}
+
+.deliverySection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.deliverySection:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.deliverySection h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+/* Acciones de la pÃ¡gina de completado */
+.completeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.invoiceButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background-color: white;
+  
+  transition: all 0.2s ease;
+}
+
+.invoiceButton:hover {
+  background-color: #f9fafb;
+}
+
+.viewOrdersButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  background-color: #ff5722;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.viewOrdersButton:hover {
+  background-color: #e64a19;
+}
+
+/* SecciÃ³n de ayuda */
+.helpSection {
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.helpSection h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.helpSection p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.contactLink {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ff5722;
+  text-decoration: none;
+}
+
+.contactLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkoutProgress {
+    padding: 0 1rem;
+  }
+
+  .progressLine {
+    max-width: 60px;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .backButton,
+  .continueButton,
+  .completeButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .savedAddresses {
+    grid-template-columns: 1fr;
+  }
+
+  .shippingContent {
+    flex-wrap: wrap;
+  }
+
+  .shippingPrice {
+    width: 100%;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+
+  .completeActions {
+    flex-direction: column;
+  }
+
+  .invoiceButton,
+  .viewOrdersButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

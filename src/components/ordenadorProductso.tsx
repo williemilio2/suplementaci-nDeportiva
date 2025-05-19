@@ -1,5 +1,6 @@
 "use client"
 
+import type React from "react"
 import styles from "../styles/Product-listing.module.css"
 
 interface ProductSortProps {
@@ -8,23 +9,28 @@ interface ProductSortProps {
 }
 
 export default function ProductSort({ sortBy, setSortBy }: ProductSortProps) {
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value)
+  }
+
   return (
-    <div className={styles.sortControl}>
-      <label htmlFor="sortBy" className={styles.sortLabel}>
+    <div className={styles.sortContainer}>
+      <label htmlFor="sort-select" className={styles.sortLabel}>
         Ordenar por:
       </label>
       <select
-        id="sortBy"
-        className={`${styles.sortSelect} hoverable`}
+        id="sort-select"
         value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
+        onChange={handleSortChange}
+        className={`${styles.sortSelect} hoverable`}
+        aria-label="Ordenar productos"
       >
         <option value="relevance">Relevancia</option>
-        <option value="price_asc">Precio: Menor a Mayor</option>
-        <option value="price_desc">Precio: Mayor a Menor</option>
-        <option value="rating">Mejor Valorados</option>
-        <option value="newest">Más Recientes</option>
-        <option value="bestselling">Más Vendidos</option>
+        <option value="price_asc">Precio: de menor a mayor</option>
+        <option value="price_desc">Precio: de mayor a menor</option>
+        <option value="rating">Mejor valorados</option>
+        <option value="newest">Más recientes</option>
+        <option value="bestselling">Más vendidos</option>
       </select>
     </div>
   )

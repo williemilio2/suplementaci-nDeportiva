@@ -159,7 +159,9 @@
   align-items: center;
   justify-content: center;
 }
-
+.favCount{
+  background-color: #ff1919 !important;
+}
 .searchResults {
   position: absolute;
   top: 100%;
@@ -354,20 +356,140 @@
   background-color: #f0f0f0;
 }
 
-/* Responsive - mantener siempre el diseño de dos columnas */
+/* Add these responsive styles at the end of the file */
+
+/* Add these responsive styles at the end of the file */
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .logo img {
+    height: 3rem;
+  }
+
+  .searchContainer {
+    margin: 0 0.75rem;
+  }
+
+  .trustpilot {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 0.5rem;
+  }
+
+  .logo {
+    order: 1;
+    width: 50%;
+  }
+
+  .headerRight {
+    order: 2;
+    width: 50%;
+    justify-content: flex-end;
+  }
+
+  .searchContainer {
+    order: 3;
+    width: 100%;
+    margin: 0.5rem 0 0;
+  }
+
+  .searchInput {
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .searchButton {
+    padding: 0.6rem 0.75rem;
+  }
+
   .searchResults {
-    flex-direction: row !important; /* Forzar dirección de fila incluso en móviles */
+    max-height: 450px;
   }
 
   .popularTermsSection {
-    width: 160px; /* Reducir un poco el ancho en móviles */
-    min-width: 160px;
+    width: 140px;
+    min-width: 140px;
+    padding: 0.75rem;
   }
 
-  .popularTermButton {
-    padding: 0.4rem 0.5rem;
+  .popularTermsHeader h3 {
+    font-size: 0.9rem;
+  }
+
+  .searchResultImage {
+    width: 80px;
+    height: 80px;
+    margin-right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.4rem;
+  }
+
+  .logo img {
+    height: 2.5rem;
+  }
+
+  .searchResults {
+    flex-direction: column !important; /* Override the forced row direction for very small screens */
+    max-height: 80vh;
+  }
+
+  .popularTermsSection {
+    width: 100%;
+    min-width: 100%;
+    max-height: unset;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5rem;
+  }
+
+  .popularTermsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .productResultsSection {
+    width: 100%;
+  }
+
+  .searchResultImage {
+    width: 60px;
+    height: 60px;
+  }
+
+  .searchResultName {
     font-size: 0.8rem;
+  }
+
+  .searchResultBrand {
+    font-size: 0.7rem;
+  }
+
+  .searchResultPrice {
+    font-size: 0.85rem;
+  }
+
+  .cartIcon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo img {
+    height: 2.2rem;
   }
 
   .searchResultImage {
@@ -375,7 +497,14 @@
     height: 50px;
   }
 
-  .searchResultName {
-    font-size: 0.85rem;
+  .cartIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .cartCount {
+    width: 1.1rem;
+    height: 1.1rem;
+    font-size: 0.7rem;
   }
 }

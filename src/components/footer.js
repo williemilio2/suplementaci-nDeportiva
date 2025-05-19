@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/footer.module.css';
-import { Facebook, Instagram, Twitter, Youtube, CreditCard, Truck, Phone } from 'lucide-react';
+import { InstagramIcon,  CreditCard, Truck, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -41,12 +41,10 @@ export default function Footer() {
           <div className={styles.footerColumns}>
             {/* Columna 1: Sobre nosotros */}
             <div className={styles.footerColumn}>
-              <h3 className={styles.footerTitle}>SOBRE suplementacionDeportiva</h3>
+              <h3 className={styles.footerTitle}>SOBRE suplementaciondeportiva</h3>
               <ul className={`${styles.footerLinks} hoverable`}>
                 <li><Link href="/nosotros">Quiénes Somos</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
                 <li><Link href="/contacto">Contacto</Link></li>
-                <li><Link href="/trabaja-con-nosotros">Trabaja con Nosotros</Link></li>
                 <li><Link href="/afiliados">Programa de Afiliados</Link></li>
               </ul>
             </div>
@@ -58,7 +56,6 @@ export default function Footer() {
                 <li><Link href="/envios">Envíos y Entregas</Link></li>
                 <li><Link href="/devoluciones">Devoluciones</Link></li>
                 <li><Link href="/preguntas-frecuentes">Preguntas Frecuentes</Link></li>
-                <li><Link href="/metodos-pago">Métodos de Pago</Link></li>
                 <li><Link href="/politica-privacidad">Política de Privacidad</Link></li>
                 <li><Link href="/terminos-condiciones">Términos y Condiciones</Link></li>
               </ul>
@@ -68,12 +65,11 @@ export default function Footer() {
             <div className={styles.footerColumn}>
               <h3 className={styles.footerTitle}>CATEGORÍAS</h3>
               <ul className={`${styles.footerLinks} hoverable`}>
-                <li><Link href="/proteinas">Proteínas</Link></li>
-                <li><Link href="/aminoacidos">Aminoácidos</Link></li>
-                <li><Link href="/pre-entreno">Pre-entreno</Link></li>
-                <li><Link href="/creatina">Creatina</Link></li>
-                <li><Link href="/vitaminas">Vitaminas</Link></li>
-                <li><Link href="/control-peso">Control de Peso</Link></li>
+                <li><Link href="/especiales?t=proteinas">Proteínas</Link></li>
+                <li><Link href="/especiales?t=aminoacidos">Aminoácidos</Link></li>
+                <li><Link href="/especiales?t=pre-entreno">Pre-entreno</Link></li>
+                <li><Link href="/especiales?t=creatina">Creatina</Link></li>
+                <li><Link href="/especiales?t=vitaminas">Vitaminas</Link></li>
               </ul>
             </div>
 
@@ -86,17 +82,8 @@ export default function Footer() {
                 <button type="submit" className={`${styles.newsletterButton} hoverable`}>SUSCRIBIRSE</button>
               </form>
               <div className={styles.socialLinks}>
-                <a href="https://facebook.com" aria-label="Facebook" className='hoverable'>
-                  <Facebook size={20} />
-                </a>
                 <a href="https://instagram.com" aria-label="Instagram" className='hoverable'>
-                  <Instagram size={20} />
-                </a>
-                <a href="https://twitter.com" aria-label="Twitter" className='hoverable'>
-                  <Twitter size={20} />
-                </a>
-                <a href="https://youtube.com" aria-label="Youtube" className='hoverable'>
-                  <Youtube size={20} />
+                  <InstagramIcon size={20} />
                 </a>
               </div>
             </div>

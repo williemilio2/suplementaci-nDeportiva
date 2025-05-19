@@ -1,13 +1,17 @@
-'use client';
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ChevronDown } from "lucide-react";
-import styles from "../styles/Navigation.module.css";
+"use client"
+
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { ChevronDown, Menu, X, ChevronRight, Salad, BicepsFlexed, CircleFadingArrowUp, Cross, BadgeDollarSign  } from "lucide-react"
+import styles from "../styles/Navigation.module.css"
 
 export default function Navigation() {
-  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
-
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<number | null>(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const navItems = [
     {
@@ -16,254 +20,267 @@ export default function Navigation() {
       dropdownContent: [
         {
           title: "Ganar músculo",
+          icon: BicepsFlexed,
           links: [
-            { nameLink: "Proteina", linkUrl: "/suplementos/ganar-musculo/proteina" },
+            { nameLink: "Proteina", linkUrl: "/especiales?t=proteinas" },
             { nameLink: "Mass gainer", linkUrl: "/suplementos/ganar-musculo/mass-gainer" },
-            { nameLink: "Creatina", linkUrl: "/suplementos/ganar-musculo/creatina" }
-          ]
+            { nameLink: "Creatina", linkUrl: "/suplementos/ganar-musculo/creatina" },
+          ],
         },
         {
           title: "Mejorar salud",
+          icon: Salad,
           links: [
             { nameLink: "Vitaminas C", linkUrl: "/suplementos/mejorar-salud/vitaminas-c" },
             { nameLink: "Omega-3", linkUrl: "/suplementos/mejorar-salud/omega-3" },
-            { nameLink: "Multivitamínicos", linkUrl: "/suplementos/mejorar-salud/multivitaminicos" }
-          ]
+            { nameLink: "Multivitamínicos", linkUrl: "/suplementos/mejorar-salud/multivitaminicos" },
+          ],
         },
         {
           title: "Perder grasa",
+          icon: Cross,
           links: [
             { nameLink: "Quemadores de grasa", linkUrl: "/suplementos/perder-grasa/quemadores" },
             { nameLink: "L-carnitina", linkUrl: "/suplementos/perder-grasa/l-carnitina" },
-            { nameLink: "Té verde", linkUrl: "/suplementos/perder-grasa/te-verde" }
-          ]
+            { nameLink: "Té verde", linkUrl: "/suplementos/perder-grasa/te-verde" },
+          ],
         },
         {
           title: "Recuperación",
+          icon: CircleFadingArrowUp,
           links: [
             { nameLink: "Glutamina", linkUrl: "/suplementos/recuperacion/glutamina" },
             { nameLink: "BCAAs", linkUrl: "/suplementos/recuperacion/bcaas" },
-            { nameLink: "EAAs", linkUrl: "/suplementos/recuperacion/eaas" }
-          ]
+            { nameLink: "EAAs", linkUrl: "/suplementos/recuperacion/eaas" },
+          ],
         },
       ],
     },
     {
-      name: "Dietas",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Dietas para ganar masa muscular",
-          links: [
-            { nameLink: "Dieta alta en proteínas", linkUrl: "/dietas/ganar-masa-muscular/alta-en-proteinas" },
-            { nameLink: "Dieta para volumen", linkUrl: "/dietas/ganar-masa-muscular/para-volumen" }
-          ]
-        },
-        {
-          title: "Dietas para perder peso",
-          links: [
-            { nameLink: "Dieta cetogénica", linkUrl: "/dietas/perder-peso/cetogenica" },
-            { nameLink: "Dieta baja en carbohidratos", linkUrl: "/dietas/perder-peso/baja-en-carbohidratos" },
-            { nameLink: "Ayuno intermitente", linkUrl: "/dietas/perder-peso/ayuno-intermitente" }
-          ]
-        },
-        {
-          title: "Dietas vegetarianas y veganas",
-          links: [
-            { nameLink: "Dieta vegetariana", linkUrl: "/dietas/vegetarianas-veganas/vegetariana" },
-            { nameLink: "Dieta vegana", linkUrl: "/dietas/vegetarianas-veganas/vegana" },
-            { nameLink: "Suplementos para veganos", linkUrl: "/dietas/vegetarianas-veganas/suplementos" }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Accesorios",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Equipamiento de entrenamiento",
-          links: [
-            { nameLink: "Mancuernas", linkUrl: "/accesorios/equipamiento/mancuernas" },
-            { nameLink: "Barras y discos", linkUrl: "/accesorios/equipamiento/barras-discos" },
-            { nameLink: "Kettlebells", linkUrl: "/accesorios/equipamiento/kettlebells" }
-          ]
-        },
-        {
-          title: "Ropa deportiva",
-          links: [
-            { nameLink: "Camisetas", linkUrl: "/accesorios/ropa/camisetas" },
-            { nameLink: "Pantalones de yoga", linkUrl: "/accesorios/ropa/pantalones-yoga" },
-            { nameLink: "Zapatillas deportivas", linkUrl: "/accesorios/ropa/zapatillas" }
-          ]
-        },
-        {
-          title: "Suplementos para entrenamiento",
-          links: [
-            { nameLink: "Shakers", linkUrl: "/accesorios/suplementos/shakers" },
-            { nameLink: "Botellas de agua", linkUrl: "/accesorios/suplementos/botellas" },
-            { nameLink: "Accesorios para fitness", linkUrl: "/accesorios/suplementos/accesorios" }
-          ]
-        }
-      ]
-    },
-    {
       name: "Ofertas",
       hasDropdown: true,
+      //icon: HandCoins,
       dropdownContent: [
         {
           title: "Descuentos en suplementos",
+          icon: BadgeDollarSign,
           links: [
             { nameLink: "Descuento en proteínas", linkUrl: "/ofertas/descuento/proteinas" },
             { nameLink: "Descuento en creatinas", linkUrl: "/ofertas/descuento/creatinas" },
-            { nameLink: "Descuentos por volumen", linkUrl: "/ofertas/descuento/volumen" }
-          ]
+            { nameLink: "Descuentos por volumen", linkUrl: "/ofertas/descuento/volumen" },
+          ],
         },
-        {
-          title: "Ofertas en ropa deportiva",
-          links: [
-            { nameLink: "Descuento en camisetas", linkUrl: "/ofertas/ropa/camisetas" },
-            { nameLink: "Descuento en pantalones", linkUrl: "/ofertas/ropa/pantalones" },
-            { nameLink: "Descuento en zapatillas", linkUrl: "/ofertas/ropa/zapatillas" }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Marcas",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Nuestras marcas",
-          links: [
-            { nameLink: "HSN", linkUrl: "/marcas/hsn" },
-            { nameLink: "Optimum Nutrition", linkUrl: "/marcas/optimum-nutrition" },
-            { nameLink: "MyProtein", linkUrl: "/marcas/myprotein" }
-          ]
-        },
-        {
-          title: "Marcas destacadas",
-          links: [
-            { nameLink: "Scitec Nutrition", linkUrl: "/marcas/scitec" },
-            { nameLink: "BiotechUSA", linkUrl: "/marcas/biotech" },
-            { nameLink: "Prozis", linkUrl: "/marcas/prozis" }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Blog",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Consejos de entrenamiento",
-          links: [
-            { nameLink: "Rutinas de fuerza", linkUrl: "/blog/entrenamiento/rutinas-fuerza" },
-            { nameLink: "HIIT vs cardio", linkUrl: "/blog/entrenamiento/hiit-vs-cardio" },
-            { nameLink: "Errores comunes", linkUrl: "/blog/entrenamiento/errores-comunes" }
-          ]
-        },
-        {
-          title: "Nutrición y salud",
-          links: [
-            { nameLink: "Cómo leer etiquetas", linkUrl: "/blog/nutricion/leer-etiquetas" },
-            { nameLink: "Alimentos saludables", linkUrl: "/blog/nutricion/alimentos-saludables" },
-            { nameLink: "Suplementos esenciales", linkUrl: "/blog/nutricion/suplementos-esenciales" }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Nosotros",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Quiénes somos",
-          links: [
-            { nameLink: "Historia", linkUrl: "/nosotros/historia" },
-            { nameLink: "Equipo", linkUrl: "/nosotros/equipo" },
-            { nameLink: "Misión y visión", linkUrl: "/nosotros/mision-vision" }
-          ]
-        },
-        {
-          title: "Compromisos",
-          links: [
-            { nameLink: "Calidad y sostenibilidad", linkUrl: "/nosotros/calidad-sostenibilidad" },
-            { nameLink: "Opiniones de clientes", linkUrl: "/nosotros/opiniones" },
-            { nameLink: "Colaboraciones", linkUrl: "/nosotros/colaboraciones" }
-          ]
-        }
-      ]
+      ],
+    },    {
+      name: "Historial Pedidos",
+      hasDropdown: false,
+      linkUrl: "/pedidos",
     },
     {
       name: "CONTACTO",
-      hasDropdown: false
+      hasDropdown: false,
+      linkUrl: "/contacto",
     },
     {
       name: "TOP VENTAS",
       hasDropdown: false,
+      linkUrl: "/top-ventas",
+      highlight: true,
     },
     {
       name: "NOVEDADES",
       hasDropdown: false,
-    }
-  ];
-  
+      linkUrl: "/novedades",
+      highlight: true,
+    },
+  ]
+
   useEffect(() => {
     const handleScroll = () => {
-      setActiveDropdown(null);
-    };
+      setActiveDropdown(null)
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    const handleResize = () => {
+      setActiveDropdown(null)
+      setMobileMenuOpen(false)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleResize)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    // Disable body scroll when mobile menu is open
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
+
+  const handleDropdownToggle = (index: number) => {
+    if (activeDropdown === index) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(index)
+    }
+  }
+
+  const handleMobileSubmenuToggle = (index: number) => {
+    if (mobileSubmenuOpen === index) {
+      setMobileSubmenuOpen(null)
+    } else {
+      setMobileSubmenuOpen(index)
+    }
+  }
 
   return (
-    <nav className={styles.nav}>
-      <Image
-        src={'/logoLetras.png'}
-        width={110}
-        height={35}
-        alt={'logoLetras'}
-        className={styles.navBarImage}
-      />
-      <div className={styles.navContainer}>
-        {navItems.map((item, index) => (
-          <div
-            key={index}
-            className={styles.navItem}
-            onMouseEnter={() => item.hasDropdown && setActiveDropdown(index)}
-            onMouseLeave={() => item.hasDropdown && setActiveDropdown(null)}
+    <>
+      <nav className={styles.nav} ref={navRef}>
+        <div className={styles.navInner}>
+          <Link href="/" className={styles.logoContainer}>
+            <Image src="/logoLetras.png" width={110} height={35} alt="Logo" className={styles.navBarImage} />
+          </Link>
+
+          <button
+            className={styles.mobileMenuButton}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
-            <div className={`${styles.navLink} ${!item.hasDropdown ? `${styles.remarcado} hoverable` : ''}`}>
-              {item.name}
-              {item.hasDropdown && <ChevronDown size={16} className={styles.icon} style={activeDropdown === index ? { transition: 'transform 0.3s' } : {  transform: 'rotate(-90deg)', transition: 'transform 0.3s' }}/>}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          <div className={`${styles.navContainer} ${mobileMenuOpen ? styles.mobileMenuOpen : ""}`}>
+            <div className={styles.mobileMenuHeader}>
+              <Image src="/logoLetras.png" width={100} height={32} alt="Logo" />
+              <button
+                className={styles.mobileCloseButton}
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                <X size={24} />
+              </button>
             </div>
 
-            {item.hasDropdown && activeDropdown === index && (
-              <div className={styles.dropdown}>
-                {item.dropdownContent?.map((category, catIndex) => (
-                  <div key={catIndex} className={styles.dropdownCategory}>
-                    <h4 className={styles.dropdownTitle}>{category.title}</h4>
-                    <ul className={styles.dropdownList}>
-                      {category.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          <Link href={link.linkUrl} className={`${styles.dropdownLink} hoverable`}>
-                            {link.nameLink}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+            {navItems.map((item, index) => (
+              <div
+                key={index}
+                className={`${styles.navItemWrapper}`}
+                onMouseLeave={() => !mobileMenuOpen && setActiveDropdown(null)}
+              >
+                <div
+                  key={index}
+                  className={`${styles.navItem} ${activeDropdown === index ? styles.active : ""} ${item.highlight ? styles.highlighted : ""}`}
+                >
+                  {item.hasDropdown ? (
+                    <>
+                      <button
+                        className={styles.navLink}
+                        onClick={() => {
+                          if (mobileMenuOpen) {
+                            handleMobileSubmenuToggle(index)
+                          } else {
+                            handleDropdownToggle(index)
+                          }
+                        }}
+                        onMouseEnter={() => !mobileMenuOpen && item.hasDropdown && setActiveDropdown(index)}
+                        aria-expanded={activeDropdown === index}
+                        aria-haspopup="true"
+                      >
+                        {/*<item.icon size={18} className={styles.navIcon} />*/}
+                        {item.name}
+                        <ChevronDown
+                          size={16}
+                          className={`${styles.icon} ${activeDropdown === index || mobileSubmenuOpen === index ? styles.iconRotated : ""}`}
+                        />
+                      </button>
+
+                      {/* Desktop dropdown */}
+                      {!mobileMenuOpen && activeDropdown === index && (
+                        <div className={styles.dropdownBackdrop} onMouseLeave={() => setActiveDropdown(null)}>
+                          <div className={styles.dropdown} ref={dropdownRef}>
+                            <div className={styles.dropdownInner}>
+                              {item.dropdownContent?.map((category, catIndex) => (
+                                <div key={catIndex} className={styles.dropdownCategory}>
+                                  <div className={styles.titleWithIcon}>
+                                    <h4 className={styles.dropdownTitle}>{category.title}</h4>
+                                    {category.icon && (
+                                      <category.icon width={35} height={35} />
+                                    )}
+                                  </div>
+
+                                  <ul className={styles.dropdownList}>
+                                    {category.links.map((link, linkIndex) => (
+                                      <li key={linkIndex}>
+                                        <Link
+                                          href={link.linkUrl}
+                                          className={`${styles.dropdownLink} hoverable`}
+                                          onClick={() => setActiveDropdown(null)}
+                                        >
+                                          {link.nameLink}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                            ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Mobile submenu */}
+                      {mobileMenuOpen && mobileSubmenuOpen === index && (
+                        <div className={styles.mobileSubmenu}>
+                          {item.dropdownContent?.map((category, catIndex) => (
+                            <div key={catIndex} className={styles.mobileCategory}>
+                              <h4 className={styles.mobileCategoryTitle}>{category.title}</h4>
+                              <ul className={styles.mobileCategoryList}>
+                                {category.links.map((link, linkIndex) => (
+                                  <li key={linkIndex}>
+                                    <Link
+                                      href={link.linkUrl}
+                                      className={styles.mobileCategoryLink}
+                                      onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                      {link.nameLink}
+                                      <ChevronRight size={16} />
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={item.linkUrl || "#"}
+                      className={`${styles.navLink} ${styles.navLinkStandalone} hoverable`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
               </div>
-            )}
+            ))}
           </div>
-        ))}
-      </div>
-    </nav>
-  );
+        </div>
+      </nav>
+
+      {/* Overlay for mobile menu */}
+      {mobileMenuOpen && <div className={styles.mobileOverlay} onClick={() => setMobileMenuOpen(false)} />}
+    </>
+  )
 }

@@ -1,5 +1,5 @@
 .promoBanner {
-  background-color: #f0f0f0;
+  background-color: #ff5d0c;
   text-align: center;
   padding: 0.5rem;
   color: #333333;
@@ -7,10 +7,15 @@
 }
 
 .promoText {
-  font-size: 0.875rem;
+  font-size: 0.925rem;
+  color: white;
 }
 
 .highlight {
-  color: var(--color-accent);
   font-weight: bold;
+}
+@media (max-width: 600px) {
+  .promoText{
+     font-size: 0.705rem;
+  }
 }

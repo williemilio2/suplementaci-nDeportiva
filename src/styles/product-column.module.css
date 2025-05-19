@@ -303,7 +303,14 @@
 .actionButtonPrimary:hover {
   background-color: #e64d00;
 }
+.actionButtonFavorite {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
 
+.actionButtonFavorite:hover {
+  background-color: rgba(255, 69, 0, 0.2);
+}
 /* Responsive */
 @media (max-width: 768px) {
   .productContent {

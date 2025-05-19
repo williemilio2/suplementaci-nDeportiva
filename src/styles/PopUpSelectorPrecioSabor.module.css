@@ -1,0 +1,160 @@
+.popUpDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 400px;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.divImage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.divImage img {
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.selectorsButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.quantitySection {
+  margin-top: 8px;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px 8px;
+  width: fit-content;
+}
+
+.quantityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #333;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.quantityButton:hover {
+  background-color: #f3f4f6;
+}
+
+.quantityButton:disabled {
+  color: #d1d5db;
+}
+
+.quantityValue {
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.currentPrice {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff4500;
+}
+
+.originalPrice {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.botonAnadirDiv {
+  margin-top: 8px;
+}
+
+.addToCartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.addToCartButton:hover {
+  background-color: #e03e00;
+}
+
+.addToCartButton:disabled {
+  background-color: #d1d5db;
+}
+
+/* Estilos para los botones de sabor y tamaño (para compatibilidad con ProductOptions) */
+.flavorOptions,
+.sizeOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.flavorButton,
+.sizeButton {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background: none;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.flavorButtonActive,
+.sizeButtonActive {
+  background-color: #ff4500;
+  color: white;
+  border-color: #ff4500;
+}
+
+.flavorButtonDisabled,
+.sizeButtonDisabled {
+  opacity: 0.5;
+}
+
+.variantsSection {
+  margin-bottom: 12px;
+}
