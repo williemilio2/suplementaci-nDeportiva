@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Star, StarHalf } from "lucide-react"
-import styles from "../styles/opinionesclientes.module.css"
+import styles from "../styles/opinionesClientes.module.css"
 import Cookies from 'js-cookie'; // npm i js-cookie
 
 // Tipos para las opiniones
