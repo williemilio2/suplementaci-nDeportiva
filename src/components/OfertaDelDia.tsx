@@ -9,14 +9,20 @@ import type { Product } from "../types/product"
 
 export default function DailyOffer() {
   const [time, setTime] = useState({ h: "--", m: "--", s: "--" })
-  const [offsetFromUTC, setOffsetFromUTC] = useState(null)
+  const [offsetFromUTC, setOffsetFromUTC] = useState<number | null>(null)
   const [isClient, setIsClient] = useState(false);
   const [ofertasDelDia, setOfertasDelDia] = useState<Product[]>([])
   // Obtener la fecha actual en formato español
   const getCurrentDate = () => {
-    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" }
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
     return new Date().toLocaleDateString("es-ES", options)
   }
+
 
   useEffect(() => {
     const localOffset = new Date().getTimezoneOffset() * -60000 // offset local en ms
@@ -53,7 +59,7 @@ export default function DailyOffer() {
       const tomorrow = new Date(now)
       tomorrow.setHours(24, 0, 0, 0)
 
-      const diff = tomorrow - now
+      const diff = tomorrow.getTime() - now.getTime()
       const totalSecondsLeft = Math.floor(diff / 1000)
 
       const h = Math.floor(totalSecondsLeft / 3600)
