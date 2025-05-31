@@ -8,27 +8,9 @@ import { Minus, Plus, ShoppingCart } from "lucide-react"
 import styles from "../styles/PopUpSelectorPrecioSabor.module.css"
 import ProductOptions from "./product-options"
 import { sacarStock } from "../products/listaArchivos"
-
-interface Producto {
-  id: number // 'number' en lugar de 'string'
-  name: string // 'string' en lugar de 'strnig'
-  description: string // 'string' en lugar de 'strnig'
-  image: string // 'string
-  rating: number // 'number' en lugar de 'float'
-  reviews: number // 'number' está bien
-  badge?: string // 'string' en lugar de 'strnig'
-  marca: string // 'string' en lugar de 'strnig'
-  tipo: string // 'string' en lugar de 'strnig'
-  colesterol: string // 'string' en lugar de 'strnig'
-  superOfertas?: boolean // 'boolean' en lugar de 'bool'
-  slug: string // 'string' en lugar de 'strnig'
-  informacionAlergenos: string
-  infoIngredientes: string
-  modoDeUso: string
-  recomendacionesDeUso: string
-}
+import type { Product } from "../types/product"
 interface PopUpSelectorPrecioSaborProps {
-  producto: Producto
+  producto: Product
   onClose?: () => void // Añadimos esta prop para cerrars el popup
 }
 export default function PopUpSelectorPrecioSabor({ producto, onClose }: PopUpSelectorPrecioSaborProps) {
@@ -71,6 +53,7 @@ export default function PopUpSelectorPrecioSabor({ producto, onClose }: PopUpSel
       sabor: selectedFlavor,
       tamaño: selectedSize,
       cantidad: quantity,
+      tipo: producto.tipo,
     }
     type CarritoItem = {
       producto: string;

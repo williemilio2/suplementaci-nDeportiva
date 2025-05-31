@@ -1,29 +1,36 @@
 import ProductDetailClient from "./product-detail-client"
-import { allProducts }  from '../../../products/listaArchivos'
-//import { PageProps } from 'next';
-import { notFound } from 'next/navigation';  // Asumiendo que usas 'notFound'
+import { getAllProducts } from "../../../products/listaArchivos"
+import { notFound } from "next/navigation"
 
 // Define el tipo Props con el tipo correcto para params
 type Props = {
-  params: Promise<{ slug: string }>;
-};
+  params: { slug: string }
+}
 
 // Componente ProductoPage
 export default async function ProductoPage({ params }: Props) {
-  const { slug } = await params;  // Esperar a que 'params' se resuelva
+  const { slug } = params
+
+  // Cargar productos de forma asíncrona
+  const products = await getAllProducts()
 
   // Buscar el producto con el slug
-  const producto = allProducts.find((p) => p.slug === slug);
+  const producto = products.find((p) => p.slug === slug)
 
+  // Si no se encuentra el producto, mostrar la página 404
   if (!producto) {
-    notFound();
+    console.error(`Producto con slug "${slug}" no encontrado`)
+    notFound()
   }
 
-  return <ProductDetailClient producto={producto} />;
+  return <ProductDetailClient producto={producto} />
 }
 
+// Generar rutas estáticas para todos los productos
 export async function generateStaticParams() {
-  return allProducts.map((p) => ({
-    slug: p.slug,
-  }));
+  const products = await getAllProducts()
+
+  return products.map((p) => ({
+    slug: String(p.slug), // asegúrate de que es string
+  }))
 }

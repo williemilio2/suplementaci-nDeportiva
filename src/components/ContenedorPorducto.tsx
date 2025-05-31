@@ -1,53 +1,52 @@
-'use client'
-import { useState, useEffect } from 'react'
+"use client"
+import { useState, useEffect } from "react"
+import type React from "react"
+
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, ShoppingCart, X } from "lucide-react"
+import { Heart, ShoppingCart, X, Crown } from "lucide-react"
 import styles from "../styles/contenedorProducto.module.css"
 import columnStyles from "../styles/product-column.module.css"
 import PopUpSelectorPrecioSabor from "./PopUpSelectorPrecioSabor"
-import StockAutoSelector from './dineroDefault'
+import StockAutoSelector from "./dineroDefault"
+import { useElite } from "@/src/components/eliteContent"
+import type { Product } from "../types/product"
 
-interface Producto {
-  id: number;            // 'number' en lugar de 'string'
-  name: string;          // 'string' en lugar de 'strnig'
-  description: string;   // 'string' en lugar de 'strnig'
-  image: string;       // 'string
-  rating: number;        // 'number' en lugar de 'float'
-  reviews: number;       // 'number' está bien
-  badge?: string;         // 'string' en lugar de 'strnig'
-  marca: string;         // 'string' en lugar de 'strnig'
-  tipo: string;          // 'string' en lugar de 'strnig'
-  colesterol: string;    // 'string' en lugar de 'strnig'
-  superOfertas?: boolean; // 'boolean' en lugar de 'bool'
-  slug: string;          // 'string' en lugar de 'strnig'
-  informacionAlergenos: string;
-  infoIngredientes: string;
-  modoDeUso: string;
-  recomendacionesDeUso: string;
-  sabores: string;
-}
+
 interface OfferProductCardProps {
-  product: Producto
+  product: Product
   displayMode?: "grid" | "column"
 }
 
 export default function OfferProductCard({ product, displayMode = "grid" }: OfferProductCardProps) {
-  // Procesar imágenes múltiples si existen
   const images = product.image ? product.image.split("<<<") : ["/placeholder.svg?height=300&width=300"]
-  const [showPopup, setShowPopup] = useState(false) 
+  const [showPopup, setShowPopup] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
-  const [dinero, setDinero] = useState(0) 
+  const [dinero, setDinero] = useState(0)
   const [oferta, setOferta] = useState(0)
+  const [finalDiscount, setFinalDiscount] = useState(0)
 
-  // Procesar otros campos que pueden ser listas
+  // Usar el contexto Elite
+  const { isElite} = useElite()
+
   const sabores = product.sabores ? product.sabores.split("<<<") : []
 
-  // Función para cambiar la imagen mostrada
+  // Calcular descuento final cuando cambian las ofertas
+  useEffect(() => {
+    let totalDiscount = oferta
+
+    // Si es Elite y el producto tiene rebajasElite, combinar descuentos
+    if (isElite && product.rebajasElite !== undefined && product.rebajasElite > 0) {
+      totalDiscount = Math.min(oferta + product.rebajasElite, 90)
+    }
+
+    setFinalDiscount(totalDiscount)
+  }, [oferta, isElite, product.rebajasElite])
 
   const togglePopup = () => {
     setShowPopup(!showPopup)
-  } 
+  }
+
   useEffect(() => {
     const checkFavoriteStatus = () => {
       const favoritosString = localStorage.getItem("favoritos")
@@ -56,54 +55,59 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
     }
 
     checkFavoriteStatus()
-    
-    // Añadir un event listener para actualizar el estado si cambian los favoritos
     window.addEventListener("favoritesUpdated", checkFavoriteStatus)
-    
+
     return () => {
       window.removeEventListener("favoritesUpdated", checkFavoriteStatus)
     }
   }, [product.id])
-    const toggleFavorite = (e: React.MouseEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
 
-      const favoritosString = localStorage.getItem("favoritos")
-      const favoritos: string[] = favoritosString ? JSON.parse(favoritosString) : []
-      
-      let nuevosFavoritos: string[]
-      
-      if (isFavorite) {
-        // Quitar de favoritos
-        nuevosFavoritos = favoritos.filter(nombre => nombre !== product.name)
-      } else {
-        // Añadir a favoritos
-        nuevosFavoritos = [...favoritos, product.name]
-      }
-      
-      // Guardar en localStorage
-      localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos))
-      
-      // Actualizar estado
-      setIsFavorite(!isFavorite)
-      
-      // Disparar evento para que otros componentes puedan reaccionar
-      window.dispatchEvent(new Event("favoritesUpdated"))
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const favoritosString = localStorage.getItem("favoritos")
+    const favoritos: string[] = favoritosString ? JSON.parse(favoritosString) : []
+
+    let nuevosFavoritos: string[]
+
+    if (isFavorite) {
+      nuevosFavoritos = favoritos.filter((nombre) => nombre !== product.name)
+    } else {
+      nuevosFavoritos = [...favoritos, product.name]
+    }
+
+    localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos))
+    setIsFavorite(!isFavorite)
+    window.dispatchEvent(new Event("favoritesUpdated"))
   }
-  // Si el modo de visualización es columna, usar el estilo de columna
-  
+
+  // Determinar si aplicar estilos Elite
+  const hasEliteOffer = isElite && product.rebajasElite !== undefined && product.rebajasElite > 0
+  const cardClassName = hasEliteOffer
+    ? `${styles.productCard} ${styles.eliteProductCard}`
+    : `${styles.productCard} ${product.superOfertas ? styles.productCardGlow : ""}`
+
   if (displayMode === "column") {
     return (
       <>
-        <div className={`${styles.productCard} ${product.superOfertas ? styles.productCardGlow : ""}`}>
-          
-        <StockAutoSelector
+        <div className={cardClassName}>
+          <StockAutoSelector
             productId={product.id}
             onFound={({ price, offer }) => {
               setDinero(price)
               setOferta(offer)
             }}
           />
+
+          {/* Badge Elite */}
+          {hasEliteOffer && (
+            <div className={styles.eliteBadge}>
+              <Crown size={12} className={styles.eliteIcon} />
+              ELITE
+            </div>
+          )}
+
           <div className={columnStyles.productContent}>
             <div className={columnStyles.productImageContainer}>
               {product.badge && (
@@ -114,7 +118,7 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
                 </span>
               )}
 
-              <Link href={dinero == 0 ? '' : `/productos/${product.slug || product.id}`}>
+              <Link href={dinero == 0 ? "" : `/productos/${product.slug || product.id}`}>
                 <Image
                   src={images[0] || "/placeholder.svg"}
                   alt={product.name}
@@ -126,7 +130,10 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
             </div>
 
             <div className={columnStyles.productInfo}>
-              <Link href={dinero == 0 ? '' : `/productos/${product.slug || product.id}`} className={`${columnStyles.productName} hoverable`}>
+              <Link
+                href={dinero == 0 ? "" : `/productos/${product.slug || product.id}`}
+                className={`${columnStyles.productName} hoverable`}
+              >
                 {product.name}
               </Link>
 
@@ -168,21 +175,27 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
             <div className={columnStyles.productActions}>
               <div className={columnStyles.productPricing}>
                 <div className={columnStyles.priceContainer}>
-                  {oferta ? (
+                  {finalDiscount > 0 ? (
                     <>
-                      <span className={columnStyles.originalPrice}>{dinero == 0 ? '' : dinero}€</span>
-                      <span className={columnStyles.offerPrice}>{dinero == 0 ? 'Fuera stock' : `${(dinero - (dinero * oferta / 100)).toFixed(2)}€`}</span>
+                      <span className={columnStyles.originalPrice}>{dinero == 0 ? "" : dinero}€</span>
+                      <span className={columnStyles.offerPrice}>
+                        {dinero == 0 ? "Fuera stock" : `${(dinero - (dinero * finalDiscount) / 100).toFixed(2)}€`}
+                      </span>
                     </>
                   ) : (
-                    <span className={columnStyles.offerPrice}>{dinero == 0 ? 'Fuera stock' : `${dinero}€`}</span>
+                    <span className={columnStyles.offerPrice}>{dinero == 0 ? "Fuera stock" : `${dinero}€`}</span>
                   )}
                 </div>
-                {oferta > 0 && <span className={styles.discountBadge}>-{oferta}%</span>}
+                {finalDiscount > 0 && (
+                  <span className={hasEliteOffer ? styles.eliteDiscountBadge : styles.discountBadge}>
+                    -{finalDiscount}%{hasEliteOffer && <span className={styles.eliteDiscountText}>ELITE</span>}
+                  </span>
+                )}
               </div>
 
               <div className={columnStyles.actionButtons}>
-                <button 
-                  className={`${styles.actionButton} ${isFavorite ? styles.actionButtonFavorite : ''} hoverable`} 
+                <button
+                  className={`${styles.actionButton} ${isFavorite ? styles.actionButtonFavorite : ""} hoverable`}
                   aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
                   onClick={toggleFavorite}
                 >
@@ -196,14 +209,14 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
             </div>
           </div>
         </div>
-        
+
         {showPopup && (
           <div className={styles.popupOverlay}>
             <div className={styles.popupContainer}>
               <button className={`${styles.closeButton} hoverable`} onClick={togglePopup}>
                 <X size={30} />
               </button>
-              <PopUpSelectorPrecioSabor producto={product} onClose={togglePopup}/>
+              <PopUpSelectorPrecioSabor producto={product} onClose={togglePopup} />
             </div>
           </div>
         )}
@@ -215,21 +228,29 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
   return (
     <>
       <StockAutoSelector
-          productId={product.id}
-          onFound={({ price, offer }) => {
-            setDinero(price)
-            setOferta(offer)
-          }}
-        />
-      <div className={`${styles.productCard} ${product.superOfertas ? styles.productCardGlow : ""}`}>
+        productId={product.id}
+        onFound={({ price, offer }) => {
+          setDinero(price)
+          setOferta(offer)
+        }}
+      />
+      <div className={cardClassName}>
         {product.badge && (
           <span className={`${styles.productBadge} ${styles[`badge${product.badge.replace(/\s+/g, "")}`]}`}>
             {product.badge}
           </span>
         )}
 
+        {/* Badge Elite */}
+        {hasEliteOffer && (
+          <div className={styles.eliteBadge}>
+            <Crown size={12} className={styles.eliteIcon} />
+            ELITE
+          </div>
+        )}
+
         <div className={styles.productImageContainer}>
-          <Link href={dinero == 0 ? '' : `/productos/${product.slug || product.id}`}>
+          <Link href={dinero == 0 ? "" : `/productos/${product.slug || product.id}`}>
             <Image
               src={images[0] || "/placeholder.svg"}
               alt={product.name}
@@ -240,8 +261,8 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
           </Link>
 
           <div className={styles.productActions}>
-            <button 
-              className={`${styles.actionButton} ${isFavorite ? styles.actionButtonFavorite : ''} hoverable`} 
+            <button
+              className={`${styles.actionButton} ${isFavorite ? styles.actionButtonFavorite : ""} hoverable`}
               aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
               onClick={toggleFavorite}
             >
@@ -255,7 +276,10 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
         </div>
 
         <div className={styles.productInfo}>
-          <Link href={dinero == 0 ? '' : `/productos/${product.slug || product.id}`} className={`${styles.productName} hoverable`}>
+          <Link
+            href={dinero == 0 ? "" : `/productos/${product.slug || product.id}`}
+            className={`${styles.productName} hoverable`}
+          >
             {product.name}
           </Link>
           <p className={styles.productDescription}>{product.description}</p>
@@ -273,16 +297,22 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
 
           <div className={styles.productPricing}>
             <div className={styles.priceContainer}>
-              {oferta ? (
+              {finalDiscount > 0 ? (
                 <>
-                  <span className={styles.originalPrice}>{dinero == 0 ? '' : dinero}€</span>
-                  <span className={styles.offerPrice}>{dinero == 0 ? 'Fuera stock' : `${(dinero - (dinero * oferta / 100)).toFixed(2)}€`}</span>
+                  <span className={styles.originalPrice}>{dinero == 0 ? "" : dinero}€</span>
+                  <span className={styles.offerPrice}>
+                    {dinero == 0 ? "Fuera stock" : `${(dinero - (dinero * finalDiscount) / 100).toFixed(2)}€`}
+                  </span>
                 </>
               ) : (
-                <span className={styles.offerPrice}>{dinero == 0 ? 'Fuera stock' : `${dinero}€`}</span>
+                <span className={styles.offerPrice}>{dinero == 0 ? "Fuera stock" : `${dinero}€`}</span>
               )}
             </div>
-            {oferta > 0 && <span className={styles.discountBadge}>-{oferta}%</span>}
+            {finalDiscount > 0 && (
+              <span className={hasEliteOffer ? styles.eliteDiscountBadge : styles.discountBadge}>
+                -{finalDiscount}%{hasEliteOffer && <span className={styles.eliteDiscountText}>ELITE</span>}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -292,11 +322,10 @@ export default function OfferProductCard({ product, displayMode = "grid" }: Offe
             <button className={`${styles.closeButton} hoverable`} onClick={togglePopup}>
               <X size={30} />
             </button>
-            <PopUpSelectorPrecioSabor producto={product}  onClose={togglePopup}/>
+            <PopUpSelectorPrecioSabor producto={product} onClose={togglePopup} />
           </div>
         </div>
       )}
     </>
   )
-  
 }

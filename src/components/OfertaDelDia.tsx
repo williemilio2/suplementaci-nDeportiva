@@ -4,11 +4,14 @@ import Link from "next/link"
 import { Clock, ArrowRight } from "lucide-react"
 import styles from "../styles/ofertaDelDia.module.css"
 import OfferProductCard from "./ContenedorPorducto"
-import { especiales } from "../products/listaArchivos"
+import { ensureDataLoaded } from "../products/listaArchivos"
+import type { Product } from "../types/product"
 
 export default function DailyOffer() {
   const [time, setTime] = useState({ h: "--", m: "--", s: "--" })
   const [offsetFromUTC, setOffsetFromUTC] = useState(null)
+  const [isClient, setIsClient] = useState(false);
+  const [ofertasDelDia, setOfertasDelDia] = useState<Product[]>([])
   // Obtener la fecha actual en formato español
   const getCurrentDate = () => {
     const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" }
@@ -18,6 +21,28 @@ export default function DailyOffer() {
   useEffect(() => {
     const localOffset = new Date().getTimezoneOffset() * -60000 // offset local en ms
     setOffsetFromUTC(localOffset)
+    setIsClient(true);
+    const loadProducts = async () => {
+      try {
+        const { allProducts: products } = await ensureDataLoaded()
+        const validatedProducts = products.map((p) => ({
+          ...p,
+          description: p.description || "",
+          image: p.image || "",
+          tipo: p.tipo || "",
+        })) as Product[]
+        const ofertasDelDiaFiltradas = validatedProducts.filter(
+          (p) =>
+            p.superOfertas == 1
+        )
+        setOfertasDelDia(ofertasDelDiaFiltradas)
+      } catch (error) {
+        console.error("Error al cargar productos:", error)
+        setOfertasDelDia([])
+      }
+    }
+
+  loadProducts()
   }, [])
 
   useEffect(() => {
@@ -48,8 +73,7 @@ export default function DailyOffer() {
   }, [offsetFromUTC])
 
   // Obtener los productos de la oferta del día usando la función especiales
-  const ofertasDelDia = especiales("OfertaDelDia")
-
+  if (!isClient) return null;
   return (
     <section className={styles.dailyOfferSection}>
       <div className="container">

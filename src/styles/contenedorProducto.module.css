@@ -6,6 +6,7 @@
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
   max-width: 100%; /* Asegura que no se estire más de lo necesario */
+  margin: 5px;
 }
 
 .productCard:hover {
@@ -23,6 +24,7 @@
   font-weight: 600;
   z-index: 2;
   color: white;
+  background-color: #0984e3;
 }
 
 .badgeTOPVENTAS {
@@ -31,10 +33,6 @@
 
 .badgeNUEVO {
   background-color: #00b894;
-}
-
-.badgeEXCLUSIVO {
-  background-color: #0984e3;
 }
 
 .productImageContainer {
@@ -258,43 +256,6 @@
   box-shadow: 0 5px 15px rgba(255, 85, 0, 0.2);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .offerHeader {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .countdownContainer {
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .offerProducts {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  }
-  .productsGrid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
-  }
-}
-
-@media (max-width: 480px) {
-  .offerProducts {
-    grid-template-columns: 1fr;
-  }
-
-  .offerTitle {
-    font-size: 24px;
-  }
-
-  .timeValue {
-    font-size: 20px;
-    min-width: 30px;
-  }
-  .productsGrid {
-    grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
-  }
-}
 .productCardGlow {
   position: relative;
   overflow: hidden;
@@ -355,6 +316,7 @@
   border: none;
   z-index: 10001; /* Asegura que la X esté encima del contenido */
 }
+
 .actionButtonFavorite {
   background-color: rgba(255, 0, 0, 0.1);
   color: red;
@@ -370,5 +332,264 @@
   }
   to {
     transform: rotate(-360deg);
+  }
+}
+
+/* ===== ELITE PRODUCT STYLES ===== */
+.eliteProductCard {
+  position: relative;
+  background: linear-gradient(135deg, #fff5f2 0%, #ffffff 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  overflow: visible;
+}
+
+.eliteProductCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ff6b35, #ffd700, #ff1493, #8a2be2);
+  background-size: 400% 400%;
+  animation: eliteBorder 3s ease infinite;
+  z-index: -1;
+  margin: -2px;
+  border-radius: 12px;
+}
+
+@keyframes eliteBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.eliteProductCard:hover {
+  transform: translateY(-8px);
+}
+
+.eliteBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(45deg, #ff6b35, #ffd700);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: elitePulse 2s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.eliteIcon {
+  font-size: 12px;
+  animation: eliteIconSpin 3s linear infinite;
+}
+
+@keyframes elitePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+  }
+}
+
+@keyframes eliteIconSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.eliteDiscountBadge {
+  background: linear-gradient(45deg, #ff6b35, #ffd700, #ff1493);
+  background-size: 200% 200%;
+  animation: eliteDiscountGlow 2s ease infinite;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.eliteDiscountBadge::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  animation: eliteShimmer 2s linear infinite;
+}
+
+@keyframes eliteDiscountGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes eliteShimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.eliteDiscountText {
+  font-size: 10px;
+  margin-left: 4px;
+  opacity: 0.9;
+}
+
+/* Elite glow effect for product image */
+.eliteProductCard .productImage {
+  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
+  transition: all 0.5s ease;
+}
+
+.eliteProductCard:hover .productImage {
+  filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
+  transform: scale(1.08);
+}
+
+/* Elite action buttons */
+.eliteProductCard .actionButtonPrimary {
+  background: linear-gradient(45deg, #ff6b35, #ffd700);
+  background-size: 200% 200%;
+  animation: eliteButtonGlow 3s ease infinite;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.eliteProductCard .actionButtonPrimary:hover {
+  background: linear-gradient(45deg, #e55a2b, #e6c200);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+@keyframes eliteButtonGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Elite particles effect */
+.eliteProductCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px, 30px 30px, 40px 40px;
+  animation: eliteParticles 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.eliteProductCard:hover::after {
+  opacity: 1;
+}
+
+@keyframes eliteParticles {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .offerHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .countdownContainer {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .offerProducts {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+  }
+
+  .eliteBadge {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .eliteIcon {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .offerProducts {
+    grid-template-columns: 1fr;
+  }
+
+  .offerTitle {
+    font-size: 24px;
+  }
+
+  .timeValue {
+    font-size: 20px;
+    min-width: 30px;
+  }
+  .productsGrid {
+    grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+  }
+
+  .eliteBadge {
+    top: 10px;
+    right: 10px;
+    padding: 4px 6px;
+    font-size: 9px;
   }
 }

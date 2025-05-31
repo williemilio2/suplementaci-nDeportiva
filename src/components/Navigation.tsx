@@ -23,35 +23,33 @@ export default function Navigation() {
           icon: BicepsFlexed,
           links: [
             { nameLink: "Proteina", linkUrl: "/especiales?t=proteinas" },
-            { nameLink: "Mass gainer", linkUrl: "/suplementos/ganar-musculo/mass-gainer" },
-            { nameLink: "Creatina", linkUrl: "/suplementos/ganar-musculo/creatina" },
+            { nameLink: "Mass gainer", linkUrl: "/especiales?t=massGainer" },
+            { nameLink: "Creatina", linkUrl: "/especiales?t=Creatina" },
           ],
         },
         {
           title: "Mejorar salud",
           icon: Salad,
           links: [
-            { nameLink: "Vitaminas C", linkUrl: "/suplementos/mejorar-salud/vitaminas-c" },
-            { nameLink: "Omega-3", linkUrl: "/suplementos/mejorar-salud/omega-3" },
-            { nameLink: "Multivitamínicos", linkUrl: "/suplementos/mejorar-salud/multivitaminicos" },
+            { nameLink: "Vitaminas C", linkUrl: "/especiales?t=vitaminaC" },
+            { nameLink: "Omega-3", linkUrl: "/especiales?t=Omega-3" },
+            { nameLink: "Multivitamínicos", linkUrl: "/especiales?t=Multivitamínicos" },
           ],
         },
         {
           title: "Perder grasa",
           icon: Cross,
           links: [
-            { nameLink: "Quemadores de grasa", linkUrl: "/suplementos/perder-grasa/quemadores" },
-            { nameLink: "L-carnitina", linkUrl: "/suplementos/perder-grasa/l-carnitina" },
-            { nameLink: "Té verde", linkUrl: "/suplementos/perder-grasa/te-verde" },
+            { nameLink: "Quemadores de grasa", linkUrl: "/especiales?t=QuemadoresGrasa" },
           ],
         },
         {
           title: "Recuperación",
           icon: CircleFadingArrowUp,
           links: [
-            { nameLink: "Glutamina", linkUrl: "/suplementos/recuperacion/glutamina" },
-            { nameLink: "BCAAs", linkUrl: "/suplementos/recuperacion/bcaas" },
-            { nameLink: "EAAs", linkUrl: "/suplementos/recuperacion/eaas" },
+            { nameLink: "Glutamina", linkUrl: "/especiales?t=Glutamina" },
+            { nameLink: "BCAAs", linkUrl: "/especiales?t=BCAAs" },
+            { nameLink: "EAAs", linkUrl: "/especiales?t=EAAs" },
           ],
         },
       ],
@@ -71,7 +69,7 @@ export default function Navigation() {
           ],
         },
       ],
-    },    {
+    },{
       name: "Historial Pedidos",
       hasDropdown: false,
       linkUrl: "/pedidos",
@@ -84,13 +82,19 @@ export default function Navigation() {
     {
       name: "TOP VENTAS",
       hasDropdown: false,
-      linkUrl: "/top-ventas",
+      linkUrl: "/topVentas",
       highlight: true,
     },
     {
       name: "NOVEDADES",
       hasDropdown: false,
       linkUrl: "/novedades",
+      highlight: true,
+    },
+    {
+      name: "Club elite",
+      hasDropdown: false,
+      linkUrl: "/clubElite",
       highlight: true,
     },
   ]

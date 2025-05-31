@@ -1,7 +1,20 @@
+'use client'
 import styles from "../../styles/page.module.css"
 import CustomCursor from "@/src/components/customCursor"
+import { useState } from "react"
+
+function deleteCookie(name: string) {
+  document.cookie = name + '=; Max-Age=0; path=/;'
+}
 
 export default function PoliticaPrivacidadPage() {
+  const [cookieDeleted, setCookieDeleted] = useState(false);
+
+  const handleDeleteCookie = () => {
+    deleteCookie('token');
+    setCookieDeleted(true);
+  };
+
   return (
     <div className={styles.pageContainer}>
             <CustomCursor />
@@ -16,16 +29,16 @@ export default function PoliticaPrivacidadPage() {
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Responsable del Tratamiento</h2>
           <p>
-            <strong>Nombre de la empresa:</strong> Tu Tienda, S.L.
+            <strong>Nombre de la empresa:</strong> Suplementacion deportiva SL
             <br />
             <strong>Dirección:</strong> Calle Ejemplo, 123, 28001 Madrid
             <br />
             <strong>Email:</strong>{" "}
-            <a href="mailto:privacidad@tutienda.com" className={styles.contactLink}>
-              privacidad@tutienda.com
+            <a href="mailto:contacto@suplementaciondeportiva.es" className={styles.contactLink}>
+              contacto@suplementaciondeportiva.es
             </a>
             <br />
-            <strong>Teléfono:</strong> 900 000 000
+            <strong>Teléfono:</strong> 673 385 301
             <br />
             <strong>CIF:</strong> B12345678
           </p>
@@ -154,8 +167,8 @@ export default function PoliticaPrivacidadPage() {
           </ul>
           <p>
             Puedes ejercer estos derechos enviando un email a{" "}
-            <a href="mailto:privacidad@tutienda.com" className={styles.contactLink}>
-              privacidad@tutienda.com
+            <a href="mailto:contacto@suplementaciondeportiva.es" className={styles.contactLink}>
+              contacto@suplementaciondeportiva.es
             </a>
             o por correo postal a la dirección indicada anteriormente, adjuntando copia de tu DNI o documento
             equivalente.
@@ -187,7 +200,22 @@ export default function PoliticaPrivacidadPage() {
           </p>
           <p>Última actualización: 15 de mayo de 2023</p>
         </div>
-
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Eliminar Cookies</h2>
+          <p>Si deseas eliminar sus cookies, pulsa el botón siguiente:</p>
+          <button
+            className={styles.deleteCookieButton}
+            onClick={handleDeleteCookie}
+          >
+            Eliminar cookie
+          </button>
+          <p>Recuerda que una vez la elimines deberás volver a iniciar sesión si quieres volver a tener tu cuenta</p>
+          {cookieDeleted && (
+            <p style={{ color: 'green', marginTop: '0.5rem' }}>
+              La cookie ha sido eliminada.
+            </p>
+          )}
+        </div>
         <div className={styles.contactInfo}>
           <h3 className={styles.contactTitle}>Contacto sobre Privacidad</h3>
           <p className={styles.contactText}>
@@ -196,8 +224,8 @@ export default function PoliticaPrivacidadPage() {
           </p>
           <p className={styles.contactText}>
             Email:{" "}
-            <a href="mailto:dpo@tutienda.com" className={styles.contactLink}>
-              dpo@tutienda.com
+            <a href="mailto:contacto@suplementaciondeportiva.es" className={styles.contactLink}>
+              contacto@suplementaciondeportiva.es
             </a>
           </p>
         </div>

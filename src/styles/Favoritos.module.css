@@ -472,3 +472,30 @@
     max-width: 100%;
   }
 }
+.eliteDiscountBadge {
+  background: linear-gradient(45deg, #ff6b35, #ffd700, #ff1493);
+  background-size: 200% 200%;
+  animation: eliteDiscountGlow 2s ease infinite;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.eliteDiscountBadge::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  animation: eliteShimmer 2s linear infinite;
+}

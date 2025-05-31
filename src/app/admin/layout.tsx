@@ -10,7 +10,6 @@ import {
   LayoutDashboard,
   Package,
   ShoppingCart,
-  Users,
 } from "lucide-react"
 import styles from "./admin.module.css"
 import { Suspense } from "react"
@@ -29,7 +28,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Productos", href: "/admin/productosAdmin", icon: Package },
     { name: "Pedidos", href: "/admin/pedidos", icon: ShoppingCart },
-    { name: "Clientes", href: "/admin/clientes", icon: Users },
   ]
 
   return (
@@ -46,7 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
           <div className={styles.sidebarHeader}>
             <Link href="/admin" className={styles.sidebarLogo}>
-              <Image src="/logoLetras.png" width={130} height={42} alt="Logo" priority />
+              <Image src="/logoAlante.png" width={130} height={42} alt="Logo" priority />
             </Link>
           </div>
 

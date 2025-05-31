@@ -1,0 +1,387 @@
+.container {
+  margin: 40px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ff5500;
+  position: relative;
+}
+
+.titulo::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 80px;
+  height: 2px;
+  background-color: #ff5500;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px;
+  color: #666666;
+  font-style: italic;
+}
+
+.resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+@media (min-width: 768px) {
+  .resumen {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.promedio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.promedioNumero {
+  font-size: 48px;
+  font-weight: bold;
+  color: #333333;
+  line-height: 1;
+}
+
+.promedioEstrellas {
+  margin: 10px 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.promedioTotal {
+  font-size: 14px;
+  color: #666666;
+}
+
+.distribucion {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.distribucionFila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.distribucionFila:hover,
+.distribucionFilaActiva {
+  background-color: #f5f5f5;
+}
+
+.distribucionEstrellas {
+  width: 80px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.distribucionBarraContainer {
+  flex: 1;
+  height: 12px;
+  background-color: #eeeeee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.distribucionBarra {
+  height: 100%;
+  background-color: #ff5500;
+  border-radius: 6px;
+}
+
+.distribucionPorcentaje {
+  width: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: right;
+}
+
+.estrellas {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  margin-right: 2px;
+  align-items: center;
+}
+
+.starFilled {
+  color: #ff5500;
+}
+
+.starEmpty {
+  color: #dddddd;
+}
+
+.starMirror {
+  transform: scaleX(-1);
+}
+
+.acciones {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.botonEscribir,
+.botonFiltro {
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.botonEscribir {
+  background-color: #ff5500;
+  color: white;
+  border: none;
+}
+
+.botonEscribir:hover {
+  background-color: #e64a00;
+}
+
+.botonFiltro {
+  background-color: #f5f5f5;
+  color: #333333;
+  border: 1px solid #dddddd;
+}
+
+.botonFiltro:hover {
+  background-color: #eeeeee;
+}
+
+.formulario {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 1px solid #eeeeee;
+}
+
+.formulario h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333333;
+}
+
+.formularioGrupo {
+  margin-bottom: 15px;
+}
+
+.formularioGrupo label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555555;
+}
+
+.formularioEstrellasContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.formularioEstrellas {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.formularioEstrellaBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formularioEstrellaSeleccionada {
+  color: #ff5500;
+}
+
+.puntuacionSeleccionada {
+  font-size: 14px;
+  color: #ff5500;
+  font-weight: bold;
+}
+
+.formularioGrupo input,
+.formularioGrupo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.formularioGrupo textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formularioBotonEnviar {
+  background-color: #ff5500;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.formularioBotonEnviar:hover {
+  background-color: #e64a00;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.opinionItem {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.opinionItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.opinionCabecera {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.opinionUsuarioInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.opinionUsuario {
+  font-weight: bold;
+  color: #333333;
+}
+
+.opinionVerificado {
+  font-size: 12px;
+  background-color: #e6f7e6;
+  color: #2e7d32;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.opinionFecha {
+  font-size: 12px;
+  color: #999999;
+}
+
+.opinionEstrellas {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.opinionTitulo {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #333333;
+}
+
+.opinionComentario {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555555;
+  margin-bottom: 15px;
+}
+
+.opinionAcciones {
+  display: flex;
+  gap: 15px;
+}
+
+.opinionBotonUtil,
+.opinionBotonReportar {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.opinionBotonUtil {
+  background-color: #f5f5f5;
+  color: #333333;
+  border: 1px solid #dddddd;
+}
+
+.opinionBotonUtil:hover {
+  background-color: #eeeeee;
+}
+
+.opinionBotonReportar {
+  background-color: transparent;
+  color: #999999;
+  border: none;
+  text-decoration: underline;
+}
+
+.opinionBotonReportar:hover {
+  color: #666666;
+}
+
+.vacio {
+  text-align: center;
+  padding: 30px;
+  color: #666666;
+  font-style: italic;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}

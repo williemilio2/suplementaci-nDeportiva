@@ -59,19 +59,6 @@ export default function QuienesSomosPage() {
             miembro aporta su talento para que tu experiencia de compra sea excelente.
           </p>
         </div>
-
-        <div className={styles.contactInfo}>
-          <h3 className={styles.contactTitle}>¿Quieres formar parte de nuestra comunidad?</h3>
-          <p className={styles.contactText}>
-            Síguenos en redes sociales y suscríbete a nuestra newsletter para estar al día de nuestras novedades y ofertas.
-          </p>
-          <p className={styles.contactText}>
-            También puedes enviarnos tu CV a{" "}
-            <a href="mailto:contacto@suplementaciondeportiva.es" className={styles.contactLink}>
-              contacto@suplementaciondeportiva.es
-            </a>
-          </p>
-        </div>
       </div>
     </div>
   )

@@ -5,12 +5,10 @@ import type React from "react"
 import { useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { ChevronLeft, Upload, Plus, X, Save, Trash2, AlertCircle, Info, Check } from "lucide-react"
+import { ChevronLeft, Upload, Plus, X, Save, Trash2, AlertCircle, Info, Check } from 'lucide-react'
 import styles from "../../admin.module.css"
 
 export default function NewProductPage() {
-  const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [activeTab, setActiveTab] = useState("general")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -90,15 +88,6 @@ export default function NewProductPage() {
     setNutritionalInfo({
       ...nutritionalInfo,
       [name]: value,
-    })
-  }
-
-  // Manejar cambio en checkbox
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setProductData({
-      ...productData,
-      [name]: checked,
     })
   }
 
@@ -208,27 +197,81 @@ export default function NewProductPage() {
   }
 
   // Manejar envío del formulario
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (stockVariants.length === 0) {
+      alert("Debes añadir al menos una variante del producto")
+      setActiveTab("variants")
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulación de envío
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setShowSuccess(true)
+    // 1. INFORMACIÓN GENERAL
+    const informacionGeneral = {
+      ...productData,
+      usageRecommendations: productData.usageRecommendations.join('<<<'),
+      flavors: productData.flavors.join('<<<'),
+      specialCategories: productData.specialCategories.join('<<<'),
+      productImage: "", // no se usa, va aparte
+    }
 
-      // Redirigir después de mostrar el mensaje de éxito
-      setTimeout(() => {
-        router.push("/admin/products")
-      }, 2000)
-    }, 1500)
+    // 2. INFORMACIÓN NUTRICIONAL
+    const informacionNutricional = {
+      ...nutritionalInfo,
+    }
+
+    // 3. VARIANTES Y STOCK
+    const variantesYStock = stockVariants.map(variant => ({
+      sabor: variant.flavor,
+      tamano: variant.size,
+      cantidad: variant.quantity,
+      precio: variant.price,
+      oferta: variant.discount || 0,
+    }))
+
+    try {
+      const formData = new FormData()
+      formData.append("general", JSON.stringify(informacionGeneral))
+      formData.append("nutricional", JSON.stringify(informacionNutricional))
+      formData.append("stock", JSON.stringify(variantesYStock))
+
+      if (!productImage ) {
+        alert("Selecciona una imagen válida antes de enviar")
+        setIsSubmitting(false)
+        return
+      }
+
+      formData.append("image", productImage)
+
+      const res = await fetch("/api/meterDatosNuevoProducto", {
+        method: "POST",
+        body: formData,
+      })
+
+      const result = await res.json()
+
+      if (result.ok) {
+        setShowSuccess(true)
+        // Reset form or redirect as needed
+      } else {
+        alert("Error al guardar el producto")
+      }
+    } catch (error) {
+      console.error("Error al enviar datos:", error)
+      alert("Error al enviar los datos")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
 
   return (
     <div className={styles.newProductContainer}>
       <div className={styles.pageHeader}>
         <div className={styles.headerLeft}>
-          <Link href="/admin/products" className={styles.backButton}>
+          <Link href="/admin/productosAdmin" className={styles.backButton}>
             <ChevronLeft size={16} />
             Volver a productos
           </Link>
@@ -278,7 +321,7 @@ export default function NewProductPage() {
             className={`${styles.formTab} ${activeTab === "variants" ? styles.activeTab : ""}`}
             onClick={() => setActiveTab("variants")}
           >
-            Variantes y stock
+            Variantes y stock {stockVariants.length === 0 && <span style={{color: 'red'}}>*</span>}
           </button>
         </div>
 
@@ -322,25 +365,6 @@ export default function NewProductPage() {
 
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
-                      <label htmlFor="slug" className={styles.formLabel}>
-                        Slug <span className={styles.requiredField}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="slug"
-                        name="slug"
-                        value={productData.slug}
-                        onChange={handleInputChange}
-                        className={styles.formInput}
-                        placeholder="high-quality-mass-protein"
-                        required
-                      />
-                      <p className={styles.fieldHelp}>
-                        URL amigable para el producto (sin espacios ni caracteres especiales)
-                      </p>
-                    </div>
-
-                    <div className={styles.formGroup}>
                       <label htmlFor="badge" className={styles.formLabel}>
                         Insignia
                       </label>
@@ -354,9 +378,6 @@ export default function NewProductPage() {
                         placeholder="Ej: EXCLUSIVO, NUEVO, OFERTA"
                       />
                     </div>
-                  </div>
-
-                  <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label htmlFor="brand" className={styles.formLabel}>
                         Marca <span className={styles.requiredField}>*</span>
@@ -372,6 +393,10 @@ export default function NewProductPage() {
                         required
                       />
                     </div>
+                  </div>
+
+                  <div className={styles.formRow}>
+                    
 
                     <div className={styles.formGroup}>
                       <label htmlFor="type" className={styles.formLabel}>
@@ -388,9 +413,6 @@ export default function NewProductPage() {
                         required
                       />
                     </div>
-                  </div>
-
-                  <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label htmlFor="cholesterol" className={styles.formLabel}>
                         Colesterol
@@ -407,23 +429,6 @@ export default function NewProductPage() {
                         <option value="Medio">Medio</option>
                         <option value="Alto">Alto</option>
                       </select>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>Ofertas especiales</label>
-                      <div className={styles.checkboxContainer}>
-                        <input
-                          type="checkbox"
-                          id="superOffers"
-                          name="superOffers"
-                          checked={productData.superOffers}
-                          onChange={handleCheckboxChange}
-                          className={styles.checkbox}
-                        />
-                        <label htmlFor="superOffers" className={styles.checkboxLabel}>
-                          Incluir en super ofertas
-                        </label>
-                      </div>
                     </div>
                   </div>
 
@@ -938,7 +943,7 @@ export default function NewProductPage() {
                   <Info size={16} />
                   <span>
                     Añade las diferentes variantes del producto (combinaciones de sabor y tamaño) con su precio, stock y
-                    descuento.
+                    descuento. <strong>Debes añadir al menos una variante.</strong>
                   </span>
                 </div>
               </div>
@@ -966,6 +971,11 @@ export default function NewProductPage() {
                           </option>
                         ))}
                       </select>
+                      {productData.flavors.length === 0 && (
+                        <p className={styles.fieldHelp} style={{color: 'red'}}>
+                          Primero añade sabores en la pestaña `Información general`
+                        </p>
+                      )}
                     </div>
 
                     <div className={styles.formGroup}>

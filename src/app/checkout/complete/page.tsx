@@ -7,50 +7,97 @@ import Image from "next/image"
 import { CheckCircle, Package, Truck, Calendar, ChevronRight, Download, MapPin } from "lucide-react"
 import styles from "../checkout.module.css"
 import CustomCursor from "@/src/components/customCursor"
-
+import { useRouter } from "next/navigation"
+interface ProductoProcesado {
+  nombre: string
+  tipo: string
+  sabor: string
+  tamano: string
+  cantidad: number
+  dinero: number
+  finalDiscount: number
+}
+interface CompraData {
+  id: string
+  productosComprados: string
+  saborTamanoCantidadDinero: string
+  precioTotal: number
+  direccionFinal: string
+}
+//e
 export default function CompletePage() {
-  const [orderNumber, setOrderNumber] = useState("")
+  const router = useRouter()
+  const [compraData, setCompraData] = useState<CompraData | null>(null)
+  const [productosTransformados, setProductosTransformados] = useState<ProductoProcesado[]>([])
 
   useEffect(() => {
-    // Generar un número de pedido aleatorio
-    const randomOrderNumber = Math.floor(10000000 + Math.random() * 90000000).toString()
-    setOrderNumber(randomOrderNumber)
-  }, [])
+    const pedido = localStorage.getItem('pedido')
+    if (!pedido) return
 
-  // Datos de ejemplo del carrito
-  const cartItems = [
-    {
-      id: 1,
-      name: "Proteína Whey Gold Standard",
-      variant: "Chocolate - 2kg",
-      price: 59.99,
-      quantity: 1,
-      image: "/images/muscle-gain.jpg",
-    },
-    {
-      id: 2,
-      name: "Creatina Monohidrato",
-      variant: "Sin sabor - 500g",
-      price: 24.99,
-      quantity: 2,
-      image: "/images/supplement-deals.jpg",
-    },
-  ]
+    const datos = JSON.parse(pedido)
+  setCompraData(datos)
+    fetch('/api/meterDatosCompras', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          console.log('Compra insertada correctamente')
+          localStorage.removeItem('pedido')
+        } else {
+          console.error('Error en la API:', data)
+        }
+      })
+      .catch(err => {
+        console.error('Error al conectar con la API:', err)
+      })
+  }, [router])
+  useEffect(() => {
+    if (!compraData) return
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-  const shipping = 4.99
+    try {
+      // Procesar productos comprados: "Extreme PROTEIN COMPLEX&%&undefined<<<Pro MUSCLE BUILDER&%&undefined<<<"
+      const productosArray = compraData.productosComprados
+        .split('<<<')
+        .filter(Boolean)
+        .map(producto => {
+          const [nombre, tipo] = producto.split('&%&')
+          return { nombre: nombre.trim(), tipo: tipo === 'undefined' ? '' : tipo }
+        })
+
+      // Procesar detalles: "Caramelo;1kg;2;72.16;0//Pistacho;1kg;2;64.56;0//"
+      const detallesArray = compraData.saborTamanoCantidadDinero
+        .split('//')
+        .filter(Boolean)
+        .map(detalle => {
+          const [sabor, tamano, cantidad, dinero, finalDiscount] = detalle.split(';')
+          return {
+            sabor: sabor.trim(),
+            tamano: tamano.trim(),
+            cantidad: parseInt(cantidad),
+            dinero: parseFloat(dinero),
+            finalDiscount: parseFloat(finalDiscount)
+          }
+        })
+
+      // Combinar productos con sus detalles
+      const productosCompletos = productosArray.map((producto, index) => ({
+        ...producto,
+        ...detallesArray[index]
+      }))
+
+      console.log('Productos procesados:', productosCompletos)
+      setProductosTransformados(productosCompletos)
+    } catch (error) {
+      console.error('Error procesando productos:', error)
+    }
+  }, [compraData])
+
+  const subtotal = compraData?.precioTotal || 0
+  const shipping = subtotal >= 35 ? 0 : 3.99
   const total = subtotal + shipping
-
-  // Datos de ejemplo
-  const shippingAddress = {
-    name: "Casa",
-    recipient: "Juan Pérez",
-    street: "Calle Principal 123",
-    city: "Madrid",
-    postalCode: "28001",
-    country: "España",
-    phone: "+34 612 345 678",
-  }
 
   const estimatedDelivery = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toLocaleDateString("es-ES", {
     weekday: "long",
@@ -79,7 +126,7 @@ export default function CompletePage() {
           </p>
           <div className={styles.orderNumber}>
             <span>Número de pedido:</span>
-            <strong>{orderNumber}</strong>
+            <strong>{compraData?.id}</strong>
           </div>
         </div>
 
@@ -148,12 +195,11 @@ export default function CompletePage() {
                   <MapPin size={18} /> Dirección de envío
                 </h3>
                 <div className={styles.addressReview}>
-                  <p className={styles.recipientName}>{shippingAddress.recipient}</p>
-                  <p>{shippingAddress.street}</p>
-                  <p>
-                    {shippingAddress.postalCode}, {shippingAddress.city}, {shippingAddress.country}
-                  </p>
-                  <p>{shippingAddress.phone}</p>
+                     {compraData && (
+                        <>
+                          <p>{compraData.direccionFinal}</p>
+                        </>
+                      )}
                 </div>
               </div>
             </div>
@@ -172,24 +218,31 @@ export default function CompletePage() {
           <div className={styles.completeSidebar}>
             <div className={styles.orderSummary}>
               <h2 className={styles.summaryTitle}>Resumen del pedido</h2>
-
-              <div className={styles.cartItems}>
-                {cartItems.map((item) => (
-                  <div key={item.id} className={styles.cartItem}>
-                    <div className={styles.itemImage}>
-                      <Image src={item.image || "/placeholder.svg"} width={60} height={60} alt={item.name} />
-                    </div>
+                <div>
+                <div className={styles.cartItems}>
+                {productosTransformados.map((item, index) => (
+                  <div key={`${item.nombre}-${item.sabor}-${index}`} className={styles.cartItem}>
                     <div className={styles.itemDetails}>
-                      <h3 className={styles.itemName}>{item.name}</h3>
-                      <p className={styles.itemVariant}>{item.variant}</p>
+                      <h3 className={styles.itemName}>{item.nombre}</h3>
+                      {item.tipo && <p className={styles.itemType}>{item.tipo}</p>}
+                      <p className={styles.itemVariant}>{item.sabor}</p>
+                      <p className={styles.itemVariant}>{item.tamano}</p>
                       <div className={styles.itemPriceQty}>
-                        <span className={styles.itemPrice}>{item.price.toFixed(2)}€</span>
-                        <span className={styles.itemQuantity}>x{item.quantity}</span>
+                        <span className={styles.itemPrice}>
+                          {(item.dinero / item.cantidad).toFixed(2)}€
+                        </span>
+                        <span className={styles.cantidad}>x{item.cantidad}</span>
                       </div>
+                      {item.finalDiscount > 0 && (
+                        <div className={styles.discount}>
+                          Descuento: -{item.finalDiscount.toFixed(2)}€
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
 
               <div className={styles.summaryDetails}>
                 <div className={styles.summaryRow}>
@@ -210,7 +263,7 @@ export default function CompletePage() {
             <div className={styles.helpSection}>
               <h3>¿Necesitas ayuda?</h3>
               <p>Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.</p>
-              <Link href="/contact" className={styles.contactLink}>
+              <Link href="/contacto" className={styles.contactLink}>
                 Contactar con soporte
               </Link>
             </div>

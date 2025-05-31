@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+"use client"
+
+import { useEffect, useState, useRef } from "react"
 import styles from "../styles/ProductDetail.module.css"
 
 interface StockItem {
@@ -24,51 +26,67 @@ interface ProductOptionsProps {
 export default function ProductOptions({ stockItems, onFlavorSizeChange }: ProductOptionsProps) {
   const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null)
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+  const initialSelectionMade = useRef(false)
 
-  const saboresDisponibles = Array.from(new Set(stockItems?.map((item) => item.sabor)))
-  const tamanosDisponibles = Array.from(new Set(stockItems?.map((item) => item.tamano)))
-
+  // Detectar cuando el componente está montado en el cliente
   useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  // Extraer sabores y tamaños disponibles solo cuando el componente está montado
+  const saboresDisponibles = mounted ? Array.from(new Set(stockItems?.map((item) => item.sabor) || [])) : []
+
+  const tamanosDisponibles = mounted ? Array.from(new Set(stockItems?.map((item) => item.tamano) || [])) : []
+
+  // Notificar cambios de selección
+  useEffect(() => {
+    if (!mounted) return
+
     if (selectedFlavor !== null && selectedSize !== null) {
-      const producto = stockItems?.find(
-        (item) => item.sabor === selectedFlavor && item.tamano === selectedSize
-      );
-      const nuevoPrecioUnitario = producto?.precio ?? 0;
-      const cantidadProduct = producto?.cantidad ?? 0;
-      const ofertaProduct = producto?.oferta ?? 0;
+      const producto = stockItems?.find((item) => item.sabor === selectedFlavor && item.tamano === selectedSize)
+      const nuevoPrecioUnitario = producto?.precio ?? 0
+      const cantidadProduct = producto?.cantidad ?? 0
+      const ofertaProduct = producto?.oferta ?? 0
 
       if (onFlavorSizeChange) {
-        onFlavorSizeChange(
-          selectedFlavor,
-          selectedSize,
-          nuevoPrecioUnitario,
-          cantidadProduct,
-          ofertaProduct
-        );
+        onFlavorSizeChange(selectedFlavor, selectedSize, nuevoPrecioUnitario, cantidadProduct, ofertaProduct)
       }
     }
-  }, [selectedFlavor, selectedSize, stockItems, onFlavorSizeChange]);
+  }, [selectedFlavor, selectedSize, stockItems, onFlavorSizeChange, mounted])
 
+  // Selección inicial automática
   useEffect(() => {
-    if (!stockItems || stockItems.length === 0) return;
+    if (!mounted || !stockItems || stockItems.length === 0 || initialSelectionMade.current) return
 
-    // 1. Buscar primero con oferta y stock
-    const conOferta = stockItems.find(item => item.cantidad > 0 && item.oferta);
-    
-    if (conOferta && selectedFlavor === null && selectedSize === null) {
-      setSelectedFlavor(conOferta.sabor);
-      setSelectedSize(conOferta.tamano);
-      return;
-    }
+    // Usar un timeout para evitar problemas de hidratación
+    const timer = setTimeout(() => {
+      // 1. Buscar primero con oferta y stock
+      const conOferta = stockItems.find((item) => item.cantidad > 0 && item.oferta)
 
-    // 2. Si no hay con oferta, buscar cualquier variante con stock
-    const conStock = stockItems.find(item => item.cantidad > 0);
+      if (conOferta && selectedFlavor === null && selectedSize === null) {
+        setSelectedFlavor(conOferta.sabor)
+        setSelectedSize(conOferta.tamano)
+        initialSelectionMade.current = true
+        return
+      }
 
-    if (conStock && selectedFlavor === null && selectedSize === null) {
-      setSelectedFlavor(conStock.sabor);
-      setSelectedSize(conStock.tamano);
-    }
-  }, [stockItems, selectedFlavor, selectedSize]);
+      // 2. Si no hay con oferta, buscar cualquier variante con stock
+      const conStock = stockItems.find((item) => item.cantidad > 0)
+
+      if (conStock && selectedFlavor === null && selectedSize === null) {
+        setSelectedFlavor(conStock.sabor)
+        setSelectedSize(conStock.tamano)
+        initialSelectionMade.current = true
+      }
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [stockItems, selectedFlavor, selectedSize, mounted])
+
+  // No renderizar nada hasta que el componente esté montado
+  if (!mounted) return null
 
   return (
     <>

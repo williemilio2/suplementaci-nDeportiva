@@ -2,12 +2,13 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Eye, EyeOff, Mail, Lock, ArrowRight, } from "lucide-react"
 import styles from "../../../styles/Auth.module.css"
 import CustomCursor from "@/src/components/customCursor"
+import Cookies from 'js-cookie'; // npm i js-cookie
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -15,11 +16,53 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [mensajeError, setMensajeError] = useState('')
+  useEffect(() => {
+      const token = Cookies.get('token');
+      if (!token) return;
 
+      fetch('/api/verifyToken', {  // Crea esta API que valide el token y devuelva el nombre
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.resultado && data.nombre) {
+            window.location.href = '/'
+          }
+        })
+        .catch(console.error);
+    }, []);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ correo: email, contrasena: password, recuerda: rememberMe }),  // usa "correo"
+      });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(`Error: ${errorData.message || 'No se pudo iniciar sesión'}`);
+        setMensajeError('Datos no validos')
+        setIsLoading(false);
+        return;
+      }
+      setMensajeError('')
+      const data = await response.json(); 
+      console.log("Inicio de sesión exitoso:", data);
+      window.location.href = '/'
+      // Aquí redirigir o mostrar mensaje de éxito
+
+    } catch (error) {
+      console.error("Error en la petición:", error);
+      alert('Error al registrar');
+    } finally {
+      setIsLoading(false);
+    }
     // Simulación de login
     setTimeout(() => {
       setIsLoading(false)
@@ -91,6 +134,7 @@ export default function LoginPage() {
           </div>
 
           <div className={styles.rememberContainer}>
+            <p style={{color: 'red'}}>{mensajeError}</p>
             <label className={`${styles.checkboxContainer} hoverable`}>
               <input
                 type="checkbox"
@@ -117,7 +161,7 @@ export default function LoginPage() {
             )}
           </button>
         </form>
-
+    {/*
         <div className={styles.divider}>
           <span>O continúa con</span>
         </div>
@@ -145,7 +189,7 @@ export default function LoginPage() {
             <span>Google</span>
           </button>
         </div>
-
+*/}
         <div className={styles.authFooter}>
           <p>
             ¿No tienes una cuenta?{" "}

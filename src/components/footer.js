@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/footer.module.css';
-import { InstagramIcon,  CreditCard, Truck, Phone } from 'lucide-react';
+import { CreditCard, Truck, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -14,7 +14,7 @@ export default function Footer() {
               <Truck className={styles.serviceIcon} />
               <div className={styles.serviceText}>
                 <h4>Envío Gratis</h4>
-                <p>En pedidos superiores a 29.99€</p>
+                <p>En pedidos superiores a 34.99€</p>
               </div>
             </div>
             <div className={styles.serviceItem}>
@@ -82,9 +82,10 @@ export default function Footer() {
                 <button type="submit" className={`${styles.newsletterButton} hoverable`}>SUSCRIBIRSE</button>
               </form>
               <div className={styles.socialLinks}>
+                {/*
                 <a href="https://instagram.com" aria-label="Instagram" className='hoverable'>
                   <InstagramIcon size={20} />
-                </a>
+                </a>*/}
               </div>
             </div>
           </div>

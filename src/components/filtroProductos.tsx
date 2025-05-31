@@ -12,7 +12,7 @@ interface ProductFiltersProps {
   marcas: string[]
   selectedMarcas: string[]
   setSelectedMarcas: (marcas: string[]) => void
-  tipos: string[]
+  tipos: string[] // Ahora garantizamos que no hay undefined
   selectedTipos: string[]
   setSelectedTipos: (tipos: string[]) => void
   sabores: string[]
@@ -51,6 +51,8 @@ export default function ProductFilters({
   showFilters,
   setShowFilters,
 }: ProductFiltersProps) {
+  // Resto del componente...
+
   // Estados para los dropdowns
   const [showMarcasDropdown, setShowMarcasDropdown] = useState(false)
   const [showSaboresDropdown, setShowSaboresDropdown] = useState(false)

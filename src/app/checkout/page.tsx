@@ -1,52 +1,170 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { ChevronRight, CreditCard, ShoppingBag, Truck, Check, Lock } from "lucide-react"
+import { ChevronRight, Truck, Check, CreditCard, MapPin } from 'lucide-react'
 import styles from "./checkout.module.css"
 import CustomCursor from "@/src/components/customCursor"
+import Cookies from 'js-cookie'
+import { loadStripe } from '@stripe/stripe-js';
+import { useCompraStore } from '@/src/components/useCompraStore'
+//e
 
-export default function CheckoutPage() {
-  const router = useRouter()
+interface ProductoProcesado {
+  nombre: string
+  tipo: string
+  sabor: string
+  tamano: string
+  cantidad: number
+  dinero: number
+  finalDiscount: number
+}
+interface DatosBBDD {
+  nombres: string
+  precioTotal: number
+}
+export default function EnvioPage() {
+  const [direccion, setDireccionLocal] = useState({
+    calle: "",
+    ciudad: "",
+    codigoPostal: "",
+    pais: "España",
+    numero: "",
+    bloque: ""
+  })
   const [isLoading, setIsLoading] = useState(false)
+  const compraData = useCompraStore((state) => state.datosCompra)
+  const [selectedShipping, setSelectedShipping] = useState(1)
+  const [productosTransformados, setProductosTransformados] = useState<ProductoProcesado[]>([])
 
-  // Datos de ejemplo del carrito
-  const cartItems = [
+  const shippingOptions = [
     {
       id: 1,
-      name: "Proteína Whey Gold Standard",
-      variant: "Chocolate - 2kg",
-      price: 59.99,
-      quantity: 1,
-      image: "/cursor2.png",
-    },
-    {
-      id: 2,
-      name: "Creatina Monohidrato",
-      variant: "Sin sabor - 500g",
-      price: 24.99,
-      quantity: 2,
-      image: "/images/supplement-deals.jpg",
+      name: "Envío estándar",
+      price: 3.99,
+      description: "Entrega en 3-5 días laborables",
+      icon: <Truck size={20} />,
     },
   ]
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-  const shipping = 4.99
-  const total = subtotal + shipping
 
+  // Procesar productos cuando cambien los datos
+  useEffect(() => {
+    if (!compraData) return
+
+    try {
+      // Procesar productos comprados: "Extreme PROTEINd COMPLEX&%&undefined<<<Pro MUSCLE BUILDER&%&undefined<<<"
+      const productosArray = compraData.productosComprados
+        .split('<<<')
+        .filter(Boolean)
+        .map(producto => {
+          const [nombre, tipo] = producto.split('&%&')
+          return { nombre: nombre.trim(), tipo: tipo === 'undefined' ? '' : tipo }
+        })
+
+      // Procesar detalles: "Caramelo;1kg;2;72.16;0//Pistacho;1kg;2;64.56;0//"
+      const detallesArray = compraData.saborTamanoCantidadDinero
+        .split('//')
+        .filter(Boolean)
+        .map(detalle => {
+          const [sabor, tamano, cantidad, dinero, finalDiscount] = detalle.split(';')
+          return {
+            sabor: sabor.trim(),
+            tamano: tamano.trim(),
+            cantidad: parseInt(cantidad),
+            dinero: parseFloat(dinero),
+            finalDiscount: parseFloat(finalDiscount)
+          }
+        })
+
+      // Combinar productos con sus detalles
+      const productosCompletos = productosArray.map((producto, index) => ({
+        ...producto,
+        ...detallesArray[index]
+      }))
+
+      console.log('Productos procesados:', productosCompletos)
+      setProductosTransformados(productosCompletos)
+    } catch (error) {
+      console.error('Error procesando productos:', error)
+    }
+  }, [compraData])
+
+  const subtotal = compraData?.precioTotal || 0
+  const shipping = subtotal >= 35 ? 0 : 3.99
+  const total = subtotal + shipping
+  const meterDatosStripe = async (datosbbdd: DatosBBDD) => {
+    const productos = datosbbdd.nombres.split('<<<')
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: productos.map((item: string) => item.split('&%&')[0].trim()),
+        precioTotal: datosbbdd.precioTotal + shipping
+      }),
+    })
+
+    const session = await response.json()
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!)
+    stripe?.redirectToCheckout({ sessionId: session.id })
+  }
   const handleContinue = () => {
+    const token = Cookies.get('token')
+    if (!token) return alert("No hay token. Inicia sesión.")
+
+    if (
+      !direccion.calle ||
+      !direccion.ciudad ||
+      !direccion.codigoPostal ||
+      !direccion.numero
+    ) {
+      alert("Por favor, completa todos los campos de la dirección.")
+      return
+    }
+
     setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      router.push("/checkout/envio")
-    }, 800)
+
+    const direccionFinal = `${direccion.ciudad},${direccion.calle},${direccion.numero},${direccion.bloque},${direccion.codigoPostal}`
+    const compraData = useCompraStore.getState().datosCompra
+    if (!compraData) return
+    // Asegúrate de que estos campos existen en el store
+    const { productosComprados, precioTotal } = compraData
+
+    const pedidoCompleto = {
+      ...compraData,
+      direccionFinal,
+      precioTotal: precioTotal + shipping
+    }
+
+    // Guardar en localStorage
+    localStorage.setItem('pedido', JSON.stringify(pedidoCompleto))
+
+    // Crear el objeto para Stripe
+    const resultStripe = {
+      nombres: productosComprados,
+      precioTotal: precioTotal,
+    }
+
+    meterDatosStripe(resultStripe)
+  }
+
+  if (!compraData) {
+    return (
+      <div className={styles.checkoutContainer}>
+        <CustomCursor />
+        <div className={styles.loadingPayment}>
+          <div className={styles.spinner}></div>
+          <p>Cargando datos de la compra...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className={styles.checkoutContainer}>
-        <CustomCursor />
+      <CustomCursor />
+      
       <div className={styles.checkoutHeader}>
         <Link href="/" className={styles.logoContainer}>
           <Image src="/logoLetras.png" width={130} height={42} alt="Logo" priority />
@@ -56,13 +174,6 @@ export default function CheckoutPage() {
       <div className={styles.checkoutProgress}>
         <div className={`${styles.progressStep} ${styles.active}`}>
           <div className={styles.stepIcon}>
-            <CreditCard size={18} />
-          </div>
-          <span className={styles.stepText}>Pago</span>
-        </div>
-        <div className={styles.progressLine}></div>
-        <div className={styles.progressStep}>
-          <div className={styles.stepIcon}>
             <Truck size={18} />
           </div>
           <span className={styles.stepText}>Envío</span>
@@ -70,91 +181,158 @@ export default function CheckoutPage() {
         <div className={styles.progressLine}></div>
         <div className={styles.progressStep}>
           <div className={styles.stepIcon}>
+            <CreditCard size={18} />
+          </div>
+          <span className={styles.stepText}>Pago</span>
+        </div>
+        <div className={styles.progressLine}></div>
+        <div className={styles.progressStep}>
+          <div className={styles.stepIcon}>
             <Check size={18} />
           </div>
-          <span className={styles.stepText}>Confirmación</span>
+          <span className={styles.stepText}>Final</span>
         </div>
       </div>
 
       <div className={styles.checkoutContent}>
         <div className={styles.checkoutMain}>
           <div className={styles.sectionTitle}>
-            <h1>Información de pago</h1>
-            <p>Completa los datos de tu tarjeta para procesar el pago</p>
+            <h1>Dirección de envío</h1>
+            <p>Completa los datos de entrega para tu pedido</p>
           </div>
 
-          <div className={styles.paymentMethods}>
-            <div className={`${styles.paymentMethod} ${styles.active}`}>
-              <div className={styles.methodRadio}>
-                <input type="radio" id="card" name="paymentMethod" checked readOnly />
-                <label htmlFor="card"></label>
-              </div>
-              <div className={styles.methodContent}>
-                <div className={styles.methodTitle}>Tarjeta de crédito/débito</div>
-                <div className={styles.cardIcons}>
-                  <Image src="/placeholder.svg?height=24&width=38" width={38} height={24} alt="Visa" />
-                  <Image src="/placeholder.svg?height=24&width=38" width={38} height={24} alt="Mastercard" />
-                  <Image src="/placeholder.svg?height=24&width=38" width={38} height={24} alt="Amex" />
-                </div>
-              </div>
-            </div>
+          <div className={styles.shippingSection}>
+            <h2 className={styles.subsectionTitle}>
+              <Truck size={18} />
+              Método de envío
+            </h2>
 
-            <div className={styles.paymentMethod}>
-              <div className={styles.methodRadio}>
-                <input type="radio" id="paypal" name="paymentMethod" />
-                <label htmlFor="paypal"></label>
-              </div>
-              <div className={styles.methodContent}>
-                <div className={styles.methodTitle}>PayPal</div>
-                <div className={styles.methodDescription}>Paga rápido y seguro con PayPal</div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.cardForm}>
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label htmlFor="cardName">Nombre en la tarjeta</label>
-                <input
-                  type="text"
-                  id="cardName"
-                  placeholder="Nombre como aparece en la tarjeta"
-                  className={styles.formInput}
-                />
-              </div>
-            </div>
-
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label htmlFor="cardNumber">Número de tarjeta</label>
-                <div className={styles.cardNumberInput}>
-                  <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" className={styles.formInput} />
-                  <div className={styles.cardBrand}>
-                    <Image src="/placeholder.svg?height=24&width=38" width={38} height={24} alt="Card brand" />
+            <div className={styles.shippingOptions}>
+              {shippingOptions.map((option) => (
+                <div
+                  key={option.id}
+                  className={`${styles.shippingOption} ${selectedShipping === option.id ? styles.selectedShipping : ""}`}
+                  onClick={() => setSelectedShipping(option.id)}
+                >
+                  <div className={styles.shippingRadio}>
+                    <input
+                      type="radio"
+                      id={`shipping-${option.id}`}
+                      name="selectedShipping"
+                      checked={selectedShipping === option.id}
+                      onChange={() => setSelectedShipping(option.id)}
+                    />
+                    <label htmlFor={`shipping-${option.id}`}></label>
+                  </div>
+                  <div className={styles.shippingContent}>
+                    <div className={styles.shippingIcon}>{option.icon}</div>
+                    <div className={styles.shippingDetails}>
+                      <h3 className={styles.shippingName}>{option.name}</h3>
+                      <p className={styles.shippingDescription}>{option.description}</p>
+                    </div>
+                    <div className={styles.shippingPrice}>
+                      {subtotal >= 35 ? (
+                        <span className={styles.freeShipping}>Gratis</span>
+                      ) : (
+                        `${option.price.toFixed(2)}€`
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
+          </div>
 
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label htmlFor="cardExpiry">Fecha de expiración</label>
-                <input type="text" id="cardExpiry" placeholder="MM/AA" className={styles.formInput} />
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="cardCvc">Código de seguridad</label>
-                <input type="text" id="cardCvc" placeholder="CVC" className={styles.formInput} />
-              </div>
-            </div>
+          <div className={styles.addressSection}>
+            <h2 className={styles.subsectionTitle}>
+              <MapPin size={18} />
+              Dirección de entrega
+            </h2>
 
-            <div className={styles.securePayment}>
-              <Lock size={14} />
-              <span>Pago 100% seguro. Tus datos están protegidos.</span>
+            <div className={styles.addressForm}>
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="calle">Calle *</label>
+                  <input
+                    type="text"
+                    id="calle"
+                    placeholder="Nombre de la calle"
+                    value={direccion.calle}
+                    onChange={(e) => setDireccionLocal({ ...direccion, calle: e.target.value })}
+                    className={styles.formInput}
+                    required
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="numero">Número *</label>
+                  <input
+                    type="text"
+                    id="numero"
+                    placeholder="Nº"
+                    value={direccion.numero}
+                    onChange={(e) => setDireccionLocal({ ...direccion, numero: e.target.value })}
+                    className={styles.formInput}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="bloque">Bloque/Portal</label>
+                  <input
+                    type="text"
+                    id="bloque"
+                    placeholder="2A (opcional)"
+                    value={direccion.bloque}
+                    onChange={(e) => setDireccionLocal({ ...direccion, bloque: e.target.value })}
+                    className={styles.formInput}
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="codigoPostal">Código Postal *</label>
+                  <input
+                    type="text"
+                    id="codigoPostal"
+                    placeholder="12345"
+                    maxLength={6}
+                    value={direccion.codigoPostal}
+                    onChange={(e) => setDireccionLocal({ ...direccion, codigoPostal: e.target.value })}
+                    className={styles.formInput}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="ciudad">Ciudad *</label>
+                  <input
+                    type="text"
+                    id="ciudad"
+                    placeholder="Tu ciudad"
+                    value={direccion.ciudad}
+                    onChange={(e) => setDireccionLocal({ ...direccion, ciudad: e.target.value })}
+                    className={styles.formInput}
+                    required
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="pais">País</label>
+                  <input
+                    type="text"
+                    id="pais"
+                    value={direccion.pais}
+                    className={styles.formInput}
+                    disabled
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
           <div className={styles.formActions}>
-            <Link href="/cart" className={styles.backButton}>
+            <Link href="/carrito" className={styles.backButton}>
               Volver al carrito
             </Link>
             <button
@@ -166,7 +344,7 @@ export default function CheckoutPage() {
                 <span className={styles.spinner}></span>
               ) : (
                 <>
-                  Continuar <ChevronRight size={18} />
+                  Continuar al pago <ChevronRight size={18} />
                 </>
               )}
             </button>
@@ -178,18 +356,24 @@ export default function CheckoutPage() {
             <h2 className={styles.summaryTitle}>Resumen del pedido</h2>
 
             <div className={styles.cartItems}>
-              {cartItems.map((item) => (
-                <div key={item.id} className={styles.cartItem}>
-                  <div className={styles.itemImage}>
-                    <Image src={item.image || "/placeholder.svg"} width={60} height={60} alt={item.name} />
-                  </div>
+              {productosTransformados.map((item, index) => (
+                <div key={`${item.nombre}-${item.sabor}-${index}`} className={styles.cartItem}>
                   <div className={styles.itemDetails}>
-                    <h3 className={styles.itemName}>{item.name}</h3>
-                    <p className={styles.itemVariant}>{item.variant}</p>
+                    <h3 className={styles.itemName}>{item.nombre}</h3>
+                    {item.tipo && <p className={styles.itemType}>{item.tipo}</p>}
+                    <p className={styles.itemVariant}>{item.sabor}</p>
+                    <p className={styles.itemVariant}>{item.tamano}</p>
                     <div className={styles.itemPriceQty}>
-                      <span className={styles.itemPrice}>{item.price.toFixed(2)}€</span>
-                      <span className={styles.itemQuantity}>x{item.quantity}</span>
+                      <span className={styles.itemPrice}>
+                        {(item.dinero / item.cantidad).toFixed(2)}€
+                      </span>
+                      <span className={styles.cantidad}>x{item.cantidad}</span>
                     </div>
+                    {item.finalDiscount > 0 && (
+                      <div className={styles.discount}>
+                        Descuento: -{item.finalDiscount.toFixed(2)}€
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -202,22 +386,35 @@ export default function CheckoutPage() {
               </div>
               <div className={styles.summaryRow}>
                 <span>Envío</span>
-                <span>{shipping.toFixed(2)}€</span>
+                {shipping === 0 ? (
+                  <span className={styles.freeShipping}>Gratis</span>
+                ) : (
+                  <span>{shipping.toFixed(2)}€</span>
+                )}
               </div>
               <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
                 <span>Total</span>
                 <span>{total.toFixed(2)}€</span>
               </div>
             </div>
-          </div>
 
-          <div className={styles.guaranteeBox}>
-            <div className={styles.guaranteeIcon}>
-              <ShoppingBag size={24} />
+            {subtotal >= 35 && (
+              <div className={styles.freeShippingBanner}>
+                🎉 ¡Envío gratis! Has superado los 35€
+              </div>
+            )}
+          </div>
+              
+          <div className={styles.deliveryInfo}>
+            <div className={styles.deliveryIcon}>
+              <Truck size={24} />
             </div>
-            <div className={styles.guaranteeContent}>
-              <h3>Garantía de satisfacción</h3>
-              <p>Si no estás satisfecho con tu compra, tienes 30 días para devolverla.</p>
+            <div className={styles.deliveryContent}>
+              <h3>Información de entrega</h3>
+              <p>Recibirás tu pedido en 3-5 días laborables.</p>
+              <p className={styles.deliveryNote}>
+                Te enviaremos un email con el seguimiento del envío.
+              </p>
             </div>
           </div>
         </div>

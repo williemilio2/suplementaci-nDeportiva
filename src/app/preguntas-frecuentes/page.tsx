@@ -164,8 +164,8 @@ export default function PreguntasFrecuentesPage() {
           </p>
           <p className={styles.contactText}>
             Teléfono:{" "}
-            <a href="tel:+34900000000" className={styles.contactLink}>
-              900 000 000
+            <a href="tel:+34673385301" className={styles.contactLink}>
+              673 385 301
             </a>{" "}
             (Lunes a Viernes, 9:00 - 18:00)
           </p>

@@ -1,5 +1,6 @@
 import './globals.css';
 import LayoutWrapper from '../components/layoutWrapper'; // pon este archivo junto a layout.tsx
+import { EliteProvider } from "@/src/components/eliteContent"
 
 export const metadata = {
   title: 'Suplementos deportivos',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </head>
       <body suppressHydrationWarning>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <LayoutWrapper>
+          <EliteProvider>{children}</EliteProvider>
+        </LayoutWrapper>
       </body>
     </html>
   );

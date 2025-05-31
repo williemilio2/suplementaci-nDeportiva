@@ -1,185 +1,264 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import {
-  Users,
-  ShoppingBag,
-  DollarSign,
-  Package,
-  ArrowUpRight,
-  ArrowDownRight,
-  MoreHorizontal,
-  ChevronRight,
-} from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { Users, ShoppingBag, DollarSign, Package } from 'lucide-react'
 import styles from "./admin.module.css"
 import { LineChart, BarChart } from "./UI/estadisticas"
+import { ensureDataLoaded } from "@/src/products/listaArchivos"
+import { parse, format, isAfter, isSameDay, subDays, startOfDay } from "date-fns"
+
+interface Ventas {
+  id: number
+  correoUsuarioCompra: string
+  productosComprados: string
+  fechaCompleta: string
+  precioTotal: number
+}
 
 export default function AdminDashboard() {
   const [timeRange, setTimeRange] = useState("7d")
+  const [allVentas, setAllVentas] = useState<Ventas[]>([])
+  const [ventasTotales, setVentasTotales] = useState(0)
+  const [clientes, setClientes] = useState(0)
+  const [productosVendidos, setProductosVendidos] = useState(0)
 
-  // Datos de ejemplo para las tarjetas
+  useEffect(() => {
+    const loadOrders = async () => {
+      try {
+        const { compras: comprasAdmin, clientes: clientesAdmin } = await ensureDataLoaded()
+        console.log("Clientes:", clientesAdmin)
+        console.log("Compras:", comprasAdmin)
+
+        // Validación ligera por si algún campo falta o viene mal
+        const validatedOrders: Ventas[] = (comprasAdmin as Partial<Ventas>[]).map((p) => ({
+          id: p.id ?? 0,
+          correoUsuarioCompra: p.correoUsuarioCompra ?? "",
+          productosComprados: p.productosComprados ?? "",
+          fechaCompleta: p.fechaCompleta ?? "",
+          precioTotal: Number(p.precioTotal) || 0,
+        }))
+
+        setAllVentas(validatedOrders)
+        setClientes(clientesAdmin)
+      } catch (error) {
+        console.error("Error al cargar pedidos:", error)
+        setAllVentas([])
+      }
+    }
+
+    loadOrders()
+  }, [])
+
+  // Filtra las ventas según el rango de tiempo seleccionado
+  const filteredVentas = useMemo(() => {
+    const now = new Date()
+    let startDate = new Date(0)
+
+    if (timeRange === "today") {
+      startDate = startOfDay(now)
+    } else if (timeRange === "7d") {
+      startDate = subDays(now, 6) // Últimos 7 días incluyendo hoy
+    } else if (timeRange === "30d") {
+      startDate = subDays(now, 29) // Últimos 30 días incluyendo hoy
+    } else if (timeRange === "90d") {
+      startDate = subDays(now, 89) // Últimos 90 días incluyendo hoy
+    } else if (timeRange === "total") {
+      // Para "total", devolver todas las ventas sin filtrar
+      return allVentas
+    }
+
+    return allVentas.filter((venta) => {
+      try {
+        const ventaDate = parse(venta.fechaCompleta, "dd/MM/yyyy", new Date())
+
+        if (timeRange === "today") {
+          return isSameDay(ventaDate, now)
+        } else {
+          return isAfter(ventaDate, startDate) || isSameDay(ventaDate, startDate)
+        }
+      } catch (error) {
+        console.error("Error parsing date:", venta.fechaCompleta, error)
+        return false
+      }
+    })
+  }, [allVentas, timeRange])
+
+  // Actualiza totales y productos vendidos con base en las ventas filtradas
+  useEffect(() => {
+    let suma = 0
+    let totalProductosVendidos = 0
+
+    for (const venta of filteredVentas) {
+      suma += venta.precioTotal
+
+      // Contar productos: cada producto está separado por <<<
+      if (venta.productosComprados && venta.productosComprados.trim()) {
+        const productos = venta.productosComprados.split("<<<").filter((p) => p.trim())
+        totalProductosVendidos += productos.length
+      }
+    }
+
+    setProductosVendidos(totalProductosVendidos)
+    setVentasTotales(suma)
+  }, [filteredVentas])
+
+  // Tarjetas de resumen
   const cards = [
     {
       title: "Ventas totales",
-      value: "€24,532.95",
-      change: "+12.5%",
-      trend: "up",
+      value: `€${ventasTotales.toFixed(2)}`,
       icon: DollarSign,
       color: "blue",
     },
     {
       title: "Pedidos",
-      value: "356",
-      change: "+8.2%",
-      trend: "up",
+      value: filteredVentas.length,
       icon: ShoppingBag,
       color: "green",
     },
     {
       title: "Clientes",
-      value: "2,845",
-      change: "+5.1%",
-      trend: "up",
+      value: clientes,
       icon: Users,
       color: "purple",
     },
     {
       title: "Productos vendidos",
-      value: "1,294",
-      change: "-2.3%",
-      trend: "down",
+      value: productosVendidos,
       icon: Package,
       color: "orange",
     },
   ]
 
-  // Datos de ejemplo para el gráfico de ventas
-  const salesData = {
-    labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+  // Datos para el gráfico de ventas por día
+const salesData = useMemo(() => {
+  const dailySales: Record<string, number> = {}
+  const dailyCounts: Record<string, number> = {}
+
+  for (const venta of filteredVentas) {
+    try {
+      const fecha = parse(venta.fechaCompleta, "dd/MM/yyyy", new Date())
+      const fechaKey = format(fecha, "dd/MM/yyyy")  // clave con año
+
+      dailySales[fechaKey] = (dailySales[fechaKey] || 0) + venta.precioTotal
+      dailyCounts[fechaKey] = (dailyCounts[fechaKey] || 0) + 1
+    } catch (error) {
+      console.error("Error processing date:", venta.fechaCompleta, error)
+    }
+  }
+
+  const sortedDates = Object.keys(dailySales).sort((a, b) => {
+    const dateA = parse(a, "dd/MM/yyyy", new Date())
+    const dateB = parse(b, "dd/MM/yyyy", new Date())
+    return dateA.getTime() - dateB.getTime()
+  })
+
+  return {
+    labels: sortedDates.map((fecha) => {
+      const count = dailyCounts[fecha] || 0
+      return `${fecha} (${count})`
+    }),
     datasets: [
       {
-        label: "Ventas",
-        data: [1200, 1900, 1500, 2200, 1800, 2500, 2100],
+        label: "Ventas (€)",
+        data: sortedDates.map((fecha) => dailySales[fecha] || 0),
         borderColor: "#ff5722",
         backgroundColor: "rgba(255, 87, 34, 0.1)",
         tension: 0.4,
       },
     ],
   }
+}, [filteredVentas])
 
-  // Datos de ejemplo para el gráfico de categorías
-  const categoryData = {
-    labels: ["Proteínas", "Creatina", "Pre-entreno", "Vitaminas", "Aminoácidos"],
-    datasets: [
-      {
-        label: "Ventas por categoría",
-        data: [4500, 3200, 2800, 2100, 1800],
-        backgroundColor: ["#ff5722", "#2196f3", "#4caf50", "#ffc107", "#9c27b0"],
-      },
-    ],
+
+
+  // Función para mapear tipos a categorías principales
+  const mapToCategory = (tipo: string): string => {
+    const tipoLower = tipo.toLowerCase()
+
+    if (tipoLower.includes("proteina") || tipoLower.includes("protein")) {
+      return "Proteínas"
+    } else if (tipoLower.includes("creatina")) {
+      return "Creatina"
+    } else if (tipoLower.includes("bcaa") || tipoLower.includes("aminoacido")) {
+      return "Aminoácidos"
+    } else if (tipoLower.includes("vitamina")) {
+      return "Vitaminas"
+    } else if (tipoLower.includes("mineral")) {
+      return "Minerales"
+    } else if (tipoLower.includes("glutamina")) {
+      return "Glutamina"
+    } else {
+      // Para tipos genéricos como tipoA, tipoB, etc., mantener el nombre original
+      return tipo
+    }
   }
 
-  // Datos de ejemplo para los productos más vendidos
-  const topProducts = [
-    {
-      id: 1,
-      name: "Proteína Whey Gold Standard",
-      image: "/images/muscle-gain.jpg",
-      sales: 245,
-      revenue: "€12,250.00",
-      stock: 58,
-    },
-    {
-      id: 2,
-      name: "Creatina Monohidrato",
-      image: "/images/supplement-deals.jpg",
-      sales: 189,
-      revenue: "€4,725.00",
-      stock: 32,
-    },
-    {
-      id: 3,
-      name: "Pre-Workout Extreme",
-      image: "/images/fat-loss.jpg",
-      sales: 156,
-      revenue: "€6,240.00",
-      stock: 45,
-    },
-    {
-      id: 4,
-      name: "BCAA 2:1:1",
-      image: "/images/recovery.jpg",
-      sales: 132,
-      revenue: "€3,960.00",
-      stock: 27,
-    },
-    {
-      id: 5,
-      name: "Multivitamínico Sport",
-      image: "/images/health.jpg",
-      sales: 118,
-      revenue: "€2,360.00",
-      stock: 64,
-    },
-  ]
+  // Datos dinámicos para el gráfico de categorías - LIMITADO A TOP 4
+  const categoryData = useMemo(() => {
+    const categoryCounts: Record<string, number> = {}
 
-  // Datos de ejemplo para los últimos pedidos
-  const recentOrders = [
-    {
-      id: "ORD-12345",
-      customer: "Juan Pérez",
-      date: "15 mayo, 2023 - 14:32",
-      amount: "€129.99",
-      status: "completed",
-      statusText: "Completado",
-    },
-    {
-      id: "ORD-12344",
-      customer: "María López",
-      date: "15 mayo, 2023 - 13:15",
-      amount: "€89.95",
-      status: "processing",
-      statusText: "Procesando",
-    },
-    {
-      id: "ORD-12343",
-      customer: "Carlos Rodríguez",
-      date: "15 mayo, 2023 - 11:42",
-      amount: "€74.50",
-      status: "shipped",
-      statusText: "Enviado",
-    },
-    {
-      id: "ORD-12342",
-      customer: "Ana Martínez",
-      date: "15 mayo, 2023 - 10:08",
-      amount: "€54.99",
-      status: "completed",
-      statusText: "Completado",
-    },
-    {
-      id: "ORD-12341",
-      customer: "Pedro Sánchez",
-      date: "14 mayo, 2023 - 18:23",
-      amount: "€149.95",
-      status: "cancelled",
-      statusText: "Cancelado",
-    },
-  ]
+    // Procesar todas las ventas filtradas para obtener categorías
+    for (const venta of filteredVentas) {
+      if (venta.productosComprados && venta.productosComprados.trim()) {
+        // Dividir por <<< para obtener cada producto individual
+        const productos = venta.productosComprados.split("<<<")
+
+        for (const producto of productos) {
+          if (producto.trim()) {
+            // Dividir por &%& para obtener producto y tipo
+            const partes = producto.split("&%&")
+            if (partes.length >= 2) {
+              const tipo = partes[1].trim()
+              const categoria = mapToCategory(tipo)
+
+              // Contar cada producto individual
+              categoryCounts[categoria] = (categoryCounts[categoria] || 0) + 1
+            }
+          }
+        }
+      }
+    }
+
+    // Convertir a array de objetos para poder ordenar
+    const categoriasArray = Object.entries(categoryCounts)
+      .map(([categoria, count]) => ({ categoria, count }))
+      .sort((a, b) => b.count - a.count) // Ordenar de mayor a menor
+      .slice(0, 4) // LIMITAR A SOLO LOS 4 PRIMEROS
+
+    // Colores específicos para las categorías
+    const colores = ["#ff5722", "#2196f3", "#4caf50", "#ffc107"]
+
+    if (categoriasArray.length === 0) {
+      return {
+        labels: ["Sin datos"],
+        datasets: [
+          {
+            label: "Productos vendidos por categoría",
+            data: [0],
+            backgroundColor: ["#cccccc"],
+          },
+        ],
+      }
+    }
+
+    return {
+      labels: categoriasArray.map((item) => `${item.categoria} (${item.count})`),
+      datasets: [
+        {
+          label: "Productos vendidos por categoría",
+          data: categoriasArray.map((item) => item.count),
+          backgroundColor: categoriasArray.map((_, index) => colores[index % colores.length]),
+        },
+      ],
+    }
+  }, [filteredVentas])
 
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeader}>
         <h1 className={styles.pageTitle}>Dashboard</h1>
         <div className={styles.timeRangeSelector}>
-          <button
-            className={`${styles.timeRangeButton} ${timeRange === "today" ? styles.timeRangeActive : ""}`}
-            onClick={() => setTimeRange("today")}
-          >
-            Hoy
-          </button>
           <button
             className={`${styles.timeRangeButton} ${timeRange === "7d" ? styles.timeRangeActive : ""}`}
             onClick={() => setTimeRange("7d")}
@@ -198,6 +277,12 @@ export default function AdminDashboard() {
           >
             90 días
           </button>
+          <button
+            className={`${styles.timeRangeButton} ${timeRange === "total" ? styles.timeRangeActive : ""}`}
+            onClick={() => setTimeRange("total")}
+          >
+            Total
+          </button>
         </div>
       </div>
 
@@ -211,15 +296,7 @@ export default function AdminDashboard() {
             <div className={styles.statsCardContent}>
               <h3 className={styles.statsCardTitle}>{card.title}</h3>
               <p className={styles.statsCardValue}>{card.value}</p>
-              <div className={styles.statsCardFooter}>
-                <span
-                  className={`${styles.statsCardChange} ${card.trend === "up" ? styles.trendUp : styles.trendDown}`}
-                >
-                  {card.trend === "up" ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
-                  {card.change}
-                </span>
-                <span className={styles.statsCardPeriod}>vs. período anterior</span>
-              </div>
+              <div className={styles.statsCardFooter}></div>
             </div>
           </div>
         ))}
@@ -229,10 +306,7 @@ export default function AdminDashboard() {
       <div className={styles.chartsContainer}>
         <div className={styles.chartCard}>
           <div className={styles.chartHeader}>
-            <h3 className={styles.chartTitle}>Ventas</h3>
-            <button className={styles.chartOptionsButton}>
-              <MoreHorizontal size={18} />
-            </button>
+            <h3 className={styles.chartTitle}>Ventas por día</h3>
           </div>
           <div className={styles.chartContent}>
             <LineChart data={salesData} />
@@ -241,120 +315,10 @@ export default function AdminDashboard() {
 
         <div className={styles.chartCard}>
           <div className={styles.chartHeader}>
-            <h3 className={styles.chartTitle}>Ventas por categoría</h3>
-            <button className={styles.chartOptionsButton}>
-              <MoreHorizontal size={18} />
-            </button>
+            <h3 className={styles.chartTitle}>Top 4 - Productos vendidos por categoría</h3>
           </div>
           <div className={styles.chartContent}>
             <BarChart data={categoryData} />
-          </div>
-        </div>
-      </div>
-
-      {/* Productos más vendidos */}
-      <div className={styles.topProductsSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Productos más vendidos</h2>
-          <Link href="/admin/products" className={styles.viewAllLink}>
-            Ver todos <ChevronRight size={16} />
-          </Link>
-        </div>
-
-        <div className={styles.topProductsTable}>
-          <div className={styles.tableHeader}>
-            <div className={styles.tableHeaderCell} style={{ flex: 3 }}>
-              Producto
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              Ventas
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              Ingresos
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              Stock
-            </div>
-          </div>
-
-          <div className={styles.tableBody}>
-            {topProducts.map((product) => (
-              <div key={product.id} className={styles.tableRow}>
-                <div className={styles.tableCell} style={{ flex: 3 }}>
-                  <div className={styles.productCell}>
-                    <div className={styles.productImage}>
-                      <Image src={product.image || "/placeholder.svg"} width={40} height={40} alt={product.name} />
-                    </div>
-                    <span className={styles.productName}>{product.name}</span>
-                  </div>
-                </div>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  {product.sales}
-                </div>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  {product.revenue}
-                </div>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  <span className={`${styles.stockBadge} ${product.stock < 30 ? styles.stockLow : ""}`}>
-                    {product.stock}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Pedidos recientes */}
-      <div className={styles.recentOrdersSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Pedidos recientes</h2>
-          <Link href="/admin/pedidos" className={styles.viewAllLink}>
-            Ver todos <ChevronRight size={16} />
-          </Link>
-        </div>
-
-        <div className={styles.recentOrdersTable}>
-          <div className={styles.tableHeader}>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              ID
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 2 }}>
-              Cliente
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 2 }}>
-              Fecha
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              Importe
-            </div>
-            <div className={styles.tableHeaderCell} style={{ flex: 1 }}>
-              Estado
-            </div>
-          </div>
-
-          <div className={styles.tableBody}>
-            {recentOrders.map((order) => (
-              <div key={order.id} className={styles.tableRow}>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  <Link href={`/admin/pedidos/${order.id}`} className={styles.orderIdLink}>
-                    {order.id}
-                  </Link>
-                </div>
-                <div className={styles.tableCell} style={{ flex: 2 }}>
-                  {order.customer}
-                </div>
-                <div className={styles.tableCell} style={{ flex: 2 }}>
-                  {order.date}
-                </div>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  {order.amount}
-                </div>
-                <div className={styles.tableCell} style={{ flex: 1 }}>
-                  <span className={`${styles.statusBadge} ${styles[`status${order.status}`]}`}>{order.statusText}</span>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

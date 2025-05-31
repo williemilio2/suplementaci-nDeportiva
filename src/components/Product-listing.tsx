@@ -4,12 +4,12 @@ import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react"
 import { useEffect, useState, useRef, useCallback } from "react"
 import OfferProductCard from "./ContenedorPorducto"
 import styles from "../styles/Product-listing.module.css"
-import { allProducts } from "../products/listaArchivos"
 import ProductFilters from "./filtroProductos"
-// Importar el componente ProductSort
 import ProductSort from "./ordenadorProductso"
 import Link from "next/link"
 import StockAutoSelector from "./dineroDefault"
+import { ensureDataLoaded } from "../products/listaArchivos"
+import type { Product } from "../types/product"
 
 // Importar la función especiales
 import { especiales } from "../products/listaArchivos"
@@ -35,13 +35,17 @@ export default function ProductListing({
   title = "Suplementos Deportivos",
   coleccionEspecial,
 }: ProductListingProps) {
+  // Estado para los productos
+  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(0)
   const productosPorPagina = displayMode === "column" ? 6 : 12
 
   // Estados para los filtros
   const [showFilters, setShowFilters] = useState(false)
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100])
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
   const [selectedMarcas, setSelectedMarcas] = useState<string[]>([])
   const [selectedTipos, setSelectedTipos] = useState<string[]>([])
   const [selectedFormatos, setSelectedFormatos] = useState<string[]>([])
@@ -57,11 +61,46 @@ export default function ProductListing({
   // Usar useRef para evitar actualizaciones infinitas
   const pricesInitialized = useRef(false)
   const productsToLoad = useRef<number[]>([])
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Cargar productos desde la base de datos
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true)
+        const { allProducts: products } = await ensureDataLoaded()
+
+        // Asegurarse de que todos los productos tengan los campos requeridos
+        const validatedProducts = products.map((p) => ({
+          ...p,
+          description: p.description || "",
+          image: p.image || "",
+          tipo: p.tipo || "",
+        })) as Product[]
+
+        setAllProducts(validatedProducts)
+      } catch (error) {
+        console.error("Error al cargar productos:", error)
+        setAllProducts([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadProducts()
+  }, [])
 
   // Filtrar por colección especial si existe
   let baseProducts = allProducts
-  if (coleccionEspecial) {
-    baseProducts = especiales(coleccionEspecial)
+  if (coleccionEspecial && allProducts.length > 0) {
+    const filteredProducts = especiales(coleccionEspecial)
+    // Asegurarse de que todos los productos tengan los campos requeridos
+    baseProducts = filteredProducts.map((p) => ({
+      ...p,
+      description: p.description || "",
+      image: p.image || "",
+      tipo: p.tipo || "",
+    })) as Product[]
   }
 
   // Filtrar por término de búsqueda si existe
@@ -69,9 +108,9 @@ export default function ProductListing({
     ? baseProducts.filter(
         (product) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-          (product.marca && product.marca.toLowerCase().includes(searchTerm.toLowerCase())) ||
-          (product.tipo && product.tipo.toLowerCase().includes(searchTerm.toLowerCase())),
+          product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.marca.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.tipo.toLowerCase().includes(searchTerm.toLowerCase()),
       )
     : baseProducts
 
@@ -88,7 +127,11 @@ export default function ProductListing({
 
   // Obtener valores únicos para los filtros
   const marcas = [...new Set(searchFilteredProducts.map((product) => product.marca))].filter(Boolean).sort()
-  const tipos = [...new Set(searchFilteredProducts.map((product) => product.tipo))].filter(Boolean).sort()
+
+  // Asegurarse de que tipos no contenga undefined
+  const tipos = [...new Set(searchFilteredProducts.map((product) => product.tipo))]
+    .filter((tipo): tipo is string => Boolean(tipo))
+    .sort()
 
   // Extraer todos los sabores únicos de los productos
   const extractSabores = (saboresString?: string): string[] => {
@@ -241,7 +284,7 @@ export default function ProductListing({
     const prices = searchFilteredProducts.map((product) => calculateFinalPrice(product.id)).filter((price) => price > 0)
 
     const minPrice = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0
-    const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 100
+    const maxPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 1000
 
     setPriceRange([minPrice, maxPrice])
     setSelectedMarcas([])
@@ -385,8 +428,68 @@ export default function ProductListing({
     pricesInitialized.current = false
   }, [coleccionEspecial, searchTerm])
 
+  // Efecto para forzar la actualización del estado de carga de precios después de un tiempo
+  useEffect(() => {
+    // Limpiar el timeout anterior si existe
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+
+    // Si estamos cargando precios, establecer un timeout para forzar la finalización después de 5 segundos
+    if (isLoadingPrices) {
+      timeoutRef.current = setTimeout(() => {
+        // Verificar si tenemos al menos algunos precios o si ha pasado demasiado tiempo
+        if (Object.keys(productPricing).length > 0 || searchFilteredProducts.length === 0) {
+          console.log("Forzando finalización de carga de precios por timeout")
+          setIsLoadingPrices(false)
+        }
+      }, 5000) // 5 segundos
+    }
+
+    // Limpiar el timeout al desmontar
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [isLoadingPrices, productPricing, searchFilteredProducts.length])
+
+  // Efecto adicional para verificar si todos los productos tienen precio
+  useEffect(() => {
+    // Si ya no estamos cargando, no hacer nada
+    if (!isLoadingPrices) return
+
+    // Verificar si todos los productos visibles tienen precio
+    const allProductsHavePrice = searchFilteredProducts.every((product) => {
+      return Object.keys(productPricing).includes(product.id.toString())
+    })
+
+    // Si todos los productos tienen precio o no hay productos, finalizar la carga
+    if (allProductsHavePrice || searchFilteredProducts.length === 0) {
+      console.log("Todos los productos tienen precio o no hay productos, finalizando carga")
+      setIsLoadingPrices(false)
+    }
+  }, [productPricing, searchFilteredProducts, isLoadingPrices])
+
+  // Mostrar pantalla de carga mientras se cargan los productos
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <p>Cargando productos...</p>
+        <div className={styles.spinner}></div>
+      </div>
+    )
+  }
+
+  // Determinar si mostrar el indicador de carga de precios
+  const showPriceLoading =
+    isLoadingPrices &&
+    Object.keys(productPricing).length < searchFilteredProducts.length / 2 &&
+    searchFilteredProducts.length > 0
+
   return (
     <div className={styles.productListingContainer}>
+
       {/* Componentes StockAutoSelector solo para productos que aún no tienen precio */}
       {productsToLoad.current.map((productId) => (
         <StockAutoSelector
@@ -434,13 +537,18 @@ export default function ProductListing({
       <div className={styles.productListingContent}>
         {/* Componente de filtros */}
         <ProductFilters
-          minPrice={Math.min(
-            ...Object.values(productPricing)
+          minPrice={(() => {
+            const prices = Object.values(productPricing)
               .map((p) => p.price)
-              .filter((p) => p > 0),
-            0,
-          )}
-          maxPrice={Math.max(...Object.values(productPricing).map((p) => p.price), 100)}
+              .filter((p) => p > 0)
+            return prices.length > 0 ? Math.floor(Math.min(...prices)) : 0
+          })()}
+          maxPrice={(() => {
+            const prices = Object.values(productPricing)
+              .map((p) => p.price)
+              .filter((p) => p > 0)
+            return prices.length > 0 ? Math.ceil(Math.max(...prices)) : 1000
+          })()}
           priceRange={priceRange}
           setPriceRange={setPriceRange}
           marcas={marcas}
@@ -464,7 +572,7 @@ export default function ProductListing({
 
         {/* Contenedor de productos */}
         <div className={styles.productsContainer}>
-          {isLoadingPrices && Object.keys(productPricing).length < searchFilteredProducts.length / 2 ? (
+          {showPriceLoading ? (
             <div className={styles.loadingContainer}>
               <p>Cargando precios...</p>
               <div className={styles.spinner}></div>

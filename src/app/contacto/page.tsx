@@ -26,7 +26,7 @@ export default function ContactoPage() {
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Cómo Contactarnos</h2>
-          <div className={styles.infoGrid}>
+          <div className={styles.infoGridContacto}>
             <div className={styles.infoCard}>
               <h3 className={styles.infoCardTitle}>Correo Electrónico</h3>
               <p className={styles.contactText}>
@@ -41,32 +41,11 @@ export default function ContactoPage() {
               <h3 className={styles.infoCardTitle}>Teléfono</h3>
               <p className={styles.contactText}>
                 Llámanos al:{" "}
-                <a href="tel:+34900000000" className={styles.contactLink}>
-                  900 000 000
+                <a href="tel:+34673385301" className={styles.contactLink}>
+                   673 385 301
                 </a>
               </p>
               <p className={styles.contactText}>(Horario laboral de Lunes a Viernes)</p>
-            </div>
-
-            <div className={styles.infoCard}>
-              <h3 className={styles.infoCardTitle}>Redes Sociales</h3>
-              <p className={styles.contactText}>
-                También puedes escribirnos a través de nuestras redes sociales.
-              </p>
-              <ul className={styles.infoList}>
-                <li className={styles.infoListItem}>
-                  Instagram:{" "}
-                  <a href="https://instagram.com/tutienda" className={styles.contactLink} target="_blank" rel="noopener noreferrer">
-                    @tutienda
-                  </a>
-                </li>
-                <li className={styles.infoListItem}>
-                  Facebook:{" "}
-                  <a href="https://facebook.com/tutienda" className={styles.contactLink} target="_blank" rel="noopener noreferrer">
-                    facebook.com/tutienda
-                  </a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -74,7 +53,7 @@ export default function ContactoPage() {
         <div className={styles.contactInfo}>
           <h3 className={styles.contactTitle}>¿Necesitas ayuda con tu pedido?</h3>
           <p className={styles.contactText}>
-            Accede a tu cuenta para ver el estado de tu pedido en la sección &quot;Mis Pedidos&quot;. Si tienes alguna incidencia,
+            Accede a tu cuenta para ver el estado de tu pedido en la sección &quot;pedidos&quot;. Si tienes alguna incidencia,
             no dudes en escribirnos con tu número de pedido.
           </p>
         </div>

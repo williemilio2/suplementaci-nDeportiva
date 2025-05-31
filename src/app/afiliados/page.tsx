@@ -6,89 +6,64 @@ export default function ProgramaAfiliadosPage() {
     <div className={styles.pageContainer}>
       <CustomCursor />
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Programa de Afiliados</h1>
+        <h1 className={styles.pageTitle}>El Club Elite</h1>
         <p className={styles.pageSubtitle}>
-          Únete a nuestro plan exclusivo y disfruta de ventajas únicas por ser parte de nuestra comunidad.
+          Únete a nuestro programa de fidelización y empieza a disfrutar de beneficios exclusivos desde tu primera compra.
         </p>
       </div>
 
       <div className={styles.pageContent}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>¿Cómo funciona?</h2>
+          <h2 className={styles.sectionTitle}>¿Qué es el Club Elite?</h2>
           <p>
-            Una vez creas tu cuenta e inicias sesión por primera vez, te unes automáticamente a nuestro Programa de
-            Afiliados. Este programa está diseñado para recompensar a nuestros clientes más fieles con beneficios
-            exclusivos y promociones personalizadas.
+            El Club Elite es nuestro programa de afiliados premium diseñado para agradecer a nuestros clientes más fieles. 
+            Al crear una cuenta e iniciar sesión, accedes automáticamente a este plan. Con solo realizar tu primera compra, 
+            desbloqueas todas las ventajas exclusivas del Club Elite.
           </p>
         </div>
 
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Beneficios del Programa</h2>
-          <div className={styles.infoGrid}>
+          <h2 className={styles.sectionTitle}>Beneficios iniciales</h2>
+          <p>
+            Desde el primer momento que te registras, formas parte de nuestro Club. Antes de tu primera compra, ya puedes disfrutar de:
+          </p>
+          <ul className={styles.infoList}>
+            <li className={styles.infoListItem}>Descuentos en envíos: recibe tus productos a menor coste.</li>
+            <li className={styles.infoListItem}>Ofertas exclusivas: hasta un 15% adicional en nuestros productos.</li>
+          </ul>
+        </div>
+
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Una vez compras, entras al Club Elite</h2>
+          <p>
+            Al realizar tu primera compra, se desbloquean automáticamente los beneficios completos del Club Elite:
+          </p>
+
+          <div>
             <div className={styles.infoCard}>
-              <h3 className={styles.infoCardTitle}>Descuentos Exclusivos</h3>
+              <h3 className={styles.infoCardTitle}>Acceso VIP</h3>
               <ul className={styles.infoList}>
-                <li className={styles.infoListItem}>Promociones solo para afiliados</li>
-                <li className={styles.infoListItem}>Descuentos acumulables</li>
-                <li className={styles.infoListItem}>Ofertas personalizadas según tus compras</li>
+                <li className={styles.infoListItem}>Prioridad en promociones y lanzamientos</li>
+                <li className={styles.infoListItem}>Acceso anticipado a productos exclusivos</li>
               </ul>
             </div>
 
             <div className={styles.infoCard}>
-              <h3 className={styles.infoCardTitle}>Acceso Anticipado</h3>
+              <h3 className={styles.infoCardTitle}>Regalos para miembros</h3>
               <ul className={styles.infoList}>
-                <li className={styles.infoListItem}>Lanzamientos de productos antes que nadie</li>
-                <li className={styles.infoListItem}>Reservas prioritarias en promociones especiales</li>
-              </ul>
-            </div>
-
-            <div className={styles.infoCard}>
-              <h3 className={styles.infoCardTitle}>Recompensas por Compartir</h3>
-              <ul className={styles.infoList}>
-                <li className={styles.infoListItem}>Invita a tus amigos y gana cupones</li>
-                <li className={styles.infoListItem}>Bonificaciones por cada compra referida</li>
+                <li className={styles.infoListItem}>Productos exclusivos solo para miembros del Club</li>
+                <li className={styles.infoListItem}>Sorpresas especiales según tu historial de compras</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Requisitos y Condiciones</h2>
+          <h2 className={styles.sectionTitle}>¿Cómo empiezo?</h2>
           <p>
-            Para mantener tu acceso al Programa de Afiliados, solo necesitas mantener tu cuenta activa. No hay costes
-            ocultos ni suscripciones adicionales. Simplemente inicia sesión y comienza a disfrutar de los beneficios.
-          </p>
-          <p>
-            Las recompensas y promociones están sujetas a cambios, pero siempre te notificaremos por correo electrónico
-            y dentro de tu perfil de usuario.
-          </p>
-        </div>
-
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Consulta tu Panel de Afiliado</h2>
-          <p>
-            Desde tu cuenta, accede a la sección “Programa de Afiliados” para ver tu progreso, recompensas activas,
-            enlaces de invitación y mucho más.
-          </p>
-        </div>
-
-        <div className={styles.contactInfo}>
-          <h3 className={styles.contactTitle}>¿Tienes dudas sobre el programa?</h3>
-          <p className={styles.contactText}>
-            Si necesitas más información o tienes alguna pregunta, estamos aquí para ayudarte.
-          </p>
-          <p className={styles.contactText}>
-            Email:{" "}
-            <a href="mailto:afiliados@tutienda.com" className={styles.contactLink}>
-              afiliados@tutienda.com
-            </a>
-          </p>
-          <p className={styles.contactText}>
-            Teléfono:{" "}
-            <a href="tel:+34900000001" className={styles.contactLink}>
-              900 000 001
-            </a>{" "}
-            (Lunes a Viernes, 9:00 - 18:00)
+            1. Crea una cuenta gratuita en nuestra web.<br />
+            2. Inicia sesión y empieza a navegar con beneficios iniciales.<br />
+            3. Realiza tu primera compra y accede al Club Elite automáticamente.
           </p>
         </div>
       </div>
