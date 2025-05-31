@@ -2,6 +2,7 @@ import ProductDetailClient from "./product-detail-client"
 import { getAllProducts } from "../../../products/listaArchivos"
 import { notFound } from "next/navigation"
 
+// Componente async sin tipos explícitos para params
 export default async function ProductoPage({ params }: { params: { slug: string } }) {
   const { slug } = params
 
@@ -16,6 +17,7 @@ export default async function ProductoPage({ params }: { params: { slug: string 
   return <ProductDetailClient producto={producto} />
 }
 
+// Genera rutas estáticas para todos los productos
 export async function generateStaticParams() {
   const products = await getAllProducts()
 
