@@ -53,9 +53,6 @@ export default function OrdersPage() {
     .then(data => {
       if (data.ok) {
         setCompraData(data.data)
-      } else {
-        alert('Error al cargar los datos de la compra')
-        router.push('/carrito')
       }
     })
     .catch(error => {
