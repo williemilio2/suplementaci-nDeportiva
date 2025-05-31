@@ -169,7 +169,7 @@ export default function Navigation() {
               <button
                 className={styles.mobileCloseButton}
                 onClick={() => setMobileMenuOpen(false)}
-                aria-label="Cerrar menú"
+                aria-label="Cerrar el menú"
               >
                 <X size={24} />
               </button>
