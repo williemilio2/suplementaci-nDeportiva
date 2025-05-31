@@ -1,11 +1,8 @@
 import Stripe from 'stripe';
 import { NextRequest } from 'next/server';
-import dotenv from 'dotenv';
-import path from 'path';
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
-const stripe = new Stripe(STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-04-30.basil', // Usa esta si '' da errdor
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-04-30.basil', // Usa esta si '' da error
 });
 
 export const POST = async (req: NextRequest) => {
