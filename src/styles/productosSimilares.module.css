@@ -98,7 +98,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
@@ -119,7 +118,6 @@
 
 .navButtonDisabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .navButtonDisabled:hover {
@@ -141,7 +139,6 @@
   background-color: #dddddd;
   border: none;
   padding: 0;
-  cursor: pointer;
   transition: background-color 0.2s;
 }
 

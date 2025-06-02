@@ -65,11 +65,11 @@ export default function Footer() {
             <div className={styles.footerColumn}>
               <h3 className={styles.footerTitle}>CATEGORÍAS</h3>
               <ul className={`${styles.footerLinks} hoverable`}>
-                <li><Link href="/especiales?t=proteinas">Proteínas</Link></li>
-                <li><Link href="/especiales?t=aminoacidos">Aminoácidos</Link></li>
-                <li><Link href="/especiales?t=pre-entreno">Pre-entreno</Link></li>
-                <li><Link href="/especiales?t=creatina">Creatina</Link></li>
-                <li><Link href="/especiales?t=vitaminas">Vitaminas</Link></li>
+                <li><Link href="/especiales?t=%//%)proteina">Proteínas</Link></li>
+                <li><Link href="/especiales?t=%//%)aminoacidos">Aminoácidos</Link></li>
+                <li><Link href="/especiales?t=%//%)pre-entreno">Pre-entreno</Link></li>
+                <li><Link href="/especiales?t=%//%)creatina">Creatina</Link></li>
+                <li><Link href="/especiales?t=%//%)vitaminas">Vitaminas</Link></li>
               </ul>
             </div>
 

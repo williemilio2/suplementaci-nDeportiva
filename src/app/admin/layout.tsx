@@ -14,13 +14,41 @@ import {
 import styles from "./admin.module.css"
 import { Suspense } from "react"
 import CustomCursor from "@/src/components/customCursor"
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [waiting, setWaiting] = useState(true)
   const pathname = usePathname()
 
   // Cerrar sidebar en pantallas pequeñas cuando cambia la ruta
   useEffect(() => {
+    const token = Cookies.get('token');
+    if (!token) {
+      router.push('/')
+      return;
+      }
+
+    fetch('/api/verifyToken', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.esAdmin) {
+          setWaiting(false);
+        }
+        else{
+          router.push('/')
+        }
+      })
+      .catch(console.error);
+  }, [])
+
+    useEffect(() => {
     setSidebarOpen(false)
   }, [pathname])
 
@@ -29,7 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Productos", href: "/admin/productosAdmin", icon: Package },
     { name: "Pedidos", href: "/admin/pedidos", icon: ShoppingCart },
   ]
-
+  if(waiting){return <h1>Verificando datos</h1>}
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <CustomCursor />

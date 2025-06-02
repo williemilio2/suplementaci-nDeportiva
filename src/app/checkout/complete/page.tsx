@@ -32,7 +32,10 @@ export default function CompletePage() {
 
   useEffect(() => {
     const pedido = localStorage.getItem('pedido')
-    if (!pedido) return
+    if (!pedido) {
+      router.push('/')
+      return
+    }
 
     const datos = JSON.parse(pedido)
   setCompraData(datos)

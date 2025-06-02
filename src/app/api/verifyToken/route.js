@@ -42,14 +42,14 @@ export async function POST(req) {
     const { token } = await req.json();
 
     const decoded = jwt.verify(token, JWT_SECRET);
-    
+    const esAdmin = decoded.correo == 'willymarta@gmail.com'
     const resultNombre = await client.execute({
       sql: 'SELECT nombre FROM usuarios WHERE correo = ?',
       args: [decoded.correo],
     });
     const nombreNuevo = resultNombre.rows[0]?.nombre;
 
-    return new Response(JSON.stringify({ resultado: true, nombre: nombreNuevo }), {
+    return new Response(JSON.stringify({ resultado: true, nombre: nombreNuevo, esAdmin: esAdmin}), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

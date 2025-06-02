@@ -142,12 +142,29 @@ export const productosSuperOfertas = getProductosSuperOfertas()
 
 // Función para obtener productos por categoría especial
 export function especiales(tituloEspecial) {
-  return allProducts.filter((producto) => {
-    if (!producto.categoriaEspecial) return false
-    const categorias = producto.categoriaEspecial.split("<<<")
-    return categorias.includes(tituloEspecial)
-  })
+  const limpiarCaracteres = (str) => str.replace(/[^a-zA-Z0-9\s]/g, '').trim()
+
+  const tieneEspeciales = /[^a-zA-Z0-9\s]/.test(tituloEspecial)
+
+  if (tieneEspeciales) {
+    // Limpiamos tituloEspecial
+    const tituloLimpio = limpiarCaracteres(tituloEspecial).toLowerCase()
+
+    return allProducts.filter(producto => {
+      if (!producto.tipo) return false
+
+      const tipoLower = producto.tipo.trim().toLowerCase()
+      return tipoLower === tituloLimpio
+    })
+  } else {
+    return allProducts.filter(producto => {
+      if (!producto.categoriaEspecial) return false
+      return producto.categoriaEspecial.includes(tituloEspecial)
+    })
+  }
 }
+
+
 
 // Función para obtener productos guardados
 export function guardados(guardadosArray) {

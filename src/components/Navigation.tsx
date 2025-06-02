@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronDown, Menu, X, ChevronRight, Salad, BicepsFlexed, CircleFadingArrowUp, Cross, BadgeDollarSign  } from "lucide-react"
+import { ChevronDown, Menu, X, ChevronRight, Salad, BicepsFlexed, CircleFadingArrowUp, Cross, /*BadgeDollarSign*/  } from "lucide-react"
 import styles from "../styles/Navigation.module.css"
 
 export default function Navigation() {
@@ -22,39 +22,39 @@ export default function Navigation() {
           title: "Ganar músculo",
           icon: BicepsFlexed,
           links: [
-            { nameLink: "Proteina", linkUrl: "/especiales?t=proteinas" },
-            { nameLink: "Mass gainer", linkUrl: "/especiales?t=massGainer" },
-            { nameLink: "Creatina", linkUrl: "/especiales?t=Creatina" },
+            { nameLink: "Proteina", linkUrl: "/especiales?t=%//%)proteina" },
+            { nameLink: "Mass gainer", linkUrl: "/especiales?t=%//%)massGainer" },
+            { nameLink: "Creatina", linkUrl: "/especiales?t=%//%)Creatina" },
           ],
         },
         {
           title: "Mejorar salud",
           icon: Salad,
           links: [
-            { nameLink: "Vitaminas C", linkUrl: "/especiales?t=vitaminaC" },
-            { nameLink: "Omega-3", linkUrl: "/especiales?t=Omega-3" },
-            { nameLink: "Multivitamínicos", linkUrl: "/especiales?t=Multivitamínicos" },
+            { nameLink: "Vitaminas C", linkUrl: "/especiales?t=%//%)vitaminaC" },
+            { nameLink: "Omega-3", linkUrl: "/especiales?t=%//%)Omega-3" },
+            { nameLink: "Multivitamínicos", linkUrl: "/especiales?t=%//%)Multivitamínicos" },
           ],
         },
         {
           title: "Perder grasa",
           icon: Cross,
           links: [
-            { nameLink: "Quemadores de grasa", linkUrl: "/especiales?t=QuemadoresGrasa" },
+            { nameLink: "Quemadores de grasa", linkUrl: "/especiales?t=%//%)QuemadoresGrasa" },
           ],
         },
         {
           title: "Recuperación",
           icon: CircleFadingArrowUp,
           links: [
-            { nameLink: "Glutamina", linkUrl: "/especiales?t=Glutamina" },
-            { nameLink: "BCAAs", linkUrl: "/especiales?t=BCAAs" },
-            { nameLink: "EAAs", linkUrl: "/especiales?t=EAAs" },
+            { nameLink: "Glutamina", linkUrl: "/especiales?t%//%)=Glutamina" },
+            { nameLink: "BCAAs", linkUrl: "/especiales?t=%//%)BCAAs" },
+            { nameLink: "EAAs", linkUrl: "/especiales?t=%//%)EAAs" },
           ],
         },
       ],
     },
-    {
+    /*{
       name: "Ofertas",
       hasDropdown: true,
       //icon: HandCoins,
@@ -69,7 +69,7 @@ export default function Navigation() {
           ],
         },
       ],
-    },{
+    },*/{
       name: "Historial Pedidos",
       hasDropdown: false,
       linkUrl: "/pedidos",

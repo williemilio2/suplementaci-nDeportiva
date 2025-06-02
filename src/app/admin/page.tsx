@@ -253,7 +253,6 @@ const salesData = useMemo(() => {
       ],
     }
   }, [filteredVentas])
-
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeader}>

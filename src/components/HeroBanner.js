@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react'
 import styles from '../styles/HeroBanner.module.css';
-const images = ["/promo3.webp", "/promo2.webp", "/promo.webp", "/apartadoSlider1.webp"];
+const images = ["/promo3.webp", "/promo2.webp", "/promo.webp"];
 export default function HeroBanner() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -53,7 +53,7 @@ export default function HeroBanner() {
         </div>
       </div>
       <div className={styles.pagination}>
-        {[...Array(4)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <div key={i} className={`${styles.dot} ${i === currentIndex ? styles.dotActive : ""}`}></div>
         ))}
       </div>

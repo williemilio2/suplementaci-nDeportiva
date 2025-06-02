@@ -65,7 +65,7 @@
 }
 .flechaLeft:hover,
 .flechaRight:hover{
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 @media (max-width: 1400px) {
   .heroImageContainer{

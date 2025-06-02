@@ -506,10 +506,13 @@ export default function ProductListing({
             {searchTerm
               ? `Resultados para "${searchTerm}"`
               : coleccionEspecial
-                ? `Colección: ${coleccionEspecial
-                    .replace(/(?!^)([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .replace(/^./, (c) => c.toUpperCase())}`
+                ? `Colección: ${
+                    coleccionEspecial
+                      .replace(/[^a-zA-Z0-9\s]/g, '')      // eliminar símbolos raros
+                      .replace(/(?!^)([A-Z])/g, ' $1')     // poner espacios antes de mayúsculas (excepto la primera)
+                      .toLowerCase()
+                      .replace(/^./, c => c.toUpperCase()) // primera letra en mayúscula
+                  }`
                 : title}
           </h1>
           <p className={styles.resultsCount}>
