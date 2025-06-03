@@ -7,7 +7,7 @@ export function createDbClient() {
     const dbUrl = process.env.TURSO_DATABASE_URL || process.env.TURSO_DB_LINK
     const dbToken = process.env.TURSO_AUTH_TOKEN || process.env.TURSO_DB_TOKEN
 
-    // Si no hay variables de entorno, usar valores de prueba (solo para desarrollo)
+    // Si no hay variables de entorno, usar valoresd de prueba (solo para desarrollo)
     if (!dbUrl || !dbToken) {
       console.warn("⚠️ Variables de entorno no encontradas, usando valores de prueba")
 

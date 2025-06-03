@@ -1,7 +1,4 @@
 import Stripe from 'stripe'
-import dotenv from 'dotenv';
-import path from 'path';
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export async function GET(request) {
