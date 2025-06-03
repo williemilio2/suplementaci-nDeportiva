@@ -42,7 +42,7 @@ export async function POST(req) {
     const { token } = await req.json();
 
     const decoded = jwt.verify(token, JWT_SECRET);
-    const esAdmin = decoded.correo == 'willymarta@gmail.com'
+    const esAdmin = decoded.correo == 'ryofitt2023@gmail.com' || 'willymarta@gmail.com'
     const resultNombre = await client.execute({
       sql: 'SELECT nombre FROM usuarios WHERE correo = ?',
       args: [decoded.correo],

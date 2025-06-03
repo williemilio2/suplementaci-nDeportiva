@@ -34,15 +34,24 @@ export default function OrdersPage() {
   const [popupProducts, setPopupProducts] = useState<string[] | null>(null)
 
   const exportOrdersToExcel = (orders: Order[]) => {
-    const data = orders.map(order => ({
-      ID: order.id,
-      Email: order.correoUsuarioCompra,
-      Fecha: order.fechaCompleta,
-      Total: `${order.precioTotal}€`,
-      Productos: order.productosComprados
-        ? order.productosComprados.split("<<<").map(p => p.trim()).filter(Boolean).join(", ")
-        : "Sin productos",
-    }));
+  const data = orders.map(order => ({
+    ID: order.id,
+    Email: order.correoUsuarioCompra,
+    Fecha: order.fechaCompleta,
+    Total: `${order.precioTotal}€`,
+    Productos: order.productosComprados
+      ? order.productosComprados
+          .split("<<<")
+          .map(p => p.trim())
+          .filter(Boolean)
+          .map(p => {
+            // Quitar todo desde '&%&' hacia adelante, dejando solo lo de la izquierda
+            const index = p.indexOf("&%&");
+            return index !== -1 ? p.substring(0, index) : p;
+          })
+          .join(", ")
+      : "Sin productos",
+  }));
 
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
@@ -132,7 +141,7 @@ export default function OrdersPage() {
       </div>
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Pedidos</h1>
-        <button onClick={() => exportOrdersToExcel(currentOrders)} className={styles.exportButton}>
+        <button onClick={() => exportOrdersToExcel(orders)} className={styles.exportButton}>
           <Download size={16} />
           Exportar pedidos
         </button>

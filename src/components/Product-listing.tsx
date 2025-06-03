@@ -139,10 +139,8 @@ export default function ProductListing({
     return saboresString.split("<<<").filter(Boolean)
   }
 
-  const sabores = [...new Set(searchFilteredProducts.flatMap((product) => extractSabores(product.sabores)))]
-    .filter(Boolean)
-    .sort()
-
+  const sabores = [...new Set(searchFilteredProducts.flatMap((product) => extractSabores(product.sabores)))].filter(Boolean).sort()
+  const formatos = [...new Set(searchFilteredProducts.map((product) => product.formato))].filter((formato): formato is string => Boolean(formato)).sort()
   // Inicializar la lista de productos a cargar
   useEffect(() => {
     productsToLoad.current = searchFilteredProducts.map((product) => product.id)
@@ -214,7 +212,9 @@ export default function ProductListing({
       const productSabores = extractSabores(product.sabores)
       if (!selectedSabores.some((sabor) => productSabores.includes(sabor))) return false
     }
-
+    if (selectedFormatos.length > 0) {
+      if (!product.formato || !selectedFormatos.includes(product.formato)) return false
+    }
     // Filtro de valoración
     if (selectedRating > 0 && product.rating < selectedRating) return false
 
@@ -560,6 +560,9 @@ export default function ProductListing({
           tipos={tipos}
           selectedTipos={selectedTipos}
           setSelectedTipos={setSelectedTipos}
+          formatos={formatos}
+          selectedFormatos={selectedFormatos}
+          setSelectedFormatos={setSelectedFormatos}
           sabores={sabores}
           selectedSabores={selectedSabores}
           setSelectedSabores={setSelectedSabores}

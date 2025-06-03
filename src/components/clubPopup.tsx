@@ -64,7 +64,7 @@ export default function ClubPopup() {
         <div className="popup-overlay">
           <div className="popup-card">
             <button onClick={handleClose} className="popup-close-button">
-              <X className="popup-close-icon" />
+              <X className="popup-close-icon hoverable" />
             </button>
 
             <div className="popup-content">
@@ -143,15 +143,15 @@ export default function ClubPopup() {
                   {proceso === 0 ? (
                     <>
                       <div className="popup-buttons">
-                        <Link className="popup-button-secondary" href='/auth/login'>
+                        <Link className="popup-button-secondary hoverable" href='/auth/login'>
                           <User className="button-icon" />
                           Iniciar Sesión
                         </Link>
-                        <Link className="popup-button-secondary" href='/auth/register'>Crear Cuenta</Link>
+                        <Link className="popup-button-secondary hoverable" href='/auth/register'>Crear Cuenta</Link>
                       </div>
 
-                      <div className="popup-footer">
-                        Al unirte aceptas nuestros <a href="#">Términos y Condiciones</a>
+                      <div className="popup-footer hoverable">
+                        Al unirte aceptas nuestros <a href="/terminos-condiciones">Términos y Condiciones</a>
                       </div>
                     </>
                   ) : (
@@ -166,7 +166,7 @@ export default function ClubPopup() {
 
       {/* Icono minimizado */}
       {isMinimized && (
-        <button onClick={handleOpen} className="popup-minimized-button">
+        <button onClick={handleOpen} className="popup-minimized-button hoverable">
           {proceso !== 2 && <div className="minimized-badge">1</div>}
           <Trophy className="popup-minimized-icon" />
         </button>

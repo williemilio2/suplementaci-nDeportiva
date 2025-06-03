@@ -3,11 +3,12 @@
 import type React from "react"
 
 import Link from "next/link"
+import Image from 'next/image'
 import CustomCursor from "../../../components/customCursor"
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { ShoppingCart, Heart, Share2, Truck, Shield, Star, StarHalf, Minus, Plus } from "lucide-react"
-import { sacarStockSeguro, sacarInformacionNutricionalSeguro } from "../../../products/listaArchivos"
+import { sacarStockSeguro } from "../../../products/listaArchivos"
 import ProductSlider from "../../../components/product-slider"
 import ProductOptions from "../../../components/product-options"
 import ProductosSimilares from "@/src/components/productosSimilares"
@@ -29,39 +30,8 @@ interface StockItem {
   precio: number
   oferta?: number
 }
-
-interface Aminoacidos {
-  leucina: string // Ej: "2.7g"
-  isoleucina: string // Ej: "1.6g"
-  valina: string // Ej: "1.7g"
-  glutamina: string // Ej: "5.0g"
-}
-
-interface InformacionNutricional {
-  product_id: number
-  porcion: string // Ej: "35g"
-  calorias: string // Ej: "135 kcal"
-  proteinas: string // Ej: "26g"
-  carbohidratos: string // Ej: "4g"
-  azucares: string // Ej: "1.8g"
-  grasas: string // Ej: "2.0g"
-  grasasSaturadas: string // Ej: "1.2g"
-  fibra: string // Ej: "0.7g"
-  sal: string // Ej: "0.28g"
-  sodio: string // Ej: "110mg"
-  calcio: string // Ej: "150mg"
-  hierro: string // Ej: "1.3mg"
-  vitaminaD: string // Ej: "0.8µg"
-  vitaminaB12: string // Ej: "1.2µg"
-  enzimasDigestivas: string // Ej: "28mg"
-  aminoacidos: Aminoacidos
-}
-
 export default function ProductDetailClient({ producto }: { producto: Product }) {
   // Estados para datos
-  const [stockInformacionNutricionalActual, setStockInformacionNutricionalActual] = useState<
-    Partial<InformacionNutricional> | undefined
-  >(undefined)
   const [stockProductoActual, setStockProductoActual] = useState<StockItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -106,11 +76,6 @@ export default function ProductDetailClient({ producto }: { producto: Product })
 
       try {
         // Cargar información nutricional usando la versión segura
-        const infoNutricional = await sacarInformacionNutricionalSeguro(producto.id)
-        if (infoNutricional && infoNutricional[0]) {
-          // Omitir las primeras propiedades (id y product_id)
-          setStockInformacionNutricionalActual(Object.fromEntries(Object.entries(infoNutricional[0]).slice(2)))
-        }
 
         // Cargar stock usando la versión segura
         const stock = await sacarStockSeguro(producto.id)
@@ -168,7 +133,6 @@ export default function ProductDetailClient({ producto }: { producto: Product })
 
   // Dividir imágenes y recomendaciones
   const imagenes = producto.image.split("<<<")
-  const recomendacionesDeUsoLista = producto.recomendacionesDeUso?.split("<<<")
 
   // Estados para la UI
   const [activeTab, setActiveTab] = useState("descripcion")
@@ -694,42 +658,16 @@ export default function ProductDetailClient({ producto }: { producto: Product })
                       <p className={styles.metaLabel}>Tipo</p>
                       <p className={styles.metaValue}>{producto.tipo}</p>
                     </div>
-                    {producto.colesterol && (
-                      <div>
-                        <p className={styles.metaLabel}>Colesterol</p>
-                        <p className={styles.metaValue}>{producto.colesterol}</p>
+                  </div>
+                    {producto.imagenInfoNutricional && (
+                      <div className={styles.nutritionInfo}>
+                        <h4>Información nutricional</h4>
+                        <div style={{display: 'flex', justifyContent: 'center'}}>
+                          <Image src={producto.imagenInfoNutricional} width={200} height={200} alt="Información nutricional" />
+                        </div>
                       </div>
                     )}
                   </div>
-                  <div className={styles.nutritionInfo}>
-                    <h4>Información nutricional (por servicio de {stockInformacionNutricionalActual?.porcion})</h4>
-                    {stockInformacionNutricionalActual && (
-                      <div className={styles.nutritionTable}>
-                        {Object.entries(stockInformacionNutricionalActual).map(([key, value]) =>
-                          key === "aminoacidos" ? (
-                            <div className={styles.nutritionRowAminoacidos} key={key}>
-                              <span className={styles.aminoacidos}>Aminoácidos:</span>
-                              {(value as string).split(";").map((item: string, index: number) => {
-                                const [nombre = "", cantidad = ""] = item.split(":")
-                                return (
-                                  <div key={index} className={styles.nutritionRow}>
-                                    <span style={{ paddingLeft: "20px" }}>{nombre.trim()}</span>
-                                    <span>{cantidad.trim()}</span>
-                                  </div>
-                                )
-                              })}
-                            </div>
-                          ) : (
-                            <div className={styles.nutritionRow} key={key}>
-                              <span>{key}</span>
-                              <span>{value as React.ReactNode}</span>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
               )}
               {activeTab === "ingredientes" && (
                 <div>
@@ -745,14 +683,6 @@ export default function ProductDetailClient({ producto }: { producto: Product })
                 <div>
                   <h3>Modo de uso</h3>
                   <p>{producto.modoDeUso}</p>
-                  <div className={styles.usageTips}>
-                    <h4>Recomendaciones</h4>
-                    <ul>
-                      {recomendacionesDeUsoLista?.map((recomendacion, index) => {
-                        return <li key={index}>{recomendacion}</li>
-                      })}
-                    </ul>
-                  </div>
                 </div>
               )}
             </div>

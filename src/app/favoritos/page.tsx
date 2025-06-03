@@ -425,12 +425,6 @@ export default function Favoritos() {
                           <span className={styles.infoLabel}>Tipo:</span>
                           <span>{producto.tipo}</span>
                         </div>
-                        {producto.colesterol && (
-                          <div className={styles.infoItem}>
-                            <span className={styles.infoLabel}>Colesterol:</span>
-                            <span>{producto.colesterol}</span>
-                          </div>
-                        )}
                         <div className={styles.infoItem}>
                           <span className={styles.infoLabel}>Valoración:</span>
                           <span>

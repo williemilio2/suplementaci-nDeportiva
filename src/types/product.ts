@@ -9,7 +9,6 @@ export interface Product {
   badge?: string
   marca: string
   tipo: string // Cambiado de opcional a requerido
-  colesterol?: string
   superOfertas?: number
   slug: string
   informacionAlergenos?: string
@@ -22,6 +21,8 @@ export interface Product {
   precioAnterior?: number
   puntuacionSimilitud?: number
   rebajasElite?: number
+  formato?: string
+  imagenInfoNutricional?: string
 }
 
 // Alias para compatibilidad con código existente

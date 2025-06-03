@@ -10,6 +10,7 @@ import styles from "../../admin.module.css"
 
 export default function NewProductPage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const nutritionalFileInputRef = useRef<HTMLInputElement>(null)
   const [activeTab, setActiveTab] = useState("general")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -21,8 +22,8 @@ export default function NewProductPage() {
     slug: "",
     brand: "",
     type: "",
+    formato: "",
     badge: "",
-    cholesterol: "Mínimo",
     superOffers: false,
     allergenInfo: "",
     ingredients: "",
@@ -30,25 +31,6 @@ export default function NewProductPage() {
     usageRecommendations: [] as string[],
     flavors: [] as string[],
     specialCategories: [] as string[],
-  })
-
-  const [nutritionalInfo, setNutritionalInfo] = useState({
-    serving: "30g",
-    calories: "",
-    proteins: "",
-    carbs: "",
-    sugars: "",
-    fats: "",
-    saturatedFats: "",
-    fiber: "",
-    salt: "",
-    sodium: "",
-    calcium: "",
-    iron: "",
-    vitaminD: "",
-    vitaminB12: "",
-    digestiveEnzymes: "",
-    aminoacids: "",
   })
 
   const [stockVariants, setStockVariants] = useState<
@@ -62,7 +44,7 @@ export default function NewProductPage() {
   >([])
 
   const [productImage, setProductImage] = useState<string | null>(null)
-  const [tempUsageRecommendation, setTempUsageRecommendation] = useState("")
+  const [nutritionalImage, setNutritionalImage] = useState<string | null>(null)
   const [tempFlavor, setTempFlavor] = useState("")
   const [tempCategory, setTempCategory] = useState("")
   const [tempVariant, setTempVariant] = useState({
@@ -82,15 +64,6 @@ export default function NewProductPage() {
     })
   }
 
-  // Manejar cambio en los campos de información nutricional
-  const handleNutritionalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setNutritionalInfo({
-      ...nutritionalInfo,
-      [name]: value,
-    })
-  }
-
   // Manejar carga de imagen
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -102,28 +75,16 @@ export default function NewProductPage() {
       reader.readAsDataURL(file)
     }
   }
-
-  // Añadir recomendación de uso
-  const addUsageRecommendation = () => {
-    if (tempUsageRecommendation.trim()) {
-      setProductData({
-        ...productData,
-        usageRecommendations: [...productData.usageRecommendations, tempUsageRecommendation.trim()],
-      })
-      setTempUsageRecommendation("")
+  const handleNutritionalImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setNutritionalImage(reader.result as string)
+      }
+      reader.readAsDataURL(file)
     }
   }
-
-  // Eliminar recomendación de uso
-  const removeUsageRecommendation = (index: number) => {
-    const newRecommendations = [...productData.usageRecommendations]
-    newRecommendations.splice(index, 1)
-    setProductData({
-      ...productData,
-      usageRecommendations: newRecommendations,
-    })
-  }
-
   // Añadir sabor
   const addFlavor = () => {
     if (tempFlavor.trim() && !productData.flavors.includes(tempFlavor.trim())) {
@@ -211,15 +172,9 @@ export default function NewProductPage() {
     // 1. INFORMACIÓN GENERAL
     const informacionGeneral = {
       ...productData,
-      usageRecommendations: productData.usageRecommendations.join('<<<'),
       flavors: productData.flavors.join('<<<'),
       specialCategories: productData.specialCategories.join('<<<'),
       productImage: "", // no se usa, va aparte
-    }
-
-    // 2. INFORMACIÓN NUTRICIONAL
-    const informacionNutricional = {
-      ...nutritionalInfo,
     }
 
     // 3. VARIANTES Y STOCK
@@ -234,7 +189,6 @@ export default function NewProductPage() {
     try {
       const formData = new FormData()
       formData.append("general", JSON.stringify(informacionGeneral))
-      formData.append("nutricional", JSON.stringify(informacionNutricional))
       formData.append("stock", JSON.stringify(variantesYStock))
 
       if (!productImage ) {
@@ -242,8 +196,13 @@ export default function NewProductPage() {
         setIsSubmitting(false)
         return
       }
-
+      if (!nutritionalImage) {
+        alert("Selecciona una imagen de información nutricional")
+        setIsSubmitting(false)
+        return
+      }
       formData.append("image", productImage)
+      formData.append("nutritionalImage", nutritionalImage)
 
       const res = await fetch("/api/meterDatosNuevoProducto", {
         method: "POST",
@@ -310,12 +269,6 @@ export default function NewProductPage() {
             onClick={() => setActiveTab("general")}
           >
             Información general
-          </button>
-          <button
-            className={`${styles.formTab} ${activeTab === "nutritional" ? styles.activeTab : ""}`}
-            onClick={() => setActiveTab("nutritional")}
-          >
-            Información nutricional
           </button>
           <button
             className={`${styles.formTab} ${activeTab === "variants" ? styles.activeTab : ""}`}
@@ -400,7 +353,7 @@ export default function NewProductPage() {
 
                     <div className={styles.formGroup}>
                       <label htmlFor="type" className={styles.formLabel}>
-                        Tipo <span className={styles.requiredField}>*</span>
+                        Categoria <span className={styles.requiredField}>*</span>
                       </label>
                       <input
                         type="text"
@@ -414,24 +367,22 @@ export default function NewProductPage() {
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <label htmlFor="cholesterol" className={styles.formLabel}>
-                        Colesterol
+                      <label htmlFor="formato" className={styles.formLabel}>
+                        Formato
                       </label>
                       <select
-                        id="cholesterol"
-                        name="cholesterol"
-                        value={productData.cholesterol}
+                        id="formato"
+                        name="formato"
+                        value={productData.formato}
                         onChange={handleInputChange}
                         className={styles.formSelect}
                       >
-                        <option value="Mínimo">Mínimo</option>
-                        <option value="Bajo">Bajo</option>
-                        <option value="Medio">Medio</option>
-                        <option value="Alto">Alto</option>
+                        <option value="Polvo">Polvo</option>
+                        <option value="Tabletas">Tabletas</option>
+                        <option value="Capsulas">Capsulas</option>
                       </select>
                     </div>
                   </div>
-
                   <div className={styles.formGroup}>
                     <label htmlFor="allergenInfo" className={styles.formLabel}>
                       Información de alérgenos
@@ -525,50 +476,6 @@ export default function NewProductPage() {
                   </div>
 
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Recomendaciones de uso</label>
-                    <div className={styles.tagInputContainer}>
-                      <input
-                        type="text"
-                        value={tempUsageRecommendation}
-                        onChange={(e) => setTempUsageRecommendation(e.target.value)}
-                        className={styles.tagInput}
-                        placeholder="Añadir recomendación y presionar Enter"
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            e.preventDefault()
-                            addUsageRecommendation()
-                          }
-                        }}
-                      />
-                      <button
-                        type="button"
-                        className={styles.addTagButton}
-                        onClick={addUsageRecommendation}
-                        disabled={!tempUsageRecommendation.trim()}
-                      >
-                        <Plus size={16} />
-                      </button>
-                    </div>
-                    <div className={styles.tagsContainer}>
-                      {productData.usageRecommendations.map((recommendation, index) => (
-                        <div key={index} className={styles.tag}>
-                          <span>{recommendation}</span>
-                          <button
-                            type="button"
-                            className={styles.removeTagButton}
-                            onClick={() => removeUsageRecommendation(index)}
-                          >
-                            <X size={12} />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                    <p className={styles.fieldHelp}>
-                      Cada recomendación se mostrará como un punto separado en la página del producto
-                    </p>
-                  </div>
-
-                  <div className={styles.formGroup}>
                     <label className={styles.formLabel}>Sabores disponibles</label>
                     <div className={styles.tagInputContainer}>
                       <input
@@ -648,286 +555,49 @@ export default function NewProductPage() {
                       Categorías para filtrado y agrupación (veganas, OfertaDelDia, proteinas, etc.)
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Pestaña de información nutricional */}
-          {activeTab === "nutritional" && (
-            <div className={styles.formTabContent}>
-              <div className={styles.nutritionalInfoHeader}>
-                <h3>Información nutricional</h3>
-                <div className={styles.infoBox}>
-                  <Info size={16} />
-                  <span>
-                    Completa la información nutricional por porción. Estos datos se mostrarán en la tabla nutricional
-                    del producto.
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.formGrid}>
-                <div className={styles.formColumn}>
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="serving" className={styles.formLabel}>
-                        Tamaño de porción
-                      </label>
-                      <input
-                        type="text"
-                        id="serving"
-                        name="serving"
-                        value={nutritionalInfo.serving}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 30g"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="calories" className={styles.formLabel}>
-                        Calorías
-                      </label>
-                      <input
-                        type="text"
-                        id="calories"
-                        name="calories"
-                        value={nutritionalInfo.calories}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 120 kcal"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="proteins" className={styles.formLabel}>
-                        Proteínas
-                      </label>
-                      <input
-                        type="text"
-                        id="proteins"
-                        name="proteins"
-                        value={nutritionalInfo.proteins}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 24g"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="carbs" className={styles.formLabel}>
-                        Carbohidratos
-                      </label>
-                      <input
-                        type="text"
-                        id="carbs"
-                        name="carbs"
-                        value={nutritionalInfo.carbs}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 3g"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="sugars" className={styles.formLabel}>
-                        Azúcares
-                      </label>
-                      <input
-                        type="text"
-                        id="sugars"
-                        name="sugars"
-                        value={nutritionalInfo.sugars}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 1.5g"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="fats" className={styles.formLabel}>
-                        Grasas
-                      </label>
-                      <input
-                        type="text"
-                        id="fats"
-                        name="fats"
-                        value={nutritionalInfo.fats}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 1.8g"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="saturatedFats" className={styles.formLabel}>
-                        Grasas saturadas
-                      </label>
-                      <input
-                        type="text"
-                        id="saturatedFats"
-                        name="saturatedFats"
-                        value={nutritionalInfo.saturatedFats}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 1.1g"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="fiber" className={styles.formLabel}>
-                        Fibra
-                      </label>
-                      <input
-                        type="text"
-                        id="fiber"
-                        name="fiber"
-                        value={nutritionalInfo.fiber}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 0.6g"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.formColumn}>
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="salt" className={styles.formLabel}>
-                        Sal
-                      </label>
-                      <input
-                        type="text"
-                        id="salt"
-                        name="salt"
-                        value={nutritionalInfo.salt}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 0.25g"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="sodium" className={styles.formLabel}>
-                        Sodio
-                      </label>
-                      <input
-                        type="text"
-                        id="sodium"
-                        name="sodium"
-                        value={nutritionalInfo.sodium}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 100mg"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="calcium" className={styles.formLabel}>
-                        Calcio
-                      </label>
-                      <input
-                        type="text"
-                        id="calcium"
-                        name="calcium"
-                        value={nutritionalInfo.calcium}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 140mg"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="iron" className={styles.formLabel}>
-                        Hierro
-                      </label>
-                      <input
-                        type="text"
-                        id="iron"
-                        name="iron"
-                        value={nutritionalInfo.iron}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 1.2mg"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="vitaminD" className={styles.formLabel}>
-                        Vitamina D
-                      </label>
-                      <input
-                        type="text"
-                        id="vitaminD"
-                        name="vitaminD"
-                        value={nutritionalInfo.vitaminD}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 0.75µg"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="vitaminB12" className={styles.formLabel}>
-                        Vitamina B12
-                      </label>
-                      <input
-                        type="text"
-                        id="vitaminB12"
-                        name="vitaminB12"
-                        value={nutritionalInfo.vitaminB12}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 1.1µg"
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="digestiveEnzymes" className={styles.formLabel}>
-                        Enzimas digestivas
-                      </label>
-                      <input
-                        type="text"
-                        id="digestiveEnzymes"
-                        name="digestiveEnzymes"
-                        value={nutritionalInfo.digestiveEnzymes}
-                        onChange={handleNutritionalChange}
-                        className={styles.formInput}
-                        placeholder="Ej: 25mg"
-                      />
-                    </div>
-                  </div>
-
                   <div className={styles.formGroup}>
-                    <label htmlFor="aminoacids" className={styles.formLabel}>
-                      Aminoácidos
-                    </label>
-                    <textarea
-                      id="aminoacids"
-                      name="aminoacids"
-                      value={nutritionalInfo.aminoacids}
-                      onChange={(e) => setNutritionalInfo({ ...nutritionalInfo, aminoacids: e.target.value })}
-                      className={styles.formTextarea}
-                      placeholder="Ej: leucina: 2.5g;isoleucina: 1.5g;valina: 1.6g;glutamina: 4.8g"
-                      rows={3}
-                    ></textarea>
-                    <p className={styles.fieldHelp}>
-                      Introduce los aminoácidos separados por punto y coma (;) en formato `nombre: valor`
-                    </p>
+                    <label className={styles.formLabel}>Imagen información nutricional</label>
+                    <div
+                      className={styles.imageUploadContainer}
+                      onClick={() => nutritionalFileInputRef.current?.click()}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {nutritionalImage ? (
+                        <div className={styles.uploadedImageContainer}>
+                          <Image
+                            src={nutritionalImage || "/placeholder.svg"}
+                            alt="Vista previa de la información nutricional"
+                            width={200}
+                            height={200}
+                            className={styles.uploadedImage}
+                          />
+                          <button
+                            type="button"
+                            className={styles.removeImageButton}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setNutritionalImage(null)
+                            }}
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className={styles.uploadPlaceholder}>
+                          <Upload size={32} />
+                          <p>Haz clic para subir la imagen</p>
+                          <span>o arrastra y suelta</span>
+                        </div>
+                      )}
+                      <input
+                        type="file"
+                        ref={nutritionalFileInputRef}
+                        onChange={handleNutritionalImageUpload}
+                        accept="image/*"
+                        className={styles.fileInput}
+                        hidden
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

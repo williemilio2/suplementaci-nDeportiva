@@ -1,13 +1,15 @@
 
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { CheckCircle, Package, Truck, Calendar, ChevronRight, Download, MapPin } from "lucide-react"
 import styles from "../checkout.module.css"
 import CustomCursor from "@/src/components/customCursor"
 import { useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+import * as XLSX from "xlsx"
 interface ProductoProcesado {
   nombre: string
   tipo: string
@@ -27,17 +29,94 @@ interface CompraData {
 //e
 export default function CompletePage() {
   const router = useRouter()
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
   const [compraData, setCompraData] = useState<CompraData | null>(null)
   const [productosTransformados, setProductosTransformados] = useState<ProductoProcesado[]>([])
+  const [loading, setLoading] = useState(true);
+    const firstRender = useRef(true);
+  const exportarFactura = () => {
+    if (!compraData || productosTransformados.length === 0) return
 
-  useEffect(() => {
-    const pedido = localStorage.getItem('pedido')
-    if (!pedido) {
-      router.push('/')
-      return
+    const data = productosTransformados.map((item) => ({
+      Producto: item.nombre,
+      Tipo: item.tipo || "-",
+      Sabor: item.sabor,
+      Tamaño: item.tamano,
+      Cantidad: item.cantidad,
+      "Precio unitario (€)": (item.dinero / item.cantidad).toFixed(2),
+      "Total (€)": item.dinero.toFixed(2),
+      Descuento: item.finalDiscount > 0 ? `-${item.finalDiscount.toFixed(2)}€` : "0€",
+    }))
+
+  data.push(
+    {
+      Producto: "",
+      Tipo: "",
+      Sabor: "",
+      Tamaño: "",
+      Cantidad: 0,
+      "Precio unitario (€)": "",
+      "Total (€)": "",
+      Descuento: ""
+    },
+    {
+      Producto: "Subtotal",
+      Tipo: "",
+      Sabor: "",
+      Tamaño: "",
+      Cantidad: 0,
+      "Precio unitario (€)": "",
+      "Total (€)": subtotal.toFixed(2),
+      Descuento: ""
+    },
+    {
+      Producto: "TOTAL FINAL",
+      Tipo: "",
+      Sabor: "",
+      Tamaño: "",
+      Cantidad: 0,
+      "Precio unitario (€)": "",
+      "Total (€)": total.toFixed(2),
+      Descuento: ""
     }
+  )
 
-    const datos = JSON.parse(pedido)
+    const worksheet = XLSX.utils.json_to_sheet(data)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Factura")
+
+    const fileName = `factura_pedido_${compraData.id}.xlsx`
+    XLSX.writeFile(workbook, fileName)
+  }
+  useEffect(() => {
+  if (!sessionId) {
+    router.push("/"); // No hay session_id en la URL
+    return;
+  }
+
+  fetch(`/api/verificarPagoStripe?session_id=${sessionId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.pagoExitoso) {
+        router.push("/"); // Redirige si Stripe no valida el pago
+      } else {
+        setLoading(false); // Validado => sigue el flujo normal
+      }
+    })
+    .catch(err => {
+      console.error("Error validando sesión:", err);
+      router.push("/");
+    });
+}, [sessionId, router]);
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return; // ignora el primer render
+    }
+    const pedido = localStorage.getItem('pedido')
+    
+    const datos = JSON.parse(pedido ? pedido : '')
   setCompraData(datos)
     fetch('/api/meterDatosCompras', {
       method: 'POST',
@@ -56,7 +135,7 @@ export default function CompletePage() {
       .catch(err => {
         console.error('Error al conectar con la API:', err)
       })
-  }, [router])
+  }, [loading])
   useEffect(() => {
     if (!compraData) return
 
@@ -108,7 +187,9 @@ export default function CompletePage() {
     month: "long",
     day: "numeric",
   })
-
+  if (loading) {
+    return <p className={styles.loadingMessage}>Validando pago...</p>;
+  }
   return (
     <div className={styles.checkoutContainer}>
         <CustomCursor />
@@ -208,11 +289,11 @@ export default function CompletePage() {
             </div>
 
             <div className={styles.completeActions}>
-              <button className={styles.invoiceButton}>
+              <button className={`${styles.invoiceButton} hoverable`} onClick={exportarFactura}>
                 <Download size={18} />
                 Descargar factura
               </button>
-              <Link href="/pedidos" className={styles.viewOrdersButton}>
+              <Link href="/pedidos" className={`${styles.viewOrdersButton} hoverable`}>
                 Ver mis pedidos <ChevronRight size={18} />
               </Link>
             </div>
@@ -252,10 +333,6 @@ export default function CompletePage() {
                   <span>Subtotal</span>
                   <span>{subtotal.toFixed(2)}€</span>
                 </div>
-                <div className={styles.summaryRow}>
-                  <span>Envío</span>
-                  <span>{shipping.toFixed(2)}€</span>
-                </div>
                 <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
                   <span>Total</span>
                   <span>{total.toFixed(2)}€</span>
@@ -266,7 +343,7 @@ export default function CompletePage() {
             <div className={styles.helpSection}>
               <h3>¿Necesitas ayuda?</h3>
               <p>Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.</p>
-              <Link href="/contacto" className={styles.contactLink}>
+              <Link href="/contacto" className={`${styles.contactLink} hoverable`}>
                 Contactar con soporte
               </Link>
             </div>

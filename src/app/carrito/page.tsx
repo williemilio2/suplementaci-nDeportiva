@@ -135,7 +135,6 @@ export default function Carrito() {
               reviews: 0,
               marca: "",
               tipo: "",
-              colesterol: "",
               slug: "",
               informacionAlergenos: "",
               infoIngredientes: "",

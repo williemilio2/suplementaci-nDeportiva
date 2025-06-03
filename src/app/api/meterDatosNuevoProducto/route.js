@@ -1,5 +1,3 @@
-// File: app/api/meterDatosNuevoProducto/route.js
-
 import { writeFile } from 'fs/promises'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
@@ -9,79 +7,71 @@ import { client } from '@/src/lib/db'
 export async function POST(req) {
   try {
     const formData = await req.formData()
-    console.log(formData)
     const general = JSON.parse(formData.get('general'))
-    const slug = general.name.trim().toLowerCase().replace(/\s+/g, '-')
-    const nutricional = JSON.parse(formData.get('nutricional'))
     const stock = JSON.parse(formData.get('stock'))
-    const base64Image = formData.get('image') // String: 'data:image/webp;base64,...'
 
-    // Extraer el formato desde el base64 (ej: webp)
-    const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/)
-    if (!matches || matches.length !== 3) {
-      throw new Error('Formato de imagen base64 inválido')
+    const slug = general.name.trim().toLowerCase().replace(/\s+/g, '-')
+
+    // Imagen principal
+    const base64Image = formData.get('image')
+    if (!base64Image) throw new Error('Falta la imagen principal')
+
+    // Imagen nutricional
+    const base64Nutritional = formData.get('nutritionalImage') // puede ser null
+
+    // Función auxiliar para guardar imagen base64 y devolver ruta
+    async function saveBase64Image(base64Str) {
+      const matches = base64Str.match(/^data:image\/(\w+);base64,(.+)$/)
+      if (!matches || matches.length !== 3) {
+        throw new Error('Formato de imagen base64 inválido')
+      }
+      const extension = matches[1]
+      const data = matches[2]
+      const filename = `${uuidv4()}.${extension}`
+      const imagePath = path.join(process.cwd(), 'public', filename)
+      const buffer = Buffer.from(data, 'base64')
+      await writeFile(imagePath, buffer)
+      return `/${filename}`
     }
 
-    const extension = matches[1]
-    const data = matches[2]
-    const filename = `${uuidv4()}.${extension}`
-    const imagePath = path.join(process.cwd(), 'public', filename)
+    const productImagePath = await saveBase64Image(base64Image)
 
-    // Guardar imagen en /public
-    const buffer = Buffer.from(data, 'base64')
-    await writeFile(imagePath, buffer)
+    let nutritionalImagePath = null
+    if (base64Nutritional) {
+      nutritionalImagePath = await saveBase64Image(base64Nutritional)
+    }
 
-    // Guardar en productos
+    // Insertar producto con imagen nutricional
     const insertedProduct = await client.execute(
-      `INSERT INTO productos (name, description, marca, tipo, modoDeUso, recomendacionesDeUso, badge, categoriaEspecial, informacionAlergenos, image, colesterol, sabores, superOfertas, slug, infoIngredientes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?) RETURNING id`,
+      `INSERT INTO productos (
+         name, description, marca, tipo, modoDeUso,
+         badge, categoriaEspecial, informacionAlergenos, image,
+         sabores, superOfertas, slug, infoIngredientes, formato,
+         imagenInfoNutricional
+       )
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
       [
         general.name,
         general.description,
         general.brand,
         general.type,
         general.usage,
-        general.usageRecommendations,
         general.badge,
         general.specialCategories,
         general.allergenInfo,
-        `/${filename}`,
-        general.cholesterol,
+        productImagePath,
         general.flavors,
         general.superOffers,
         slug,
         general.ingredients,
+        general.formato,
+        nutritionalImagePath ?? "", // por si no se envía
       ]
     )
 
     const productId = insertedProduct.rows[0].id
 
-    // Guardar información nutricional
-    await client.execute(
-      `INSERT INTO informacion_nutricional (product_id, calorias, proteinas, grasas, carbohidratos, fibra, azucares, sal, grasasSaturadas, sodio, hierro, calcio, vitaminaD, vitaminaB12, aminoacidos, enzimasDigestivas, porcion)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        productId,
-        nutricional.calories,
-        nutricional.proteins,
-        nutricional.fats,
-        nutricional.carbs,
-        nutricional.fiber,
-        nutricional.sugars,
-        nutricional.salt,
-        nutricional.saturatedFats,
-        nutricional.sodium,
-        nutricional.iron,
-        nutricional.calcium,
-        nutricional.vitaminD,
-        nutricional.vitaminB12,
-        nutricional.aminoacids,
-        nutricional.digestiveEnzymes,
-        nutricional.serving,
-      ]
-    )
-
-    // Guardar stock
+    // Guardar variantes de stock
     for (const variant of stock) {
       await client.execute(
         `INSERT INTO stock (product_id, sabor, tamano, cantidad, precio, oferta)

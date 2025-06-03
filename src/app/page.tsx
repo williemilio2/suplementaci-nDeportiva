@@ -1,5 +1,5 @@
 
-import PromoBanner from '../components/PromoBanner';
+//import PromoBanner from '../components/PromoBanner';
 import HeroBanner from '../components/HeroBanner';
 import CategoryContent from '../components/CategoryContent';
 import OfertaDia from '../components/OfertaDelDia';
@@ -12,7 +12,6 @@ export default function Home() {
     <main>
       <CustomCursor />
       <ClubPopup />
-      <PromoBanner />
       <HeroBanner />
       <OfertaDia />
       <CategoryContent />

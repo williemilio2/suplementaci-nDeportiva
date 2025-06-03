@@ -31,13 +31,32 @@ export default function EnvioPage() {
     codigoPostal: "",
     pais: "España",
     numero: "",
-    bloque: ""
+    bloque: "",
+    extra: ""
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [codigoProvisional, setCodigoProvisional] = useState("")
+  const [descuentoCodigo, setDescuentoCodigo] = useState(0)
   const compraData = useCompraStore((state) => state.datosCompra)
   const [selectedShipping, setSelectedShipping] = useState(1)
+  const [yaTieneUnaCompraEnSuCuenta, setYaTieneUnaCompraEnSuCuenta] = useState(false)
   const [productosTransformados, setProductosTransformados] = useState<ProductoProcesado[]>([])
 
+  useEffect(() => {
+    const token = Cookies.get("token")
+    fetch("/api/comrpobarUsuarioClubAfiliados", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.resultado && data.resultadoAmedias) {
+          setYaTieneUnaCompraEnSuCuenta(true)
+        }
+      })
+      .catch(console.error)
+  }, [])
   const shippingOptions = [
     {
       id: 1,
@@ -47,7 +66,17 @@ export default function EnvioPage() {
       icon: <Truck size={20} />,
     },
   ]
-
+  const validarCodigo = () => {
+    if(yaTieneUnaCompraEnSuCuenta){ alert('solo puedes usar el codigo promocional en tu priemra compra'); return}
+    const codigoUpper = codigoProvisional.trim().toUpperCase()
+    if (codigoUpper === "BIENVENIDA" || codigoUpper === "EMILIO") {
+      setDescuentoCodigo(0.10) // 10%
+      alert("Código válido, se aplicó un 10% de descuento")
+    } else {
+      setDescuentoCodigo(0)
+      alert("Código inválido")
+    }
+  }
 
   // Procesar productos cuando cambien los datos
   useEffect(() => {
@@ -93,7 +122,8 @@ export default function EnvioPage() {
 
   const subtotal = compraData?.precioTotal || 0
   const shipping = subtotal >= 35 ? 0 : 3.99
-  const total = subtotal + shipping
+  const descuentoAmount = subtotal * descuentoCodigo
+  const total = subtotal + shipping - descuentoAmount
   const meterDatosStripe = async (datosbbdd: DatosBBDD) => {
     const productos = datosbbdd.nombres.split('<<<')
     const response = await fetch('/api/create-checkout-session', {
@@ -125,7 +155,7 @@ export default function EnvioPage() {
 
     setIsLoading(true)
 
-    const direccionFinal = `${direccion.ciudad},${direccion.calle},${direccion.numero},${direccion.bloque},${direccion.codigoPostal}`
+    const direccionFinal = `${direccion.ciudad},${direccion.calle},${direccion.numero},${direccion.bloque},${direccion.codigoPostal} | ${direccion.extra}`
     const compraData = useCompraStore.getState().datosCompra
     if (!compraData) return
     // Asegúrate de que estos campos existen en el store
@@ -134,7 +164,7 @@ export default function EnvioPage() {
     const pedidoCompleto = {
       ...compraData,
       direccionFinal,
-      precioTotal: precioTotal + shipping
+      precioTotal: precioTotal + shipping - descuentoAmount
     }
 
     // Guardar en localStorage
@@ -143,8 +173,9 @@ export default function EnvioPage() {
     // Crear el objeto para Stripe
     const resultStripe = {
       nombres: productosComprados,
-      precioTotal: precioTotal,
+      precioTotal: precioTotal - descuentoAmount,
     }
+    alert(resultStripe.precioTotal)
 
     meterDatosStripe(resultStripe)
   }
@@ -251,7 +282,7 @@ export default function EnvioPage() {
 
             <div className={styles.addressForm}>
               <div className={styles.formRow}>
-                <div className={styles.formGroup}>
+                <div className={`${styles.formGroup} hoverable`}>
                   <label htmlFor="calle">Calle *</label>
                   <input
                     type="text"
@@ -263,7 +294,7 @@ export default function EnvioPage() {
                     required
                   />
                 </div>
-                <div className={styles.formGroup}>
+                <div className={`${styles.formGroup} hoverable`}>
                   <label htmlFor="numero">Número *</label>
                   <input
                     type="text"
@@ -278,7 +309,7 @@ export default function EnvioPage() {
               </div>
 
               <div className={styles.formRow}>
-                <div className={styles.formGroup}>
+                <div className={`${styles.formGroup} hoverable`}>
                   <label htmlFor="bloque">Bloque/Portal</label>
                   <input
                     type="text"
@@ -289,7 +320,7 @@ export default function EnvioPage() {
                     className={styles.formInput}
                   />
                 </div>
-                <div className={styles.formGroup}>
+                <div className={`${styles.formGroup} hoverable`}>
                   <label htmlFor="codigoPostal">Código Postal *</label>
                   <input
                     type="text"
@@ -305,7 +336,7 @@ export default function EnvioPage() {
               </div>
 
               <div className={styles.formRow}>
-                <div className={styles.formGroup}>
+                <div className={`${styles.formGroup} hoverable`}>
                   <label htmlFor="ciudad">Ciudad *</label>
                   <input
                     type="text"
@@ -328,15 +359,48 @@ export default function EnvioPage() {
                   />
                 </div>
               </div>
+              <div className={styles.formRow}>
+                <div className={`${styles.formGroup} hoverable`}>
+                  <label htmlFor="ciudad">Informacion extra</label>
+                  <input
+                    type="text"
+                    id="extra"
+                    placeholder="Info extra"
+                    value={direccion.extra}
+                    onChange={(e) => setDireccionLocal({ ...direccion, extra: e.target.value })}
+                    className={styles.formInput}
+                    required
+                  />
+                </div>
+                <div className={`${styles.formGroup} hoverable`} style={{display: 'flex'}}>
+                  <label htmlFor="codigoProvisional">Código provisional</label>
+                  <input
+                    type="text"
+                    id="codigoProvisional"
+                    placeholder="Introduce un código"
+                    value={codigoProvisional}
+                    onChange={(e) => setCodigoProvisional(e.target.value)}
+                    className={styles.formInput}
+                  />
+                  <button
+                    type="button"
+                    onClick={validarCodigo}
+                    className={styles.continueButton}
+                    style={{ marginTop: '0.5rem' }}
+                  >
+                    Aplicar código
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className={styles.formActions}>
-            <Link href="/carrito" className={styles.backButton}>
+            <Link href="/carrito" className={`${styles.backButton} hoverable`}>
               Volver al carrito
             </Link>
             <button
-              className={`${styles.continueButton} ${isLoading ? styles.loading : ""}`}
+              className={`${styles.continueButton} ${isLoading ? styles.loading : ""} hoverable`}
               onClick={handleContinue}
               disabled={isLoading}
             >
@@ -384,6 +448,12 @@ export default function EnvioPage() {
                 <span>Subtotal</span>
                 <span>{subtotal.toFixed(2)}€</span>
               </div>
+              {descuentoCodigo > 0 && (
+                <div className={styles.summaryRow} style={{ color: 'green' }}>
+                  <span>Descuento código</span>
+                  <span>-{descuentoAmount.toFixed(2)}€</span>
+                </div>
+              )}
               <div className={styles.summaryRow}>
                 <span>Envío</span>
                 {shipping === 0 ? (

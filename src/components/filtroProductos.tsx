@@ -18,6 +18,9 @@ interface ProductFiltersProps {
   sabores: string[]
   selectedSabores: string[]
   setSelectedSabores: (sabores: string[]) => void
+  formatos: string[]
+  selectedFormatos: string[]
+  setSelectedFormatos: (formatos: string[]) => void
   selectedRating: number
   setSelectedRating: (rating: number) => void
   showOffers: boolean
@@ -42,6 +45,9 @@ export default function ProductFilters({
   sabores,
   selectedSabores,
   setSelectedSabores,
+  formatos, 
+  selectedFormatos,
+  setSelectedFormatos, 
   selectedRating,
   setSelectedRating,
   showOffers,
@@ -60,7 +66,9 @@ export default function ProductFilters({
   const [marcaSearchTerm, setMarcaSearchTerm] = useState("")
   const [saborSearchTerm, setSaborSearchTerm] = useState("")
   const [tipoSearchTerm, setTipoSearchTerm] = useState("")
-
+  const [showFormatosDropdown, setShowFormatosDropdown] = useState(false);
+  const [formatoSearchTerm, setFormatoSearchTerm] = useState("");
+  const formatosDropdownRef = useRef<HTMLDivElement>(null);
   // Refs para los dropdowns
   const marcasDropdownRef = useRef<HTMLDivElement>(null)
   const saboresDropdownRef = useRef<HTMLDivElement>(null)
@@ -72,7 +80,8 @@ export default function ProductFilters({
 
   // Filtrar sabores según el término de búsqueda
   const filteredSabores = sabores.filter((sabor) => sabor.toLowerCase().includes(saborSearchTerm.toLowerCase()))
-
+  //Formatos
+  const filteredFormatos = formatos.filter((formato) => formato.toLowerCase().includes(formatoSearchTerm.toLowerCase()));
   // Filtrar tipos según el término de búsqueda
   const filteredTipos = tipos.filter((tipo) => tipo.toLowerCase().includes(tipoSearchTerm.toLowerCase()))
 
@@ -93,7 +102,13 @@ export default function ProductFilters({
       setSelectedSabores([...selectedSabores, sabor])
     }
   }
-
+  const toggleFormato = (formato: string) => {
+    if (selectedFormatos.includes(formato)) {
+      setSelectedFormatos(selectedFormatos.filter((f) => f !== formato));
+    } else {
+      setSelectedFormatos([...selectedFormatos, formato]);
+    }
+  };
   // Función para alternar un tipo en la selección
   const toggleTipo = (tipo: string) => {
     if (selectedTipos.includes(tipo)) {
@@ -115,6 +130,9 @@ export default function ProductFilters({
       if (tiposDropdownRef.current && !tiposDropdownRef.current.contains(event.target as Node)) {
         setShowTiposDropdown(false)
       }
+      if (formatosDropdownRef.current && !formatosDropdownRef.current.contains(event.target as Node)) {
+        setShowFormatosDropdown(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside)
@@ -134,7 +152,10 @@ export default function ProductFilters({
     if (!showTiposDropdown) {
       setTipoSearchTerm("")
     }
-  }, [showMarcasDropdown, showSaboresDropdown, showTiposDropdown])
+    if (!showFormatosDropdown) {
+      setFormatoSearchTerm("");
+    }
+  }, [showMarcasDropdown, showSaboresDropdown, showTiposDropdown, showFormatosDropdown])
 
   // Manejar clic en el overlay para cerrar filtros en móvil
   const handleOverlayClick = () => {
@@ -349,7 +370,64 @@ export default function ProductFilters({
             )}
           </div>
         </div>
-
+        {/* Filtro de formato */}
+        <div className={styles.filterSection}>
+          <h3 className={styles.filterTitle}>Formato</h3>
+          <div className={styles.customSelect}>
+            <div
+              onClick={() => setShowFormatosDropdown(!showFormatosDropdown)}
+              className={`${styles.selectHeader} hoverable`}
+            >
+              <span>
+                {selectedFormatos.length === 0
+                  ? "Todos los formatos"
+                  : selectedFormatos.length === 1
+                    ? selectedFormatos[0]
+                    : `${selectedFormatos.length} formatos seleccionados`}
+              </span>
+              <ChevronDown
+                size={16}
+                className={`${styles.dropdownIcon} ${showFormatosDropdown ? styles.dropdownIconOpen : ""}`}
+              />
+            </div>
+            {showFormatosDropdown && (
+              <div ref={formatosDropdownRef} className={styles.selectDropdown}>
+                <div className={styles.searchContainer}>
+                  <input
+                    type="text"
+                    placeholder="Buscar formato..."
+                    value={formatoSearchTerm}
+                    onChange={(e) => setFormatoSearchTerm(e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
+                    className={`${styles.searchInput} hoverable`}
+                  />
+                </div>
+                <div className={styles.optionsContainer}>
+                  {filteredFormatos.map((formato) => (
+                    <div
+                      key={formato}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFormato(formato);
+                      }}
+                      className={`${styles.optionItem} ${selectedFormatos.includes(formato) ? styles.optionSelected : ""} hoverable`}
+                    >
+                      <div className={styles.checkboxContainer}>
+                        <div
+                          className={`${styles.checkbox} ${selectedFormatos.includes(formato) ? styles.checkboxChecked : ""}`}
+                        >
+                          {selectedFormatos.includes(formato) && <Check size={12} />}
+                        </div>
+                      </div>
+                      <span>{formato}</span>
+                    </div>
+                  ))}
+                  {filteredFormatos.length === 0 && <div className={styles.noResults}>No se encontraron formatos</div>}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
         {/* Filtro de ofertas */}
         <div className={styles.filterSection}>
           <h3 className={styles.filterTitle}>Ofertas</h3>
