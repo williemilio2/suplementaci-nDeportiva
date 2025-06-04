@@ -1,21 +1,79 @@
+import type { Metadata } from "next"
+import HeroBanner from "../components/HeroBanner"
+import CategoryContent from "../components/CategoryContent"
+import OfertaDia from "../components/OfertaDelDia"
+import ProductListing from "../components/Product-listing"
+import CustomCursor from "../components/customCursor"
+import ClubPopup from "../components/clubPopup"
 
-//import PromoBanner from '../components/PromoBanner';
-import HeroBanner from '../components/HeroBanner';
-import CategoryContent from '../components/CategoryContent';
-import OfertaDia from '../components/OfertaDelDia';
-import ProductListing from '../components/Product-listing';
-import CustomCursor from '../components/customCursor';
-import ClubPopup from '../components/clubPopup';
+export const metadata: Metadata = {
+  title: "Inicio - Tu Tienda de Suplementos",
+  description:
+    "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva. Envío gratuito en pedidos superiores a 50€.",
+  openGraph: {
+    title: "Tu Tienda de Suplementos - Ofertas en Proteínas y Suplementos",
+    description: "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva.",
+    images: ["/og-home.jpg"],
+  },
+  alternates: {
+    canonical: "/",
+  },
+}
+
+// Generar datos estructurados para la página principal
+function generateHomeStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Tu Tienda de Suplementos - Inicio",
+    description: "Tienda online de suplementos deportivos, proteínas y nutrición deportiva",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    mainEntity: {
+      "@type": "Store",
+      name: "Tu Tienda de Suplementos",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Catálogo de Suplementos Deportivos",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Proteínas",
+              category: "Suplementos Deportivos",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Aminoácidos",
+              category: "Suplementos Deportivos",
+            },
+          },
+        ],
+      },
+    },
+  }
+}
 
 export default function Home() {
   return (
-    <main>
-      <CustomCursor />
-      <ClubPopup />
-      <HeroBanner />
-      <OfertaDia />
-      <CategoryContent />
-      <ProductListing />
-    </main>
-  );
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateHomeStructuredData()),
+        }}
+      />
+      <main>
+        <CustomCursor />
+        <ClubPopup />
+        <HeroBanner />
+        <OfertaDia />
+        <CategoryContent />
+        <ProductListing />
+      </main>
+    </>
+  )
 }

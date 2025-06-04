@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['via.placeholder.com', 'q2qwccah9hqmefmy.public.blob.vercel-storage.com'],
+    domains: ["q2qwccah9hqmefmy.public.blob.vercel-storage.com"],
   },
 };
 

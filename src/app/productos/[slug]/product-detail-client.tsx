@@ -662,8 +662,14 @@ export default function ProductDetailClient({ producto }: { producto: Product })
                     {producto.imagenInfoNutricional && (
                       <div className={styles.nutritionInfo}>
                         <h4>Información nutricional</h4>
-                        <div style={{display: 'flex', justifyContent: 'center'}}>
-                          <Image src={producto.imagenInfoNutricional} width={200} height={200} alt="Información nutricional" />
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <Image
+                            src={producto.imagenInfoNutricional}
+                            alt="Información nutricional"
+                            width={1000}
+                            height={800}
+                            style={{ width: '90%', height: 'auto' }}
+                          />
                         </div>
                       </div>
                     )}

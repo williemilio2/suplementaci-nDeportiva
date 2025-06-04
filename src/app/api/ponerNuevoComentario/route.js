@@ -17,19 +17,6 @@ export async function POST(req) {
       fecha,
     } = body;
 
-    // Validación básica
-    if (
-      !usuarioValoracion ||
-      !productoValoracion ||
-      !tituloValoracion ||
-      !textoValoracion ||
-      nota == null ||
-      !fecha
-    ) {
-      console.warn("⚠️ Faltan campos en la solicitud");
-      return NextResponse.json({ error: "Faltan campos" }, { status: 400 });
-    }
-
     console.log("📝 Insertando en base de datos...");
     const result = await client.execute(
       `INSERT INTO valoraciones 

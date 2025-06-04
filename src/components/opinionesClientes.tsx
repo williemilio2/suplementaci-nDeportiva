@@ -270,16 +270,6 @@ export default function OpinionesClientes({ productoId, rating, totalReviews }: 
       return
     }
 
-    if (!nuevaOpinion.titulo.trim()) {
-      alert("Por favor, añade un título a tu opinión")
-      return
-    }
-
-    if (!nuevaOpinion.comentario.trim()) {
-      alert("Por favor, escribe un comentario")
-      return
-    }
-
     // En una aplicación real, aquí enviarías la opinión a tu API
     // Ejemplo: await fetch('/api/opiniones', { method: 'POST', body: JSON.stringify(nuevaOpinion) })
 
@@ -403,7 +393,6 @@ export default function OpinionesClientes({ productoId, rating, totalReviews }: 
                   placeholder="Resume tu opinión"
                   value={nuevaOpinion.titulo}
                   onChange={(e) => setNuevaOpinion({ ...nuevaOpinion, titulo: e.target.value })}
-                  required
                 />
               </div>
               <div className={styles.formularioGrupo}>
@@ -412,7 +401,6 @@ export default function OpinionesClientes({ productoId, rating, totalReviews }: 
                   placeholder="Comparte tu experiencia con este producto"
                   value={nuevaOpinion.comentario}
                   onChange={(e) => setNuevaOpinion({ ...nuevaOpinion, comentario: e.target.value })}
-                  required
                 ></textarea>
               </div>
               <button type="submit" className={styles.formularioBotonEnviar}>

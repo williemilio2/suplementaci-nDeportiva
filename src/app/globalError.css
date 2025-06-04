@@ -1,0 +1,78 @@
+.global-error-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb; /* bg-gray-50 */
+}
+
+.global-error-box {
+  max-width: 28rem; /* max-w-md */
+  width: 100%;
+  text-align: center;
+}
+
+.global-error-heading {
+  font-size: 3.75rem; /* text-6xl */
+  font-weight: 700;
+  color: #dc2626; /* text-red-600 */
+  margin-bottom: 1rem;
+}
+
+.global-error-subheading {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600;
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 1rem;
+}
+
+.global-error-description {
+  color: #4b5563; /* text-gray-600 */
+  margin-bottom: 2rem;
+}
+
+.global-error-button {
+  display: inline-block;
+  background-color: #dc2626;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.global-error-button:hover {
+  background-color: #b91c1c;
+}
+
+.global-error-link {
+  display: inline-block;
+  background-color: #4b5563;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.global-error-link:hover {
+  background-color: #374151;
+}
+
+.global-error-details {
+  margin-top: 2rem;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #6b7280; /* text-gray-500 */
+}
+
+.global-error-pre {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow: auto;
+}
