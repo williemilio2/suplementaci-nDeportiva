@@ -14,46 +14,44 @@ export default function Navigation() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const navItems = [
-    {
-      name: "Suplementos",
-      hasDropdown: true,
-      dropdownContent: [
-        {
-          title: "Ganar músculo",
-          icon: BicepsFlexed,
-          links: [
-            { nameLink: "Proteina", linkUrl: "/especiales?t=%//%)proteina" },
-            { nameLink: "Mass gainer", linkUrl: "/especiales?t=%//%)massGainer" },
-            { nameLink: "Creatina", linkUrl: "/especiales?t=%//%)Creatina" },
-          ],
-        },
-        {
-          title: "Mejorar salud",
-          icon: Salad,
-          links: [
-            { nameLink: "Vitaminas C", linkUrl: "/especiales?t=%//%)vitaminaC" },
-            { nameLink: "Omega-3", linkUrl: "/especiales?t=%//%)Omega-3" },
-            { nameLink: "Multivitamínicos", linkUrl: "/especiales?t=%//%)Multivitamínicos" },
-          ],
-        },
-        {
-          title: "Perder grasa",
-          icon: Cross,
-          links: [
-            { nameLink: "Quemadores de grasa", linkUrl: "/especiales?t=%//%)QuemadoresGrasa" },
-          ],
-        },
-        {
-          title: "Recuperación",
-          icon: CircleFadingArrowUp,
-          links: [
-            { nameLink: "Glutamina", linkUrl: "/especiales?t%//%)=Glutamina" },
-            { nameLink: "BCAAs", linkUrl: "/especiales?t=%//%)BCAAs" },
-            { nameLink: "EAAs", linkUrl: "/especiales?t=%//%)EAAs" },
-          ],
-        },
-      ],
-    },
+{
+    name: "Suplementos",
+    hasDropdown: true,
+    dropdownContent: [
+      {
+        title: "Ganar músculo",
+        icon: BicepsFlexed,
+        links: [
+          { nameLink: "Proteina", linkUrl: "/tipo/proteina" },
+          { nameLink: "Mass gainer", linkUrl: "/tipo/mass-gainer" },
+          { nameLink: "Creatina", linkUrl: "/tipo/creatina" },
+        ],
+      },
+      {
+        title: "Mejorar salud",
+        icon: Salad,
+        links: [
+          { nameLink: "Vitaminas C", linkUrl: "/tipo/vitamina-c" },
+          { nameLink: "Omega-3", linkUrl: "/tipo/omega-3" },
+          { nameLink: "Multivitamínicos", linkUrl: "/tipo/multivitaminicos" },
+        ],
+      },
+      {
+        title: "Perder grasa",
+        icon: Cross,
+        links: [{ nameLink: "Quemadores de grasa", linkUrl: "/tipo/quemadores-grasa" }],
+      },
+      {
+        title: "Recuperación",
+        icon: CircleFadingArrowUp,
+        links: [
+          { nameLink: "Glutamina", linkUrl: "/tipo/glutamina" },
+          { nameLink: "BCAAs", linkUrl: "/tipo/bcaas" },
+          { nameLink: "EAAs", linkUrl: "/tipo/eaas" },
+        ],
+      },
+    ],
+  },
     /*{
       name: "Ofertas",
       hasDropdown: true,

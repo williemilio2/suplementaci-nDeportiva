@@ -123,7 +123,7 @@ export default function DailyOffer() {
 
         {/* Botón para ver todas las ofertas */}
         <div className={styles.viewAllContainer}>
-          <Link href="/especiales?t=OfertaDelDia" className={`${styles.viewAllButton} hoverable`}>
+          <Link href="/especiales/OfertaDelDia" className={`${styles.viewAllButton} hoverable`}>
             <span>Ver las demás ofertas</span>
             <ArrowRight size={18} />
           </Link>

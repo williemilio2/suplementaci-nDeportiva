@@ -1,7 +1,9 @@
 "use client"
 
+// Modificar tu componente Product-listing.tsx para incluir Schema.org
 import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react"
 import { useEffect, useState, useRef, useCallback } from "react"
+import CategorySchema from "./CategorySchema"
 import OfferProductCard from "./ContenedorPorducto"
 import styles from "../styles/Product-listing.module.css"
 import ProductFilters from "./filtroProductos"
@@ -19,6 +21,7 @@ interface ProductListingProps {
   displayMode?: "grid" | "column"
   title?: string
   coleccionEspecial?: string
+  tipoDeTipo?: string // Nueva prop para filtrar por tipo
 }
 
 // Interfaz para almacenar los precios y ofertas de los productos
@@ -29,13 +32,14 @@ interface ProductPricing {
   }
 }
 
+// Asumiendo que este es tu componente existente, añadimos el Schema
 export default function ProductListing({
   searchTerm,
   displayMode = "grid",
   title = "Suplementos Deportivos",
   coleccionEspecial,
+  tipoDeTipo,
 }: ProductListingProps) {
-  // Estado para los productos
   const [allProducts, setAllProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -90,8 +94,9 @@ export default function ProductListing({
     loadProducts()
   }, [])
 
-  // Filtrar por colección especial si existe
+  // Filtrar por colección especial o tipo si existe
   let baseProducts = allProducts
+
   if (coleccionEspecial && allProducts.length > 0) {
     const filteredProducts = especiales(coleccionEspecial)
     // Asegurarse de que todos los productos tengan los campos requeridos
@@ -101,6 +106,11 @@ export default function ProductListing({
       image: p.image || "",
       tipo: p.tipo || "",
     })) as Product[]
+  } else if (tipoDeTipo && allProducts.length > 0) {
+    // Filtrar por tipo de producto
+    baseProducts = allProducts.filter(
+      (product) => product.tipo && product.tipo.toLowerCase().includes(tipoDeTipo.toLowerCase()),
+    )
   }
 
   // Filtrar por término de búsqueda si existe
@@ -139,8 +149,13 @@ export default function ProductListing({
     return saboresString.split("<<<").filter(Boolean)
   }
 
-  const sabores = [...new Set(searchFilteredProducts.flatMap((product) => extractSabores(product.sabores)))].filter(Boolean).sort()
-  const formatos = [...new Set(searchFilteredProducts.map((product) => product.formato))].filter((formato): formato is string => Boolean(formato)).sort()
+  const sabores = [...new Set(searchFilteredProducts.flatMap((product) => extractSabores(product.sabores)))]
+    .filter(Boolean)
+    .sort()
+  const formatos = [...new Set(searchFilteredProducts.map((product) => product.formato))]
+    .filter((formato): formato is string => Boolean(formato))
+    .sort()
+
   // Inicializar la lista de productos a cargar
   useEffect(() => {
     productsToLoad.current = searchFilteredProducts.map((product) => product.id)
@@ -419,14 +434,14 @@ export default function ProductListing({
     setCurrentPage(0)
   }, [priceRange, selectedMarcas, selectedTipos, selectedFormatos, selectedSabores, selectedRating, showOffers, sortBy])
 
-  // Resetear a la primera página cuando cambia la colección especial
+  // Resetear a la primera página cuando cambia la colección especial o tipo
   useEffect(() => {
     setCurrentPage(0)
     // Reiniciar el estado de precios cuando cambia la colección
     setProductPricing({})
     setIsLoadingPrices(true)
     pricesInitialized.current = false
-  }, [coleccionEspecial, searchTerm])
+  }, [coleccionEspecial, tipoDeTipo, searchTerm])
 
   // Efecto para forzar la actualización del estado de carga de precios después de un tiempo
   useEffect(() => {
@@ -471,6 +486,9 @@ export default function ProductListing({
     }
   }, [productPricing, searchFilteredProducts, isLoadingPrices])
 
+  // Formatear el título para mostrar
+  const displayTitle = title || (coleccionEspecial ? coleccionEspecial.replace(/%\/\/%/g, " ") : "Todos los productos")
+
   // Mostrar pantalla de carga mientras se cargan los productos
   if (loading) {
     return (
@@ -489,7 +507,6 @@ export default function ProductListing({
 
   return (
     <div className={styles.productListingContainer}>
-
       {/* Componentes StockAutoSelector solo para productos que aún no tienen precio */}
       {productsToLoad.current.map((productId) => (
         <StockAutoSelector
@@ -498,6 +515,14 @@ export default function ProductListing({
           onFound={({ price, offer }) => handlePriceFound(productId, price, offer)}
         />
       ))}
+
+      {/* Añadir Schema.org para la categoría */}
+      {!loading && searchFilteredProducts.length > 0 && (
+        <CategorySchema
+          category={displayTitle}
+          products={searchFilteredProducts.slice(0, 20)} // Limitar a 20 productos para el schema
+        />
+      )}
 
       {/* Barra superior con controles */}
       <div className={styles.listingHeader}>
@@ -508,12 +533,20 @@ export default function ProductListing({
               : coleccionEspecial
                 ? `Colección: ${
                     coleccionEspecial
-                      .replace(/[^a-zA-Z0-9\s]/g, '')      // eliminar símbolos raros
-                      .replace(/(?!^)([A-Z])/g, ' $1')     // poner espacios antes de mayúsculas (excepto la primera)
+                      .replace(/[^a-zA-Z0-9\s]/g, "") // eliminar símbolos raros
+                      .replace(/(?!^)([A-Z])/g, " $1") // poner espacios antes de mayúsculas (excepto la primera)
                       .toLowerCase()
-                      .replace(/^./, c => c.toUpperCase()) // primera letra en mayúscula
+                      .replace(/^./, (c) => c.toUpperCase()) // primera letra en mayúscula
                   }`
-                : title}
+                : tipoDeTipo
+                  ? `Tipo: ${
+                      tipoDeTipo
+                        .replace(/[^a-zA-Z0-9\s]/g, "") // eliminar símbolos raros
+                        .replace(/(?!^)([A-Z])/g, " $1") // poner espacios antes de mayúsculas (excepto la primera)
+                        .toLowerCase()
+                        .replace(/^./, (c) => c.toUpperCase()) // primera letra en mayúscula
+                    }`
+                  : title}
           </h1>
           <p className={styles.resultsCount}>
             Mostrando {cantidadProductos > 0 ? inicio + 1 : 0}-{fin} de {cantidadProductos} productos

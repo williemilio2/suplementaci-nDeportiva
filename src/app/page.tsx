@@ -9,15 +9,15 @@ import ClubPopup from "../components/clubPopup"
 export const metadata: Metadata = {
   title: "Inicio - Tu Tienda de Suplementos",
   description:
-    "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva. Envío gratuito en pedidos superiores a 50€.",
+    "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva. Envío gratuito en pedidos superiores a 34.99€.",
   openGraph: {
     title: "Tu Tienda de Suplementos - Ofertas en Proteínas y Suplementos",
     description: "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva.",
     images: ["/og-home.jpg"],
   },
   alternates: {
-    canonical: "/",
-  },
+    canonical:"https://suplementaciondeportiva.es",
+  }
 }
 
 // Generar datos estructurados para la página principal

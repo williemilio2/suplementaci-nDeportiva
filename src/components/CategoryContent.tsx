@@ -10,12 +10,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function CategoryContent() {
   const images = [
-    { name: "apartadoSlider1", link: "/especiales?t=veganas" },
-    { name: "apartadoSlider2", link: "/especiales?t=veganas" },
-    { name: "apartadoSlider3", link: "/especiales?t=veganas" },
-    { name: "apartadoSlider1", link: "/especiales?t=veganas" },
-    { name: "apartadoSlider2", link: "/especiales?t=veganas" },
-    { name: "apartadoSlider3", link: "/especiales?t=veganas" },
+    { name: "apartadoSlider1", link: "/especiales/veganas" },
+    { name: "apartadoSlider2", link: "/especiales/veganas" },
+    { name: "apartadoSlider3", link: "/especiales/veganas" },
+    { name: "apartadoSlider1", link: "/especiales/veganas" },
+    { name: "apartadoSlider2", link: "/especiales/veganas" },
+    { name: "apartadoSlider3", link: "/especiales/veganas" },
   ]
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
