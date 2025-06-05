@@ -100,9 +100,9 @@ async function generateProductStructuredData(slug: string) {
       offers: {
         "@type": "Offer",
         url: `https://suplementaciondeportiva.es/productos/${slug}`,
-        price: product.price,
+        price: product.price ? product.price.toFixed(2) : "0.00", // Precio mínimo o 0 si no tienes dato
         priceCurrency: "EUR",
-        availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        availability: product.stock && product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         seller: {
           "@type": "Organization",
           name: "Suplementación Deportiva",
