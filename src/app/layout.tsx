@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script" // ✅ AÑADIDO
 import "./globals.css"
 import LayoutWrapper from "../components/layoutWrapper"
 import { EliteProvider } from "@/src/components/eliteContent"
@@ -79,6 +80,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
+
+        {/* ✅ Google Analytics Script */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-0NV8QCMQBF"
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0NV8QCMQBF');
+          `}
+        </Script>
+
+        {/* ✅ JSON-LD Schema.org */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
