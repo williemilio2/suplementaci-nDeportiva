@@ -1,58 +1,85 @@
-"use client"
-import "./globalError.css"
-import type { Metadata } from "next"
-import Link from 'next/link'
+// src/app/page.tsx
+import type { Metadata } from "next";
+import HeroBanner from "../components/HeroBanner";
+import CategoryContent from "../components/CategoryContent";
+import OfertaDia from "../components/OfertaDelDia";
+import ProductListing from "../components/Product-listing";
+import CustomCursor from "../components/customCursor";
+import ClubPopup from "../components/clubPopup";
 
+// SEO Metadata
 export const metadata: Metadata = {
-  title: "Error del servidor - 500",
-  description: "Ha ocurrido un error interno del servidor.",
-  robots: {
-    index: false,
-    follow: false,
+  title: "Inicio - Tu Tienda de Suplementos",
+  description:
+    "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva. Envío gratuito en pedidos superiores a 34.99€.",
+  openGraph: {
+    title: "Tu Tienda de Suplementos - Ofertas en Proteínas y Suplementos",
+    description:
+      "Descubre las mejores ofertas en suplementos deportivos, proteínas y nutrición deportiva.",
+    images: ["/og-home.jpg"],
+    url: "https://suplementaciondeportiva.es",
   },
+  alternates: {
+    canonical: "https://suplementaciondeportiva.es",
+  },
+};
+
+// Structured Data JSON-LD
+function generateHomeStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Tu Tienda de Suplementos - Inicio",
+    description: "Tienda online de suplementos deportivos, proteínas y nutrición deportiva",
+    url: "https://suplementaciondeportiva.es",
+    mainEntity: {
+      "@type": "Store",
+      name: "Tu Tienda de Suplementos",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Catálogo de Suplementos Deportivos",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Proteínas",
+              category: "Suplementos Deportivos",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Aminoácidos",
+              category: "Suplementos Deportivos",
+            },
+          },
+        ],
+      },
+    },
+  };
 }
 
-export default function GlobalError({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+// Página Principal
+export default function Home() {
   return (
-    <html>
-      <body>
-        <div className="global-error-container">
-          <div className="global-error-box">
-            <div>
-              <h1 className="global-error-heading">500</h1>
-              <h2 className="global-error-subheading">Error del servidor</h2>
-              <p className="global-error-description">
-                Ha ocurrido un error interno. Nuestro equipo ha sido notificado.
-              </p>
-            </div>
-
-            <div>
-              <button onClick={reset} className="global-error-button">
-                Intentar de nuevo
-              </button>
-              <Link href="/" className="global-error-link">
-                Volver al inicio
-              </Link>
-            </div>
-
-            {process.env.NODE_ENV === "development" && (
-              <details className="global-error-details">
-                <summary>Detalles del error (solo en desarrollo)</summary>
-                <pre className="global-error-pre">
-                  {error.message}
-                  {error.stack}
-                </pre>
-              </details>
-            )}
-          </div>
-        </div>
-      </body>
-    </html>
-  )
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateHomeStructuredData()),
+        }}
+      />
+      <main>
+        <CustomCursor />
+        <ClubPopup />
+        <HeroBanner />
+        <OfertaDia />
+        <CategoryContent />
+        <ProductListing />
+      </main>
+    </>
+  );
 }

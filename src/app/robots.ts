@@ -32,7 +32,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Googlebot-Image",
-        allow: ["/", "/productos/", "/especiales", "/topVentas", "/novedades"],
+        allow: ["/", "/tipo/", "/productos/", "/especiales/", "/topVentas", "/novedades"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

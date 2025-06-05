@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/especiales`,
+      url: `${baseUrl}/especiales/`,
       lastModified: currentDate,
       changeFrequency: "daily" as const,
       priority: 0.9,
@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/clubElite`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
-      priority: 0.8,
+      priority: 0.6,
     },
   ]
 
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/nosotros`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/contacto`,
@@ -61,25 +61,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/envios`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/devoluciones`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/preguntas-frecuentes`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/afiliados`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.5,
     },
   ]
 
@@ -108,22 +108,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         : currentDate
     ),
     changeFrequency: "weekly" as const,
-    priority: 0.8,
+    priority: 0.85,
   }))
 
   // Páginas de categorías - URLs amigables para SEO
-  const categoryPages = categories
-    .filter((category): category is string => typeof category === 'string')
-    .map((category) => {
-      const categorySlug = category.toLowerCase().replace(/\s+/g, "-")
-      return {
-        url: `${baseUrl}/categoria/${categorySlug}`,
-        lastModified: currentDate,
-        changeFrequency: "weekly" as const,
-        priority: 0.7,
-      }
-  })
-
+  const tipos = categories
+  .filter((tipo): tipo is string => typeof tipo === 'string')
+  .map((tipo) => ({
+    url: `${baseUrl}/tipo/${tipo.toLowerCase().replace(/\s+/g, "-")}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly" as const,
+    priority: 0.75,
+  }))
 const categoryQueryPages = categories
   .filter((category): category is string => typeof category === 'string')
   .map((category) => ({
@@ -134,5 +130,5 @@ const categoryQueryPages = categories
   }))
 
   // Combinar todas las páginas
-  return [...mainPages, ...infoPages, ...legalPages, ...productPages, ...categoryPages, ...categoryQueryPages]
+  return [...mainPages, ...infoPages, ...legalPages, ...productPages, ...tipos, ...categoryQueryPages]
 }
