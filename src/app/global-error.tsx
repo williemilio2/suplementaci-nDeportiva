@@ -1,4 +1,5 @@
 // src/app/page.tsx
+'use client'
 import type { Metadata } from "next";
 import HeroBanner from "../components/HeroBanner";
 import CategoryContent from "../components/CategoryContent";
